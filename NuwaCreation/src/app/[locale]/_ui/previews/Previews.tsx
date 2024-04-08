@@ -95,7 +95,7 @@ function Previews() {
       <div className="grid gap-4">
       <Popover placement="bottom" color="primary">
           <PopoverTrigger>
-            <Button isLoading={isMakeCharLoding} color="success">{t('Previews.exportingcharactercards')}</Button>
+            <Button isLoading={isMakeCharLoding} className="bg-black text-white">{t('Previews.exportingcharactercards')}</Button>
           </PopoverTrigger>
           <PopoverContent>
             <Popover placement="bottom" color="primary">

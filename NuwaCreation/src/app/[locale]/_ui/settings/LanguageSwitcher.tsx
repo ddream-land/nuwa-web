@@ -54,6 +54,7 @@ function LanguageSwitcher() {
         onClick={onOpen}
         color="primary"
         variant="flat"
+        className="bg-black text-white"
       >
         {t('Settings.changelanguage')}
       </Button>

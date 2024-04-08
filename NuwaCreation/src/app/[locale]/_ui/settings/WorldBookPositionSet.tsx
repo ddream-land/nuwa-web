@@ -17,13 +17,12 @@ export default function WorldBookPositionSet() {
 
   return (
     <>
-      <button
-        type="button"
-        className="font-semibold text-indigo-600 hover:text-indigo-500"
+      <Button
         onClick={onOpen}
+        className="bg-black text-white"
       >
         更改
-      </button>
+      </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

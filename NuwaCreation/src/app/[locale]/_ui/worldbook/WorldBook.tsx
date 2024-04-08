@@ -84,6 +84,12 @@ export default function WorldBook() {
       <Tabs
         variant="light"
         items={character_book.entries}
+        classNames={{
+          tabList: "bg-[#D9D9D9]",
+          cursor: "w-full bg-[#0C0C0C] text-white",
+          tab:"group-data-[selected=true]:bg-[#0C0C0C]",
+          tabContent: "text-zinc-800 group-data-[selected=true]:text-white",
+        }}
       >
         {(item) => (
           <Tab key={item.id} title={item.comment || t('WorldBook.untitledbook')}>

@@ -28,7 +28,7 @@ const config: Config = {
         light: {
           layout: {}, // light theme layout tokens
           colors: {
-            background:"#f9fafb"
+            background:"#F6F6F6"
           }, // light theme colors
         },
         dark: {

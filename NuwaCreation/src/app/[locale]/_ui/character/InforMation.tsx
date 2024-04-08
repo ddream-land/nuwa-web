@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useChara,useCover,useCoverHandler } from "../../_lib/utils";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
+import {
+  ArrowUpIcon,
+} from '@heroicons/react/24/outline'
 
 function InforMation() {
   const t = useTranslations();
@@ -20,7 +23,7 @@ function InforMation() {
           alt=""
           className="h-auto w-full flex-none rounded-lg object-cover"
         />
-        <div className="absolute top-0 right-0 cursor-pointer pl-4 pb-4 bg-white rounded-bl-xl">
+        <div className="absolute top-0 right-0 cursor-pointer pl-4 pb-4 bg-[#F6F6F6] rounded-bl-xl">
           <input
               accept=".jpg,.jpeg,.png,.webp,.gif"
               type="file"
@@ -36,11 +39,13 @@ function InforMation() {
                   ReplacingTheCover.click();
                 }
               }}
+              className="h-16 w-16 p-0 rounded-full bg-black relative"
               type="button"
               color="default"
               variant="flat"
             >
-              {t('Character.replacementofthecover')}
+              <ArrowUpIcon className="h-8 w-8 text-white font-black absolute" aria-hidden="true" />
+              {/* {t('Character.replacementofthecover')} */}
             </Button>
             {/* <p className="mt-2 text-xs leading-5">
               {t('Character.zipcover')}
@@ -57,7 +62,6 @@ function InforMation() {
             </label>
             <div className="mt-2">
               <Input
-                color="warning"
                 autoComplete="off"
                 value={chara.data.name}
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, name: e.target.value } }))}
@@ -75,7 +79,6 @@ function InforMation() {
             </label>
             <div className="mt-2">
               <Input
-                color="secondary"
                 value={chara.data.creator}
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, creator: e.target.value } }))}
                 maxLength={64}
