@@ -44,11 +44,11 @@ export default function RootLayout({
           <main className="py-10 lg:py-10 lg:pl-72">
             {/* <Header /> */}
             <div className="px-4 sm:px-6 lg:px-8 min-w-[600px]">{children}</div>
-            <div className="pb-10">
+            <div className="pb-10 pt-10">
 
-            <NextIntlClientProvider messages={messages}>
-              <Footer />
-            </NextIntlClientProvider>
+              <NextIntlClientProvider messages={messages}>
+                <Footer />
+              </NextIntlClientProvider>
             </div>
           </main>
         </Providers>
