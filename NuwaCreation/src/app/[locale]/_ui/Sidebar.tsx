@@ -14,12 +14,16 @@ import {
   IdentificationIcon,
   UserIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
+  ArrowUpCircleIcon,
+} from '@heroicons/react/24/outline';
+import NuwaHomePageIcon from './components/NuwaHomePageIcon';
+import NuwaDigitLifeIcon from './components/NuwaDigitLifeIcon';
+import NuwaWorldBookIcon from './components/NuwaWorldBookIcon';
 
 const navigation = [
-  { name: 'Navigation.home', href: '/', icon: HomeIcon, current: false },
-  { name: 'Navigation.character', href: '/character', icon: UserIcon, current: false },
-  { name: 'Navigation.worldbook', href: '/worldbook', icon: BookOpenIcon, current: false },
+  { name: 'Navigation.home', href: '/', icon: NuwaHomePageIcon, current: false },
+  { name: 'Navigation.character', href: '/character', icon: NuwaDigitLifeIcon, current: false },
+  { name: 'Navigation.worldbook', href: '/worldbook', icon: NuwaWorldBookIcon, current: false },
   { name: 'Navigation.greetings', href: '/greetings', icon: DocumentPlusIcon, current: false },
   { name: 'Navigation.previews', href: '/previews', icon: IdentificationIcon, current: false },
   { name: 'Navigation.settings', href: '/settings', icon: Cog6ToothIcon, current: false },
@@ -176,7 +180,7 @@ export default function Sidebar() {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 px-6 rounded-r-3xl">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 rounded-r-3xl">
             <div className="flex flex-col justify-center h-16 shrink-0 items-center mt-14 mb-2">
               <Image
                 width={96}
@@ -189,26 +193,49 @@ export default function Sidebar() {
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
-                  <ul role="list" className="-mx-2 space-y-1">
+                  <ul role="list" className="space-y-1">
                     {navigation.map((item) => (
-                      <li key={item.name}>
+                      <li key={item.name} className='group/item'>
                         <Link
                           href={item.href}
-                          className={classNames(
-                            item.current
-                              ? 'bg-neutral-900 text-white dark:bg-gray-800 dark:text-white'
-                              : 'text-black hover:text-white hover:bg-neutral-900 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal'
-                          )}
+                          className="flex flex-row h-14"
                         >
-                          <item.icon
+                          <div
                             className={classNames(
-                              item.current ? 'text-white dark:text-white' : 'text-gray-400 group-hover:text-white  dark:group-hover:text-gray-50',
-                              'h-6 w-6 shrink-0'
+                              item.current
+                                ? 'bg-black'
+                                : 'group-hover/item:bg-black',
+                              'w-1 h-full mr-8 rounded-r-lg'
                             )}
-                            aria-hidden="true"
                           />
-                          {t(item.name)}
+                          <div      
+                            className={classNames(
+                              item.current
+                                ? 'bg-neutral-900 text-white dark:bg-gray-800 dark:text-white'
+                                : 'text-black hover:text-white hover:bg-neutral-900 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800',
+                              'group h-full flex items-center gap-x-3 rounded-md text-sm leading-6 font-normal w-60 mr-6'
+                            )}
+                          >
+                            {/* <NuwaHomePageIcon
+                              className={classNames(
+                                item.current
+                                  ? 'stroke-white fill-white'
+                                  : 'stroke-black fill-black group-hover:fill-white group-hover:stroke-white',
+                                'h-6 w-6 shrink-0 ml-6'
+                              )}
+                            /> */}
+                            <item.icon
+                              className={classNames(
+                                item.current 
+                                  ? 'text-white stroke-white fill-white'
+                                  : 'text-gray-400 group-hover:text-white stroke-black fill-black group-hover:fill-white group-hover:stroke-white',
+                                'h-6 w-6 shrink-0 ml-6'
+                              )}
+                              aria-hidden="true"
+                            />
+                            {t(item.name)}
+                          </div>
+                          
                         </Link>
                       </li>
                     ))}
