@@ -41,7 +41,7 @@ export default function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <Sidebar/>
           </NextIntlClientProvider>
-          <main className="py-10 lg:py-0 lg:pl-72">
+          <main className="py-10 lg:py-10 lg:pl-72">
             {/* <Header /> */}
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
             <div className="pb-10">
