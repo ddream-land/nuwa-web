@@ -16,10 +16,10 @@ function Homepage() {
       >
         {t("HomePage.3")}
       </Link> */}
-      <div className="min-w-full bg-white h-80 rounded-[40px] px-8 w-full relative">
-        <div className="mt-16 text-base font-semibold mb-6">{t('HomePage.title1')}</div>
-        <div className="text-4xl font-semibold mb-10">{t('HomePage.title2')}</div>
-        <div className="text-base">powered by {t('HomePage.nuwaLabs')}</div>
+      <div className="min-w-full bg-white min-h-80 rounded-[40px] px-8 w-full relative">
+        <div className="pt-16 text-base font-semibold mb-6">{t('HomePage.title1')}</div>
+        <div className="text-4xl font-semibold mb-10 mr-72">{t('HomePage.title2')}</div>
+        <div className="text-base pb-10">powered by {t('HomePage.nuwaLabs')}</div>
         <Image
           className="absolute bottom-0 right-10"
           width={264}

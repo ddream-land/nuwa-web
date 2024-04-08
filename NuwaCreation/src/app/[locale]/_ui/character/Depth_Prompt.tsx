@@ -36,6 +36,7 @@ export default function Depth_Prompt() {
       />
       <div className="max-w-sm">
         <Input
+          variant="underlined"
           label={t("WorldBook.depth")}
           value={chara.data.extensions.depth_prompt.depth}
           onChange={(e) =>
