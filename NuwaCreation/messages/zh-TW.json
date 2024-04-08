@@ -1,12 +1,12 @@
 {
   "Character": {
-    "charactername": "角色名",
-    "characternote": "角色卡標籤",
-    "characterversion": "角色版本",
+    "charactername": "数字生命名",
+    "characternote": "数字生命卡標籤",
+    "characterversion": "数字生命版本",
     "cover": "封面",
     "createdby": "創建者",
     "creatorsnotes": "創作者注釋",
-    "depthprompt": "角色卡深度和提示",
+    "depthprompt": "数字生命卡深度和提示",
     "description": "描述",
     "descriptiontoken": "描述標記",
     "firstmessage": "首條消息",
@@ -17,7 +17,7 @@
     "mainprompt": "主要提示",
     "mainprompttoken": "主要提示標記",
     "mesexample": "消息示例",
-    "modifythebasicinsormationofthecharactercard": "修改角色卡的基本信息",
+    "modifythebasicinsormationofthecharactercard": "修改数字生命卡的基本信息",
     "personalitysummary": "個性摘要",
     "promptoverrdies": "提示覆蓋",
     "replacementofthecover": "更換",
@@ -31,7 +31,7 @@
     "thisoperationcannotbewithdrawn": "此操作不可撤銷！"
   },
   "HomePage": {
-    "1": "角色卡線上編輯器",
+    "1": "数字生命卡線上編輯器",
     "2": "性能強大；用戶界面友好；無需手動保存",
     "3": "開始創建",
     "updatetime": "更新於 2023/12/10",
@@ -39,10 +39,10 @@
   },
   "Metadata": {
     "description": "甘之若饴",
-    "title": "角色編輯器 | Nuwa"
+    "title": "数字生命編輯器 | Nuwa"
   },
   "Navigation": {
-    "character": "角色",
+    "character": "数字生命",
     "communityediton": "社區版",
     "Nuwa": "Nuwa",
     "github": "GitHub",
@@ -57,11 +57,11 @@
   },
   "Previews": {
     "addgreetings": "添加問候",
-    "charactercardnamesmust": "角色卡名稱必須",
+    "charactercardnamesmust": "数字生命卡名稱必須",
     "export": "導出",
-    "exportingcharactercards": "導出角色卡",
+    "exportingcharactercards": "導出数字生命卡",
     "import": "導入",
-    "importingcharactercards": "導入角色卡",
+    "importingcharactercards": "導入数字生命卡",
     "importok": "導入成功，請刷新瀏覽器如果沒有內容",
     "isitalldone": "繼續:一切完成了嗎?",
     "mymindismadeup": "我已下定決心!",
@@ -88,8 +88,8 @@
     "D": "@D",
     "addnewbook": "添加新的世界書",
     "afteran": "字符之後",
-    "afterchar": "角色之後",
-    "beforechar": "角色之前",
+    "afterchar": "数字生命之後",
+    "beforechar": "数字生命之前",
     "berforean": "字符之前",
     "constan": "常量",
     "content": "內容",

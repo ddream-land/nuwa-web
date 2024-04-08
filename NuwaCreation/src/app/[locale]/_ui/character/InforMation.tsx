@@ -5,7 +5,7 @@ import { useChara,useCover,useCoverHandler } from "../../_lib/utils";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import {
-  ArrowUpIcon,
+  ArrowUpCircleIcon,
 } from '@heroicons/react/24/outline'
 
 function InforMation() {
@@ -39,12 +39,13 @@ function InforMation() {
                   ReplacingTheCover.click();
                 }
               }}
-              className="h-16 w-16 p-0 rounded-full bg-black relative"
               type="button"
               color="default"
               variant="flat"
+              isIconOnly
+              className="rounded-full"
             >
-              <ArrowUpIcon className="h-8 w-8 text-white font-black absolute" aria-hidden="true" />
+              <ArrowUpCircleIcon className="h-full w-full text-white bg-black border-0" aria-hidden="true" />
               {/* {t('Character.replacementofthecover')} */}
             </Button>
             {/* <p className="mt-2 text-xs leading-5">
@@ -67,6 +68,8 @@ function InforMation() {
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, name: e.target.value } }))}
                 maxLength={64}
                 type="text"
+                variant="underlined"
+                isRequired
               />
             </div>
           </div>
@@ -84,6 +87,7 @@ function InforMation() {
                 maxLength={64}
                 autoComplete="off"
                 type="text"
+                variant="underlined"
               />
             </div>
           </div>
@@ -101,6 +105,7 @@ function InforMation() {
                 maxLength={64}
                 autoComplete="off"
                 type="text"
+                variant="underlined"
               />
             </div>
           </div>
@@ -117,6 +122,7 @@ function InforMation() {
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, tags: e.target.value } }))}
                 autoComplete="off"
                 type="text"
+                variant="underlined"
               />
             </div>
           </div>
@@ -133,6 +139,7 @@ function InforMation() {
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, creator_notes: e.target.value } }))}
                 autoComplete="off"
                 type="text"
+                variant="underlined"
               />
             </div>
           </div>
@@ -152,6 +159,7 @@ function InforMation() {
                 min={0}
                 autoComplete="off"
                 type="number"
+                variant="underlined"
               />
             </div>
           </div>
@@ -168,6 +176,7 @@ function InforMation() {
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, personality: e.target.value } }))}
                 autoComplete="off"
                 type="text"
+                variant="underlined"
               />
             </div>
           </div>
@@ -184,6 +193,7 @@ function InforMation() {
                 onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, scenario: e.target.value } }))}
                 autoComplete="off"
                 type="text"
+                variant="underlined"
               />
             </div>
           </div>

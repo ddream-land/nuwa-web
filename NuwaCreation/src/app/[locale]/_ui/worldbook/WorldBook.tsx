@@ -138,6 +138,7 @@ export default function WorldBook() {
                       }
                       maxLength={64}
                       type="text"
+                      variant="underlined"
                     />
                   </div>
                   <div>
@@ -160,6 +161,7 @@ export default function WorldBook() {
                       }
                       maxLength={64}
                       type="text"
+                      variant="underlined"
                     />
                   </div>
                   <div>
@@ -182,6 +184,7 @@ export default function WorldBook() {
                       }
                       maxLength={64}
                       type="text"
+                      variant="underlined"
                     />
                   </div>
                   <div className="max-w-xs">
@@ -207,6 +210,7 @@ export default function WorldBook() {
                       max={1000}
                       min={0}
                       step={1}
+                      variant="underlined"
                     />
                   </div>
                   <div className="max-w-xs">
@@ -231,6 +235,7 @@ export default function WorldBook() {
                       max={4}
                       min={0}
                       step={1}
+                      variant="underlined"
                     />
                   </div>
                   <div>

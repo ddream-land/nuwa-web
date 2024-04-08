@@ -64,7 +64,7 @@ function CC() {
         <div className="flex">
           <div className="ml-3">
             <p className="text-sm font-medium text-yellow-800">
-              此页面数据和角色卡编辑器不互通,角色卡第一条消息替换为CC协议页
+              此页面数据和数字生命卡编辑器不互通,数字生命卡第一条消息替换为CC协议页
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ function CC() {
               isLoading={isCCloading}
               className="mt-2 text-center text-sm font-semibold text-gray-900"
             >
-              上传角色卡 不支持批量 ≤10MB
+              上传数字生命卡 不支持批量 ≤10MB
             </Button>
           </label>
         </form>
@@ -163,7 +163,7 @@ function CC() {
         <Input
           value={CCfilename}
           onChange={(e) => setCCfilename(e.target.value)}
-          label="角色卡名"
+          label="数字生命卡名"
         />
         <Input
           value={CCmes}

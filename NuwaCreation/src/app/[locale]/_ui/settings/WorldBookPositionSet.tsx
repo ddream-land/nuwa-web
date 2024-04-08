@@ -48,7 +48,7 @@ export default function WorldBookPositionSet() {
                   color="primary"
                   variant="ghost"
                 >
-                  角色之前
+                  数字生命之前
                 </Button>
                 <Button
                   onClick={() => {
@@ -67,7 +67,7 @@ export default function WorldBookPositionSet() {
                   color="primary"
                   variant="ghost"
                 >
-                  角色之后
+                  数字生命之后
                 </Button>
                 <Button
                   onClick={() => {
