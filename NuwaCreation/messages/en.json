@@ -31,11 +31,17 @@
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"
   },
   "HomePage": {
-    "1": "Character Card Online Editor",
-    "2": "Powerful performance; user-friendly interface; no need to save manually",
-    "3": "Start Creating",
-    "updatetime": "Updated on 2023/12/10",
-    "version": "Main Branch"
+    "title1": "Based on HomoDeus Protocol",
+    "title2": "Nuwa Creation Platform — a free, powerful, and open sourced character creation tool",
+    "nuwaLabs": "Nuwa Labs",
+    "quickstart": "Quick Start",
+    "createDigitalLife": "Create Digital Life",
+    "createWorldBook": "Create World Book"
+  },
+  "Footer": {
+    "nuwaLabs": "Nuwa Labs",
+    "protocol": "Protocol",
+    "codeAddress": "Github"
   },
   "Metadata": {
     "description": "Sweet as Honey",

@@ -6,7 +6,7 @@ export default function CharacterPage() {
   const messages = useMessages();
   return (
     <>
-      <div className="flex w-full flex-col">
+      <div className="">
         <NextIntlClientProvider messages={messages}>
           <Character/>
         </NextIntlClientProvider>

@@ -70,7 +70,7 @@ export default function Settings() {
                 </dd>
               </Switch.Group>
             </dl>
-            <dl className="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
+            {/* <dl className="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
               <Switch.Group as="div" className="flex pt-6">
                 <Switch.Label
                   as="dt"
@@ -87,7 +87,7 @@ export default function Settings() {
                   <WorldBookPositionSet/>
                 </dd>
               </Switch.Group>
-            </dl>
+            </dl> */}
           </div>
         </div>
       </div>

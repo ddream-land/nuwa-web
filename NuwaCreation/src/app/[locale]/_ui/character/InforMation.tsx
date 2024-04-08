@@ -5,7 +5,7 @@ import { useChara,useCover,useCoverHandler } from "../../_lib/utils";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import {
-  ArrowUpCircleIcon,
+  ArrowUpIcon,
 } from '@heroicons/react/24/outline'
 
 function InforMation() {
@@ -23,12 +23,13 @@ function InforMation() {
           alt=""
           className="h-auto w-full flex-none rounded-lg object-cover"
         />
-        <div className="absolute top-0 right-0 cursor-pointer pl-4 pb-4 bg-[#F6F6F6] rounded-bl-xl">
+        <div className="absolute top-0 right-0 cursor-pointer pl-2 pb-2 bg-[#F6F6F6] rounded-bl-xl">
           <input
               accept=".jpg,.jpeg,.png,.webp,.gif"
               type="file"
               id="ReplacingTheCover"
               style={{ display: 'none' }}
+              className="h-12 w-12"
               onChange={(e) => handleReplacingTheCover(e, setCover)}
             />
             <Button
@@ -39,19 +40,20 @@ function InforMation() {
                   ReplacingTheCover.click();
                 }
               }}
+              className="h-12 w-12 p-0 rounded-full bg-black relative"
               type="button"
               color="default"
               variant="flat"
               isIconOnly
-              className="rounded-full"
             >
-              <ArrowUpCircleIcon className="h-full w-full text-white bg-black border-0" aria-hidden="true" />
+              <ArrowUpIcon className="h-8 w-8 text-white font-black absolute" aria-hidden="true" />
               {/* {t('Character.replacementofthecover')} */}
             </Button>
             {/* <p className="mt-2 text-xs leading-5">
               {t('Character.zipcover')}
             </p> */}
         </div>
+        <div className="absolute top-0 right-14 w-14 h-14 bg-transparent overflow-hidden rounded-full" />
       </div>
       <Card>
         <CardBody>

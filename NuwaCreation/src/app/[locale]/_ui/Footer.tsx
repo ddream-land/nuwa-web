@@ -1,21 +1,21 @@
 'use client'
 import { Link, Spacer } from '@nextui-org/react';
-
-
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations();
 
   return (
     <div className='flex flex-row items-center justify-center text-[#B0B0B0] text-xs'>
-      <div>©️Copyleft 2024 女娲实验室</div>
+      <div>©️Copyleft 2024 {t('Footer.nuwaLabs')}</div>
       <Spacer x={4} />
-      <div>开源协议：AGPL V3</div>
+      <div>{t('Footer.protocol')}：AGPL V3</div>
       <Spacer x={4} />
       <Link
         target='_blank'
         href='https://github.com/NuwaLabs/nuwa-web'
-        className='text-[#B0B0B0]'
-      >开源地址：nuwa.github.com</Link>
+        className='text-[#B0B0B0] text-xs'
+      >{t('Footer.codeAddress')}：nuwa.github.com</Link>
     </div>
   )
 }

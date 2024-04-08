@@ -17,9 +17,9 @@ function Homepage() {
         {t("HomePage.3")}
       </Link> */}
       <div className="min-w-full bg-white h-80 rounded-[40px] px-8 w-full relative">
-        <div className="mt-16 text-base font-semibold mb-6">基于BRC-1111协议</div>
-        <div className="text-4xl font-semibold mb-10">免费、开源的数字生命创造工具</div>
-        <div className="text-base">powered by 女娲实验室</div>
+        <div className="mt-16 text-base font-semibold mb-6">{t('HomePage.title1')}</div>
+        <div className="text-4xl font-semibold mb-10">{t('HomePage.title2')}</div>
+        <div className="text-base">powered by {t('HomePage.nuwaLabs')}</div>
         <Image
           className="absolute bottom-0 right-10"
           width={264}
@@ -29,7 +29,7 @@ function Homepage() {
         />
       </div>
       <div className="min-w-full bg-white h-80 rounded-[40px] px-8 w-full relative mt-3 pt-6">
-        <div className="text-black text-8 font-semibold mb-3">快速开始</div>
+        <div className="text-black text-8 font-semibold mb-3">{t('HomePage.quickstart')}</div>
         <div className="grid grid-cols-3 gap-4">
           <Link
             href="/character"
@@ -43,7 +43,7 @@ function Homepage() {
               alt=""
             />
             <div className="absolute top-8 left-8">
-              <div className="font-semibold text-3xl text-white">创建数字生命</div>
+              <div className="font-semibold text-3xl text-white">{t('HomePage.createDigitalLife')}</div>
               <Image
                 className="m-2"
                 width={33}
@@ -57,7 +57,7 @@ function Homepage() {
             href="/worldbook"
             className="bg-gray-100  rounded-lg flex items-center justify-items-center"
           >
-              <div className="text-center m-auto">创建世界书</div>
+              <div className="text-center m-auto">{t('HomePage.createWorldBook')}</div>
           </Link>
         </div>
       </div>
