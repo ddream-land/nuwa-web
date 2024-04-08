@@ -1,4 +1,4 @@
-
+"use client";
 import React from "react";
 import Image from "next/image";
 import { useChara,useCover,useCoverHandler } from "../../_lib/utils";

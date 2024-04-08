@@ -1,6 +1,7 @@
 'use client'
 import React from "react";
-import {Tabs, Tab, Card, CardBody, Button, Link} from "@nextui-org/react";
+import {Tabs, Tab, Card, CardBody, Button} from "@nextui-org/react";
+import { Link } from '@/navigation';
 import InforMation from "./InforMation";
 import Description from "./Description";
 import First_Message from "./First_Message";
@@ -16,7 +17,9 @@ export default function Character() {
   const t = useTranslations();
   return (
       <div className="relative flex w-full flex-col">
-        <Button href="/previews" as={Link} className="absolute right-0 top-0 bg-black text-white" startContent={<PaperAirplaneIcon className="h-4 w-4"/>}>{t('Navigation.previews')}</Button>
+        <Link href="/previews" className="absolute right-0 top-0">
+          <Button className="bg-black text-white" startContent={<PaperAirplaneIcon className="h-4 w-4"/>}>{t('Navigation.previews')}</Button>
+        </Link>
         <div className="flex w-full flex-col">
           <Tabs
             aria-label="Options"

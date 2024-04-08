@@ -1,5 +1,3 @@
-import sharp from "sharp";
-
 export async function POST(request: Request) {
   const extract = require("png-chunks-extract");
   const encode = require("png-chunks-encode");

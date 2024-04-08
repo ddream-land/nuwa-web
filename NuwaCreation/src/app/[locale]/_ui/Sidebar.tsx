@@ -96,7 +96,6 @@ export default function Sidebar() {
                   <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 px-6 pb-2">
                     <div className="flex flex-col justify-center h-16 shrink-0 items-center">
                       <Image
-                        className="h-5 w-auto"
                         width={96}
                         height={20}
                         src="/tittle-logo.png"
@@ -180,7 +179,6 @@ export default function Sidebar() {
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 px-6 rounded-r-3xl">
             <div className="flex flex-col justify-center h-16 shrink-0 items-center mt-14 mb-2">
               <Image
-                className="h-5 w-auto"
                 width={96}
                 height={20}
                 src="/tittle-logo.png"

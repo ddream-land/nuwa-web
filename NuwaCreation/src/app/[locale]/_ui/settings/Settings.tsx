@@ -36,7 +36,7 @@ export default function Settings() {
                 <LanguageSwitcher />
               </dd>
             </Switch.Group>
-            <Switch.Group as="div" className="flex pt-6">
+            {/* <Switch.Group as="div" className="flex pt-6">
               <Switch.Label
                 as="dt"
                 className="flex-none pr-6 font-medium sm:w-64"
@@ -47,7 +47,7 @@ export default function Settings() {
               <dd className="flex flex-auto items-center justify-end">
                 <ThemeSwitcher />
               </dd>
-            </Switch.Group>
+            </Switch.Group> */}
           </dl>
           <div className="pt-16">
             <h2 className="text-base font-semibold leading-7 text-red-500">
