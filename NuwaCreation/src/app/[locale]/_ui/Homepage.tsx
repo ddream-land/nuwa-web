@@ -16,7 +16,7 @@ function Homepage() {
       >
         {t("HomePage.3")}
       </Link> */}
-      <div className="min-w-full bg-white min-h-80 rounded-[40px] px-8 w-full relative">
+      <div className="min-w-full bg-white min-h-80 rounded-[40px] px-8 w-full relative" style={{minHeight: 320}}>
         <div className="pt-16 text-base font-semibold mb-6">{t('HomePage.title1')}</div>
         <div className="text-4xl font-semibold mb-10 mr-72">{t('HomePage.title2')}</div>
         <div className="text-base pb-10">powered by {t('HomePage.nuwaLabs')}</div>
