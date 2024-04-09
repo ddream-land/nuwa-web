@@ -33,7 +33,7 @@ function Homepage() {
         <div className="grid grid-cols-3 gap-4">
           <Link
             href="/character"
-            className="flex p-2 justify-between relative col-span-2 h-40 bg-black rounded-lg bg-no-repeat bg-center bg-[url('/overview-create-character-bg.png')]">
+            className="hover:scale-105 flex p-2 justify-between relative col-span-2 h-40 bg-black rounded-lg bg-no-repeat bg-center bg-[url('/overview-create-character-bg.png')]">
             <div className="w-1 h-full bg-white"></div>
             <Image
               className=""
@@ -55,9 +55,19 @@ function Homepage() {
           </Link>
           <Link
             href="/worldbook"
-            className="bg-gray-100  rounded-lg flex items-center justify-items-center"
+            className="bg-gray-100 relative rounded-lg flex items-center justify-center hover:scale-105"
           >
-              <div className="text-center m-auto">{t('HomePage.createWorldBook')}</div>
+            <div className="w-1 h-[9rem] bg-[#212121] absolute left-2 my-2"></div>
+            <div className="flex flex-col items-center justify-center my-auto">
+              <div className="text-center m-auto text-base">{t('HomePage.createWorldBook')}</div>
+              <Image
+                  className="m-2 rotate-[21deg]"
+                  width={75}
+                  height={82}
+                  src="/overview-create-worldbook-bg.png"
+                  alt=""
+                />
+            </div>
           </Link>
         </div>
       </div>
