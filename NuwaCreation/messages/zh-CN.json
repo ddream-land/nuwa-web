@@ -22,12 +22,13 @@
     "promptoverrdies": "提示覆盖",
     "replacementofthecover": "更换",
     "scenario": "情境",
+    "scenarioWorldbookTitle": "包含世界书",
     "tagstoembed": "嵌入标签",
     "talkativeness": "健谈程度",
     "zipcover": "JPG|PNG|WEBP 图片将自动压缩"
   },
   "Greetings": {
-    "deletegreetings": "删除问候",
+    "deletegreetings": "删除",
     "thisoperationcannotbewithdrawn": "此操作不可撤销！"
   },
   "HomePage": {
@@ -42,6 +43,11 @@
     "nuwaLabs": "女娲实验室",
     "protocol": "开源协议",
     "codeAddress": "开源地址"
+  },
+  "Header": {
+    "nuwaLabs": "女娲实验室",
+    "roleai": "数字生命互动平台",
+    "BRC-1111": "BRC-1111"
   },
   "Metadata": {
     "description": "甘之若饴",

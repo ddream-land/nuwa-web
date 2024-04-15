@@ -4,6 +4,7 @@ import {Tabs, Tab, Card, CardBody, Button} from "@nextui-org/react";
 import { Link } from '@/navigation';
 import InforMation from "./InforMation";
 import Description from "./Description";
+import Scenario from "./Scenario";
 import First_Message from "./First_Message";
 import Prompt_Overrides from "./Prompt_Overrides";
 import { useTranslations } from "next-intl";
@@ -35,19 +36,8 @@ export default function Character() {
             <Tab key="inforMation" title={t('Character.information')}>
               <InforMation/>
             </Tab>
-            <Tab key="description" title={t('Character.description')}>
-              <Card>
-                <CardBody>
-                  <Description/>
-                </CardBody>
-              </Card>  
-            </Tab>
-            <Tab key="first_mes" title={t('Character.firstmessage')}>
-              <Card>
-                <CardBody>
-                  <First_Message/>
-                </CardBody>
-              </Card>  
+            <Tab key="scenario" title={t('Character.scenario')}>
+              <Scenario/>
             </Tab>
             <Tab key="prompt_overrides" title={t('Character.promptoverrdies')}>
               <Card>

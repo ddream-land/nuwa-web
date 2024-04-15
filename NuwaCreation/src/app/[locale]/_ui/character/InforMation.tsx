@@ -1,78 +1,33 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import { useChara,useCover,useCoverHandler } from "../../_lib/utils";
-import { Button, Card, CardBody, Input } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
-import {
-  ArrowUpIcon,
-} from '@heroicons/react/24/outline'
+import { Divider } from "@nextui-org/react";
+import InforMation_FirstMessage from "./InforMation_FirstMessage";
+import InforMation_Cover from "./InforMation_Cover";
+import InforMation_Name from "./InforMation_Name";
+import InforMation_Personality from "./InforMation_Personality";
+import InforMation_Description from "./InforMation_Description"
+import InforMation_AlternateGreetings from "./InforMation_AlternateGreetings"
 
 function InforMation() {
-  const t = useTranslations();
-  const { chara , setChara } = useChara();
-  const { cover , setCover } = useCover();
-  const { isReplacingTheCoverLoding, handleReplacingTheCover } = useCoverHandler();
+  
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="items-center gap-x-8 relative">
-        <Image
-          src={cover}
-          width={384}
-          height={384}
-          alt=""
-          className="h-auto w-full flex-none rounded-lg object-cover"
-        />
-        <div className="absolute top-0 right-0 flex content-start justify-end cursor-pointer w-16 h-16 bg-[url('/character-avatar-btn-bg.png')] bg-cover rounded-bl-xl">
-          <input
-              accept=".jpg,.jpeg,.png,.webp,.gif"
-              type="file"
-              id="ReplacingTheCover"
-              style={{ display: 'none' }}
-              className="h-12 w-12"
-              onChange={(e) => handleReplacingTheCover(e, setCover)}
-            />
-            <Button
-              isLoading={isReplacingTheCoverLoding}
-              onClick={() => {
-                const ReplacingTheCover = document.getElementById("ReplacingTheCover");
-                if (ReplacingTheCover) {
-                  ReplacingTheCover.click();
-                }
-              }}
-              className="h-12 w-12 p-0 rounded-full bg-black relative"
-              type="button"
-              color="default"
-              variant="flat"
-              isIconOnly
-            >
-              <ArrowUpIcon className="h-8 w-8 text-white font-black absolute" aria-hidden="true" />
-              {/* {t('Character.replacementofthecover')} */}
-            </Button>
-        </div>
-      </div>
-      <Card>
-        <CardBody>
-          <div className="sm:col-span-3">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.charactername')}<span className="text-red-500">*</span>
-            </label>
-            <div className="mt-2">
-              <Input
-                autoComplete="off"
-                value={chara.data.name}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, name: e.target.value } }))}
-                maxLength={64}
-                type="text"
-                variant="underlined"
-                isRequired
-              />
-            </div>
+    <>   
+      <div className="grid grid-cols-3 gap-4">
+        <InforMation_Cover />
+        <div
+          className="col-span-2 bg-white rounded-[40px] flex flex-col"
+        >
+          <InforMation_Name />
+  
+          <div className="flex flex-col grow mt-6 px-6">
+            <InforMation_Personality />
+            <Divider className="bg-[#E6E6E6]" />
+          
+            <InforMation_Description />
           </div>
+          
 
-          <div className="sm:col-span-3">
+          {/* <div className="">
             <label
               className="block text-sm font-medium leading-6"
             >
@@ -90,7 +45,7 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="sm:col-span-3">
+          <div className="">
             <label
               className="block text-sm font-medium leading-6"
             >
@@ -108,7 +63,7 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="sm:col-span-3">
+          <div className="">
             <label
               className="block text-sm font-medium leading-6"
             >
@@ -125,7 +80,7 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="sm:col-span-3">
+          <div className="">
             <label
               className="block text-sm font-medium leading-6"
             >
@@ -142,7 +97,7 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="sm:col-span-3">
+          <div className="">
             <label
               className="block text-sm font-medium leading-6"
             >
@@ -162,24 +117,7 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="sm:col-span-6">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.personalitysummary')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.personality}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, personality: e.target.value } }))}
-                autoComplete="off"
-                type="text"
-                variant="underlined"
-              />
-            </div>
-          </div>
-
-          <div className="sm:col-span-6">
+          <div className="">
             <label
               className="block text-sm font-medium leading-6"
             >
@@ -194,10 +132,15 @@ function InforMation() {
                 variant="underlined"
               />
             </div>
-          </div>
-        </CardBody>
-      </Card>
-    </div>
+          </div> */}
+        </div>
+
+      </div>
+      <div>
+        <InforMation_FirstMessage />
+        <InforMation_AlternateGreetings />
+      </div>
+    </>
   );
 }
 

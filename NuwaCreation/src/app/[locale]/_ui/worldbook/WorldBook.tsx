@@ -1,26 +1,26 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
-  Tabs,
-  Tab,
-  Card,
-  CardBody,
-  Textarea,
-  Input,
-  RadioGroup,
-  Radio,
   Button,
   Popover,
-  PopoverTrigger,
   PopoverContent,
-  Kbd,
+  PopoverTrigger,
 } from "@nextui-org/react";
 import { useCharacterBook } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
+import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
+import { isEmpty } from "lodash-es";
+import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
+import NuwaFormWrapper from "../components/NuwaFormWrapper";
+import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import NuwaButton from "../components/NuwaButton";
+import { TypeCharacterBook, TypeCharacterBookEntriy } from "../../_lib/definitions";
 
 export default function WorldBook() {
   const t = useTranslations();
   const { character_book, setCharacter_Book } = useCharacterBook();
+  const [isDeletePopoverOpen, setIsDeletePopoverOpen] = React.useState(false);
+  const [selectedEntry, setSelectedEntry] = React.useState(character_book?.entries[0]);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
@@ -44,15 +44,21 @@ export default function WorldBook() {
         entries: updatedEntriesWithIds,
       };
     });
+    if (selectedEntry.id === id) {
+      setSelectedEntry(character_book?.entries[0])
+    }
   };
 
   const handleAddNewBookClick = () => {
     // Determine the next available id and display_index based on existing entries
-    const nextId = (character_book.entries || []).length + 1;
+    let nextId = (character_book.entries || []).length + 1;
+    // if(character_book.entries[character_book.entries.length - 1].id >= nextId) {
+    //   nextId = character_book.entries[character_book.entries.length - 1].id + 1;
+    // }
     const nextDisplayIndex = nextId;
 
     // Default template for new entries
-    const defaultTemplate = {
+    const defaultTemplate: TypeCharacterBookEntriy = {
       id: nextId,
       keys: [],
       secondary_keys: [],
@@ -73,268 +79,321 @@ export default function WorldBook() {
       },
     };
 
-    setCharacter_Book((prevChara) => ({
+    setCharacter_Book((prevChara: TypeCharacterBook):TypeCharacterBook => ({
       ...prevChara,
       entries: [...(prevChara.entries || []), defaultTemplate],
     }));
+    setSelectedEntry(defaultTemplate)
+
   };
 
+  useEffect(() => {
+    isEmpty(selectedEntry) && setSelectedEntry(character_book?.entries[0])
+  }, [character_book])
+  // const selectedValue = React.useMemo(
+  //   () => Array.from(selectedEntry).join(", "),
+  //   [selectedEntry]
+  // );
+  
   return (
     <>
-      <Tabs
-        variant="light"
-        items={character_book.entries}
-        classNames={{
-          tabList: "bg-[#D9D9D9]",
-          cursor: "w-full bg-[#0C0C0C] text-white",
-          tab:"group-data-[selected=true]:bg-[#0C0C0C]",
-          tabContent: "text-zinc-800 group-data-[selected=true]:text-white",
-        }}
-      >
-        {(item) => (
-          <Tab key={item.id} title={item.comment || t('WorldBook.untitledbook')}>
-            <Card>
-              <CardBody>
-                <div className="md:p-4 p-2 w-full flex flex-col gap-2">
-                  <div>
-                    <label className="block text-sm font-medium leading-6">
-                      {t('WorldBook.content')}
-                    </label>
-                    <Textarea
-                      value={item.content}
-                      onChange={(e) =>
-                        setCharacter_Book((prevChara) => ({
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((entry) =>
-                            entry.id === item.id
-                              ? { ...entry, content: e.target.value }
-                              : entry
-                          ),
-                        }))
-                      }
-                      variant="underlined"
-                      labelPlacement="outside"
-                      maxRows={100}
-                    />
+      <div>
+        <div className="flex flex-row">
+          
+          <div className="relative flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] py-12 mt-32 -mr-2 h-[570px] pl-1">
+            <Button
+              onClick={handleAddNewBookClick}
+              className="absolute top-2 right-4 bg-transparent p-0 z-40"
+              type="button"
+              color="default"
+              variant="flat"
+              isIconOnly
+            >
+              <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
+            </Button>
+            {character_book.entries?.map((entry) => (
+              <NuwaButton
+                key={`${entry.id}`}
+                className={`${
+                  selectedEntry.id === entry.id ? "h-12" : "h-7"
+                } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
+                onClick={() => {
+                  setSelectedEntry(entry);
+                }}
+                endContent={
+                  <Popover key={`${entry.id}-${character_book?.entries.length}`} placement="top" color="warning">
+                  <PopoverTrigger>
+                    <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
+                      <XMarkIcon className="h-4 w-4 text-white" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <div className="px-1 py-2">
+                      <Popover placement="top" color="warning">
+                        <PopoverTrigger>
+                          <Button size="sm" color="warning">
+                            {t('Greetings.thisoperationcannotbewithdrawn')}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <Popover placement="top" color="danger">
+                            <PopoverTrigger>
+                              <Button size="sm" color="warning">
+                                {t('Previews.mymindismadeup')}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                              <Button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteButtonClick(entry.id)
+                                }}
+                                size="sm"
+                                color="danger"
+                              >
+                                {t('WorldBook.delete')}
+                              </Button>
+                            </PopoverContent>
+                          </Popover>
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+                
+                }
+              >
+                <div className="mx-2 overflow-x-scroll">{entry.comment || t('WorldBook.untitledbook')}</div>
+              </NuwaButton>
+            ))}
+          </div>
+          <div className="grow z-40">
+            <div
+              className="-mb-9 pb-9 px-2 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
+            >
+              <input
+                value={character_book.name}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  setCharacter_Book((prevChara) => ({
+                    ...prevChara,
+                    name: newValue,
+                  }))
+                }}
+                className="w-full h-full bg-transparent outline-none"
+              />
+            </div>
+            {character_book?.entries.map((entrys) => (
+              <div key={`${entrys.id}`}>
+                {selectedEntry.id === entrys.id && (
+                <div className="grid grid-cols-2 gap-y-4 gap-x-4">
+                  <div className="h-[620px] rounded-[40px] bg-white flex flex-col divide-y">
+                    <div className="grow">
+                      <NuwaTextareaWrapper
+                        label={t('WorldBook.titlememo')}
+                        textareaProps={{
+                          value: entrys.comment,
+                          onChange: (e: { target: { value: any; }; }) => (
+                            setCharacter_Book((prevChara) => ({
+                              ...prevChara,
+                              entries: (prevChara.entries || []).map((entry) =>
+                                entry.id === entrys.id
+                                  ? { ...entry, comment: e.target.value }
+                                  : entry
+                              ),
+                            })
+                          ))
+                        }}
+                      >
+                      </NuwaTextareaWrapper>
+                    </div>
+                    <div className="grow">
+                      <NuwaTextareaWrapper
+                        label={t('WorldBook.content')}
+                        textareaProps={{
+                          value: entrys.content,
+                          onChange: (e: { target: { value: any; }; }) => (
+                            setCharacter_Book((prevChara) => ({
+                              ...prevChara,
+                              entries: (prevChara.entries || []).map((entry) =>
+                                entry.id === entrys.id
+                                  ? { ...entry, content: e.target.value }
+                                  : entry
+                              ),
+                            })
+                          ))
+                        }}
+                      >
+                      </NuwaTextareaWrapper>
+                    </div>
+                    <div className="grow">
+                      <NuwaTextareaWrapper
+                        label={t('WorldBook.primarykeywords')}
+                        textareaProps={{
+                          value: entrys.keys,
+                          onChange: (e: { target: { value: any; }; }) => (
+                            setCharacter_Book((prevChara) => ({
+                              ...prevChara,
+                              entries: (prevChara.entries || []).map((entry) =>
+                                entry.id === entrys.id
+                                  ? { ...entry, keys: e.target.value }
+                                  : entry
+                              ),
+                            })
+                          ))
+                        }}
+                      >
+                      </NuwaTextareaWrapper>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium leading-6">
-                      {t('WorldBook.titlememo')}
-                    </label>
-                    <Input
-                      color="warning"
-                      size="sm"
-                      autoComplete="off"
-                      value={item.comment}
-                      onChange={(e) =>
-                        setCharacter_Book((prevChara) => ({
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((entry) =>
-                            entry.id === item.id
-                              ? { ...entry, comment: e.target.value }
-                              : entry
-                          ),
-                        }))
-                      }
-                      maxLength={64}
-                      type="text"
-                      variant="underlined"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium leading-6">
-                      {t('WorldBook.primarykeywords')}
-                    </label>
-                    <Input
-                      size="sm"
-                      autoComplete="off"
-                      value={item.keys}
-                      onChange={(e) =>
-                        setCharacter_Book((prevChara) => ({
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((entry) =>
-                            entry.id === item.id
-                              ? { ...entry, keys: e.target.value }
-                              : entry
-                          ),
-                        }))
-                      }
-                      maxLength={64}
-                      type="text"
-                      variant="underlined"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium leading-6">
-                      {t('WorldBook.optionalfilter')}
-                    </label>
-                    <Input
-                      size="sm"
-                      autoComplete="off"
-                      value={item.secondary_keys}
-                      onChange={(e) =>
-                        setCharacter_Book((prevChara) => ({
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((entry) =>
-                            entry.id === item.id
-                              ? { ...entry, secondary_keys: e.target.value }
-                              : entry
-                          ),
-                        }))
-                      }
-                      maxLength={64}
-                      type="text"
-                      variant="underlined"
-                    />
-                  </div>
-                  <div className="max-w-xs">
-                    <label className="block text-sm font-medium leading-6">
-                      {t('WorldBook.orfer')}
-                    </label>
-                    <Input
-                      color="primary"
-                      size="sm"
-                      autoComplete="off"
-                      value={item.insertion_order}
-                      onChange={(e) =>
-                        setCharacter_Book((prevChara) => ({
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((entry) =>
-                            entry.id === item.id
-                              ? { ...entry, insertion_order: e.target.value }
-                              : entry
-                          ),
-                        }))
-                      }
-                      type="number"
-                      max={1000}
-                      min={0}
-                      step={1}
-                      variant="underlined"
-                    />
-                  </div>
-                  <div className="max-w-xs">
-                    <label className="block text-sm font-medium leading-6">
-                      {t('WorldBook.depth')}
-                    </label>
-                    <Input
-                      size="sm"
-                      autoComplete="off"
-                      value={item.extensions.depth}
-                      onChange={(e) =>
-                        setCharacter_Book((prevChara) => ({
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((entry) =>
-                            entry.id === item.id
-                              ? { ...entry, extensions: { ...entry.extensions, depth: e.target.value } }
-                              : entry
-                          ),
-                        }))
-                      }
-                      type="number"
-                      max={4}
-                      min={0}
-                      step={1}
-                      variant="underlined"
-                    />
-                  </div>
-                  <div>
-                  <RadioGroup
-                    color="default"
-                    label={t('WorldBook.position')}
-                    orientation="horizontal"
-                    value={String(item.extensions.position)}
-                    onChange={(e) =>
-                      setCharacter_Book((prevChara) => ({
-                        ...prevChara,
-                        entries: (prevChara.entries || []).map((entry) =>
-                          entry.id === item.id
-                            ? { ...entry, extensions: { ...entry.extensions, position: Number(e.target.value)  } }
-                            : entry
-                        ),
-                      }))
-                    }
-                  >
-                    <Radio value="0">{t('WorldBook.beforechar')}</Radio>
-                    <Radio value="1">{t('WorldBook.afterchar')}</Radio>
-                    <Radio value="2">{t('WorldBook.berforean')}</Radio>
-                    <Radio value="3">{t('WorldBook.afteran')}</Radio>
-                    <Radio value="4">{t('WorldBook.D')}</Radio>
-                  </RadioGroup>
-
-
-                  </div>
-                  <div>
-                  <RadioGroup
-                    label={t('WorldBook.status')}
-                    orientation="horizontal"
-                    value={String(item.constant)}
-                    onChange={(e) =>
-                      setCharacter_Book((prevChara) => ({
-                        ...prevChara,
-                        entries: (prevChara.entries || []).map((entry) =>
-                          entry.id === item.id
-                            ? { ...entry, constant: Boolean(e.target.value === 'true') }
-                            : entry
-                        ),
-                      }))
-                    }
-                  >
-                    <Radio color="success" value="false">{t('WorldBook.normal')}</Radio>
-                    <Radio color="primary" value="true">{t('WorldBook.constan')}</Radio>
-                  </RadioGroup>
-
+                  <div className="h-[620px] rounded-[40px] bg-white flex flex-col divide-y">
+                    <div className="grow">
+                      <NuwaTextareaWrapper
+                        label={t('WorldBook.optionalfilter')}
+                        textareaProps={{
+                          value: entrys.secondary_keys,
+                          onChange: (e: { target: { value: any; }; }) => (
+                            setCharacter_Book((prevChara) => ({
+                              ...prevChara,
+                              entries: (prevChara.entries || []).map((entry) =>
+                                entry.id === entrys.id
+                                  ? { ...entry, secondary_keys: e.target.value }
+                                  : entry
+                              ),
+                            })
+                          ))
+                        }}
+                      >
+                      </NuwaTextareaWrapper>
+                    </div>
+                    <div className="grow">
+                      <NuwaFormWrapper
+                        label={<div className="flex flex-row justify-between">
+                          <div>{t('WorldBook.orfer')}</div><div>{t('WorldBook.depth')}</div>
+                        </div>}
+                      >
+                        <div className="flex flex-row justify-between">
+                          <input
+                            className="grow border-none outline-none "
+                            color="primary"
+                            autoComplete="off"
+                            value={entrys.insertion_order as number}
+                            onChange={(e) =>
+                              setCharacter_Book((prevChara: any) => ({
+                                ...prevChara,
+                                entries: (prevChara.entries || []).map((entry: { id: Number; }) =>
+                                  entry.id === entrys.id
+                                    ? { ...entry, insertion_order: e.target.value }
+                                    : entry
+                                ),
+                              }))
+                            }
+                            type="number"
+                            max={1000}
+                            min={0}
+                            step={1}
+                          />
+                          <input
+                            className="grow border-none outline-none text-right"
+                            autoComplete="off"
+                            value={entrys.extensions.depth as number}
+                            onChange={(e) =>
+                              setCharacter_Book((prevChara: any) => ({
+                                ...prevChara,
+                                entries: (prevChara.entries || []).map((entry: { id: Number; extensions: any; }) =>
+                                  entry.id === entrys.id
+                                    ? { ...entry, extensions: { ...entry.extensions, depth: e.target.value } }
+                                    : entry
+                                ),
+                              }))
+                            }
+                            type="number"
+                            max={4}
+                            min={0}
+                            step={1}
+                          />
+                        </div>
+                      </NuwaFormWrapper>
+                    </div>
+                    <div className="grow">
+                      <NuwaRadioWrapper
+                        label={t('WorldBook.position')}
+                        radioList={[
+                          {
+                            value: '1',
+                            name: t('WorldBook.beforechar'),
+                          },
+                          {
+                            value: '2',
+                            name: t('WorldBook.afterchar'),
+                          },
+                          {
+                            value: '3',
+                            name: t('WorldBook.berforean'),
+                          },
+                          {
+                            value: '4',
+                            name: t('WorldBook.afteran'),
+                          },
+                          {
+                            value: '5',
+                            name: t('WorldBook.D'),
+                          },
+                        ]}
+                        radioProps={{
+                          value: String(entrys.extensions.position),
+                          onChange: (e: { target: { value: any; }; }) => (
+                            setCharacter_Book((prevChara) => ({
+                              ...prevChara,
+                              entries: (prevChara.entries || []).map((entry) =>
+                                entry.id === entrys.id
+                                  ? { ...entry, extensions: { ...entry.extensions, position: Number(e.target.value)  } }
+                                  : entry
+                              ),
+                            }))
+                          )
+                        }}
+                      >
+                      </NuwaRadioWrapper>
+                    </div>
+                    <div className="grow">
+                      <NuwaRadioWrapper
+                        label={t('WorldBook.status')}
+                        radioList={[
+                          {
+                            value: 'true',
+                            name: t('WorldBook.constan'),
+                          }, 
+                          {
+                            value: 'false',
+                            name: t('WorldBook.normal'),
+                          }
+                        ]}
+                        radioProps={{
+                          value: String(entrys.constant),
+                          onChange: (e: { target: { value: string; }; }) => (
+                            setCharacter_Book((prevChara) => ({
+                              ...prevChara,
+                              entries: (prevChara.entries || []).map((entry) =>
+                                entry.id === entrys.id
+                              ? { ...entry, constant: Boolean(e.target.value === 'true') }
+                                  : entry
+                              ),
+                            }))
+                          )
+                        }}
+                      >
+                      </NuwaRadioWrapper>
+                    </div>
                   </div>
                 </div>
-              </CardBody>
-            </Card>
-            <div className=" block p-4">
-              <Popover placement="top" color="warning">
-                <PopoverTrigger>
-                  <Button className="w-full" size="sm" color="danger">
-                   {t('WorldBook.deletebook')}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <div className="px-1 py-2">
-                    <Popover placement="top" color="warning">
-                      <PopoverTrigger>
-                        <Button size="sm" color="warning">
-                          {t('Greetings.thisoperationcannotbewithdrawn')}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent>
-                        <Popover placement="top" color="danger">
-                          <PopoverTrigger>
-                            <Button size="sm" color="warning">
-                              {t('Previews.mymindismadeup')}
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent>
-                            <Button
-                              onClick={() => handleDeleteButtonClick(item.id)}
-                              size="sm"
-                              color="danger"
-                            >
-                              {t('WorldBook.delete')}
-                            </Button>
-                          </PopoverContent>
-                        </Popover>
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </div>
-          </Tab>
-        )}
-      </Tabs>
-      <Button onClick={handleAddNewBookClick} size="lg">
-        {t('WorldBook.addnewbook')}
-      </Button>
-      <div className="hidden md:block text-center text-gray-500 text-sm pt-4">
-      電腦請使用鼠標中間左右滑動或鍵盤<Kbd keys={["left"]}></Kbd>和<Kbd keys={["right"]}></Kbd>
-    </div>
+              )}
+              </div>
+            ))}
+            
+          </div>
+        </div>
+      </div>
     </>
   );
 }

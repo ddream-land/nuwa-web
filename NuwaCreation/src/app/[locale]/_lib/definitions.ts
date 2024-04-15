@@ -35,60 +35,60 @@ export type TypeChara = {
         depth: string;
       };
     };
-    // character_book: {
-    //   entries: [
-    //     {
-    //       id: number;
-    //       keys: string[];
-    //       scondary_keys: string[];
-    //       comment: string;
-    //       content: string;
-    //       constant: boolean;
-    //       selective: boolean;
-    //       insertion_order: number;
-    //       enable: boolean;
-    //       position: string;
-    //       extensions: {
-    //         position: number;
-    //         exclude_recursion: boolean;
-    //         display_index: number;
-    //         probability: number;
-    //         useProbability: boolean;
-    //         depth: number;
-    //         selectiveLogic: number;
-    //       };
-    //     }
-    //   ];
-    // };
+    character_book: TypeCharacterBook | undefined;
   };
   create_date: string;
 };
 
 export type TypeCharacterBook = {
-  entries: (Iterable<any> & any[]) | undefined;
-  character_book: {
-    entries: [
-      {
-        id: Number;
-        key: string[];
-        secondary_keys: string[];
-        comment: string;
-        content: string;
-        constant: Boolean;
-        selective: Boolean;
-        insertion_order: Number;
-        enabled: Boolean;
-        position: string;
-        extensions: {
-          position: Number;
-          exclude_recursion: Boolean;
-          display_index: Number;
-          probability: Number;
-          useProbability: Boolean;
-          depth: Number;
-        };
-      }
-    ];
-    name: string;
+  name: string;
+
+  // entries: (Iterable<any> & any[]) | undefined;
+  entries: Array<TypeCharacterBookEntriy> | [];
+  // character_book: {
+  //   entries: [
+  //     {
+  //       id: Number;
+  //       key: string[];
+  //       secondary_keys: string[];
+  //       comment: string;
+  //       content: string;
+  //       constant: Boolean;
+  //       selective: Boolean;
+  //       insertion_order: Number;
+  //       enabled: Boolean;
+  //       position: string;
+  //       extensions: {
+  //         position: Number;
+  //         exclude_recursion: Boolean;
+  //         display_index: Number;
+  //         probability: Number;
+  //         useProbability: Boolean;
+  //         depth: Number;
+  //       };
+  //     }
+  //   ];
+  //   name: string;
+  // };
+};
+
+export type TypeCharacterBookEntriy = {
+  id: Number;
+  keys: string[];
+  secondary_keys: string[];
+  comment: string;
+  content: string;
+  constant: Boolean;
+  selective: Boolean;
+  insertion_order: Number;
+  enabled: Boolean;
+  position: string;
+  extensions: {
+    position: Number;
+    exclude_recursion: Boolean;
+    display_index: Number;
+    probability: Number;
+    useProbability: Boolean;
+    depth: Number;
   };
 };

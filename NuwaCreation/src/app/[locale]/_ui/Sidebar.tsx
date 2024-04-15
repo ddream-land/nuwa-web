@@ -16,16 +16,16 @@ import {
   XMarkIcon,
   ArrowUpCircleIcon,
 } from '@heroicons/react/24/outline';
-import NuwaHomePageIcon from './components/NuwaHomePageIcon';
-import NuwaDigitLifeIcon from './components/NuwaDigitLifeIcon';
-import NuwaWorldBookIcon from './components/NuwaWorldBookIcon';
-import NuwaSettingsIcon from './components/NuwaSettingsIcon';
+import NuwaHomePageIcon from './icons/NuwaHomePageIcon';
+import NuwaDigitLifeIcon from './icons/NuwaDigitLifeIcon';
+import NuwaWorldBookIcon from './icons/NuwaWorldBookIcon';
+import NuwaSettingsIcon from './icons/NuwaSettingsIcon';
 
 const navigation = [
   { name: 'Navigation.home', href: '/', icon: NuwaHomePageIcon, current: false },
   { name: 'Navigation.character', href: '/character', icon: NuwaDigitLifeIcon, current: false },
   { name: 'Navigation.worldbook', href: '/worldbook', icon: NuwaWorldBookIcon, current: false },
-  { name: 'Navigation.greetings', href: '/greetings', icon: DocumentPlusIcon, current: false },
+  // { name: 'Navigation.greetings', href: '/greetings', icon: DocumentPlusIcon, current: false },
   { name: 'Navigation.previews', href: '/previews', icon: IdentificationIcon, current: false },
   { name: 'Navigation.settings', href: '/settings', icon: NuwaSettingsIcon, current: false },
 ]

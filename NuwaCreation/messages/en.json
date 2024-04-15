@@ -22,12 +22,13 @@
     "promptoverrdies": "Prompt Overrides",
     "replacementofthecover": "Replacement of the Cover",
     "scenario": "Scenario",
+    "scenarioWorldbookTitle": "World Book",
     "tagstoembed": "Tags to Embed",
     "talkativeness": "Talkativeness",
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed"
   },
   "Greetings": {
-    "deletegreetings": "Delete Greetings",
+    "deletegreetings": "Delete",
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"
   },
   "HomePage": {
@@ -42,6 +43,11 @@
     "nuwaLabs": "Nuwa Labs",
     "protocol": "Protocol",
     "codeAddress": "Github"
+  },
+  "Header": {
+    "nuwaLabs": "Nuwa Labs",
+    "roleai": "Role AI",
+    "BRC-1111": "BRC-1111"
   },
   "Metadata": {
     "description": "Sweet as Honey",

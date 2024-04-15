@@ -4,11 +4,12 @@ import { getTranslations } from "next-intl/server";
 import "./globals.css";
 import { Providers } from "./providers";
 import Sidebar from "./_ui/Sidebar";
+import Header from "./_ui/Header";
 import Footer from "./_ui/Footer";
 import { NextIntlClientProvider,useMessages } from "next-intl";
-import Header from "./_ui/Header";
 
-const locales = ["en", "zh-CN", "zh-TW", "de", "es", "fr", "ja", "kr", "pt", "ru", "it"];
+// const locales = ["en", "zh-CN", "zh-TW", "de", "es", "fr", "ja", "kr", "pt", "ru", "it"];
+const locales = ["en", "zh-CN"];
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,15 +42,19 @@ export default function RootLayout({
           <NextIntlClientProvider messages={messages}>
             <Sidebar/>
           </NextIntlClientProvider>
-          <main className="py-10 lg:py-10 lg:pl-72">
-            {/* <Header /> */}
-            <div className="px-4 sm:px-6 lg:px-8 min-w-[600px]">{children}</div>
-            <div className="pb-10 pt-10">
-
+          <main className="lg:pl-72">
+            <div className="">
               <NextIntlClientProvider messages={messages}>
-                <Footer />
+                <Header locale={locale} />
               </NextIntlClientProvider>
+              <div className="px-4 sm:px-6 lg:px-8 pt-4">{children}</div>
+              <div className="pb-10 pt-10">
+                <NextIntlClientProvider messages={messages}>
+                  <Footer />
+                </NextIntlClientProvider>
+              </div>
             </div>
+            
           </main>
         </Providers>
       </body>
