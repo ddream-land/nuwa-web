@@ -27,7 +27,7 @@ function InfoMation_FirstMessage() {
               {t('Character.firstmessage')}*
             </label>
             <div className="flex flex-row mt-2 grow shrink">  
-              <div className="mr-4 grow">
+              <div className="mr-4 w-5/6">
                 <textarea
                   placeholder={t('Character.firstmessage')}
                   value={chara.data.first_mes}

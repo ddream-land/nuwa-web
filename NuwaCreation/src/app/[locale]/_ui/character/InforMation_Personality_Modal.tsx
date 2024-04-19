@@ -250,7 +250,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                   {category2.list.map((pitem, index3) => (
                                     <>
                                     {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer"
+                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
                                       key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
                                       endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
                                       variant="flat"
@@ -283,7 +283,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                   {category2.list.map((pitem, index3) => (
                                     <>
                                     {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer"
+                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
                                       key={`${index1}+${index2}+${index3}`}
                                       endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
                                       variant="flat"
@@ -426,7 +426,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                   <div className="flex flex-wrap gap-4">
                                     {category2.list.map((pitem, index3) => (
                                       <Chip
-                                        className={`${pitem.selected ? 'bg-black text-white' : 'bg-[#D9D9D9] text-black'}  h-9 cursor-pointer`}
+                                        className={`${pitem.selected ? 'bg-black text-white' : 'bg-[#D9D9D9] text-black'} h-9 px-4 w-auto  cursor-pointer`}
                                         key={`${index1}+${index2}+${index3}`}
                                         variant="flat"
                                         onClick={() => handleFruitClick(index1, index2, index3)}

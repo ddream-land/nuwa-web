@@ -3,47 +3,49 @@ import React, { useEffect, useRef, useState } from "react";
 import { useChara, useCharacterBook, usePostCharaFun } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
 import { TypeCharacterBook } from "../../_lib/definitions";
+import { Link } from "@/navigation";
+import Image from "next/image";
 
-const worldbookList = [{
-  name: "一本世界书1",
-  entries: [{
-    comment: "一本世界书11",
-  }, {
-    comment: "一本世界书11",
-  }]
-}, {
-  name: "一本世界书2",
-  entries: [{
-    comment: "一本世界书22",
-  }, {
-    comment: "一本世界书22",
-  }]
-}, {
-  name: "一本世界书3",
-  entries: [{
-    comment: "一本世界书33",
-  }, {
-    comment: "一本世界书33",
-  }]
-}, {
-  name: "一本世界书3",
-  entries: [{
-    comment: "一本世界书33",
-  }, {
-    comment: "一本世界书33",
-  }]
-}, {
-  name: "一本世界书3",
-  entries: [{
-    comment: "一本世界书33",
-  }, {
-    comment: "一本世界书33",
-  }]
-}]
+// const worldbookList = [{
+//   name: "一本世界书1",
+//   entries: [{
+//     comment: "一本世界书11",
+//   }, {
+//     comment: "一本世界书11",
+//   }]
+// }, {
+//   name: "一本世界书2",
+//   entries: [{
+//     comment: "一本世界书22",
+//   }, {
+//     comment: "一本世界书22",
+//   }]
+// }, {
+//   name: "一本世界书3",
+//   entries: [{
+//     comment: "一本世界书33",
+//   }, {
+//     comment: "一本世界书33",
+//   }]
+// }, {
+//   name: "一本世界书3",
+//   entries: [{
+//     comment: "一本世界书33",
+//   }, {
+//     comment: "一本世界书33",
+//   }]
+// }, {
+//   name: "一本世界书3",
+//   entries: [{
+//     comment: "一本世界书33",
+//   }, {
+//     comment: "一本世界书33",
+//   }]
+// }]
 function Scenario_WorldBook() {
   const t = useTranslations();
   const { chara , setChara } = useChara();
@@ -141,7 +143,7 @@ function Scenario_WorldBook() {
                       <div className="border-y border-solid border-white text-white font-semibold text-2xl overflow-hidden text-overflow-ellipsis">{worldbook.name}</div>
                       <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
                       {worldbook.entries && worldbook.entries.map((entry, index) => (
-                        <p>{entry.comment}</p>
+                        <p key={`entries${index}`}>{entry.comment}</p>
                       ))}
                       </div>
                     </div>
@@ -210,12 +212,16 @@ function Scenario_WorldBook() {
                 <div className="border-y border-solid border-white text-white font-semibold text-2xl line-clamp-1">{chara.data.character_book.name}</div>
                 <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
                 {chara.data.character_book.entries.map((entry, index) => (
-                  <p>{entry.comment}</p>
+                  <p key={`entries${index}`}>{entry.comment}</p>
                 ))}
                 </div>
               </div>
             )}
-        </div> 
+        </div>
+        <Divider />
+        <Link href='/character/mesexample'>
+          <Image className=" absolute -right-2 -bottom-3 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
+        </Link> 
       </div>
     </div>
   );

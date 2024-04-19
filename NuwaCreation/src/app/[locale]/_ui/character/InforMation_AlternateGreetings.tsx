@@ -53,55 +53,28 @@ function InforMation_AlternateGreetings() {
                     className="border-none outline-none w-full resize-none mb-6"
                   />
                 </div>
-                <Popover placement="top" color='warning'>
+                <Popover placement="top" color='danger'>
                   <PopoverTrigger>
                     <Button className="bg-black text-white">{t('Greetings.deletegreetings')}</Button>
-                    {/* <div className="w-32 h-12 flex flex-col text-center rounded-xl text-[10px] cursor-pointer">
-                      <div
-                        className="h-full rounded-xl leading-[48px] bg-black text-white"
-                      >
-                        {t('Greetings.deletegreetings')}
-                      </div>
-                    </div> */}
                   </PopoverTrigger>
                   <PopoverContent>
-                    <div className="px-1 py-2">
-                      <Popover placement="top" color='warning'>
-                        <PopoverTrigger>
-                          <Button size="sm" color="warning">
-                            {t('Greetings.thisoperationcannotbewithdrawn')}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                          <Popover placement="top" color='danger'>
-                            <PopoverTrigger>
-                              <Button size="sm" color="warning">
-                                {t('Previews.mymindismadeup')}
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent>
-                            <Button 
-                              className="w-full" 
-                              size="sm" 
-                              color="danger"
-                              onClick={() => {
-                                setChara(prev => ({
-                                  ...prev,
-                                  data: {
-                                    ...prev.data,
-                                    alternate_greetings: prev.data.alternate_greetings.filter((_, i) => i !== index)  
-                                  }
-                                }))
-                                setDeleteCount(deleteCount + 1);
-                              }}
-                            >
-                              Delete
-                            </Button>
-                            </PopoverContent>
-                          </Popover>
-                        </PopoverContent>
-                      </Popover>
-                    </div>
+                    <Button 
+                      className="w-full" 
+                      size="sm" 
+                      color="danger"
+                      onClick={() => {
+                        setChara(prev => ({
+                          ...prev,
+                          data: {
+                            ...prev.data,
+                            alternate_greetings: prev.data.alternate_greetings.filter((_, i) => i !== index)  
+                          }
+                        }))
+                        setDeleteCount(deleteCount + 1);
+                      }}
+                    >    
+                      {t('Previews.mymindismadeup')}
+                    </Button>
                   </PopoverContent>
                 </Popover>
               </div>
@@ -109,7 +82,7 @@ function InforMation_AlternateGreetings() {
           </div>
         ))}
         
-        <div className="flex flex-row-reverse">
+        <div className="flex flex-row-reverse mt-2">
           <Button onClick={handleAddGreetingsClick} variant="light" className="w-[200px]" endContent={<PlusIcon className="h-4 w-4 text-black"/>}>增加额外首条消息</Button> 
         </div>   
       </div>

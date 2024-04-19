@@ -7,7 +7,7 @@ function NuwaTextareaWrapper({label, textareaProps}: {label: string, textareaPro
     <NuwaFormWrapper label={label}>
       <textarea
           {...textareaProps}
-          className="border-none outline-none w-full h-full resize-none mb-6 text-[#272727]"
+          className="border-none outline-none w-full h-full resize-none mb-6 text-[#272727] disabled:bg-transparent"
         />
     </NuwaFormWrapper>
   );

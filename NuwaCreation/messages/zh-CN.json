@@ -6,27 +6,91 @@
     "cover": "封面",
     "createdby": "创建者",
     "creatorsnotes": "创作者注释",
-    "depthprompt": "数字生命卡深度和提示",
+    "depthprompt": "深度",
     "description": "描述",
     "descriptiontoken": "描述标记",
     "firstmessage": "首条消息",
     "firstmessagetoken": "首条消息标记",
     "information": "信息",
-    "jailbreak": "越狱",
+    "jailbreak": "越狱提示",
     "jailbreaktoken": "越狱标记",
-    "mainprompt": "主要提示",
+    "mainprompt": "主要提示覆盖",
     "mainprompttoken": "主要提示标记",
-    "mesexample": "消息示例",
+    "mesexample": "对话示例",
     "modifythebasicinsormationofthecharactercard": "修改数字生命卡的基本信息",
     "personalitysummary": "个性摘要",
-    "promptoverrdies": "提示覆盖",
+    "promptoverrdies": "主要提示词覆盖",
     "replacementofthecover": "更换",
     "scenario": "情境",
     "scenarioWorldbookTitle": "包含世界书",
     "tagstoembed": "嵌入标签",
     "talkativeness": "健谈程度",
-    "zipcover": "JPG|PNG|WEBP 图片将自动压缩"
+    "talkativeness0": "害羞",
+    "talkativeness05": "正常",
+    "talkativeness1": "话多",
+    "zipcover": "JPG|PNG|WEBP 图片将自动压缩",
+    "avatar": "形象",
+    "voice": "声音",
+    "voicetab": {
+      "desc": "选择需要集成的语音技术",
+      "sex": "声音性别",
+      "male": "男",
+      "female": "女",
+      "type": "音色选择"
+    },
+    "creatorinfo": "创建信息",
+    "language": "支持的语言（可多选）",
+    "level": "分级",
+    "leveltip": "若内容中存在暴力、色情、血腥等内容，请选择NSFW/限制级",
+    "copyright": "版权",
+    "copyrighttip1": "选择你的CC许可证协议[4.0]",
+    "copyrighttip2": "获取详细介绍请访问：",
+    "copyrighttip3": "我该如何选择？",
+    "advancedset": "高级设置"
   },
+  "Preview": {
+    "tags": "标签",
+    "tagTip": "在发布后帮助其他用户更精准的搜索和筛选到你的数字生命",
+    "tagsinputplaceholder": "添加标签",
+    "tagAddButton": "添加",
+    "basecontent": "基本内容"
+  },
+  "Voices": {
+    "male": [
+      { "name": "小明", "value": "ming5", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
+      { "name": "小黑", "value": "hei6", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/e8f4c1c0-c6f6-43d0-9885-8e0a87ebd9cb.wav"}
+    ],
+    "female": [
+      { "name": "小红", "value": "hong7", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
+      { "name": "小美", "value": "mei8", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
+    ]
+  },
+  "Languages": [{
+    "name": "英语",
+    "value": "en"
+  }, {
+    "name": "中文",
+    "value": "zh-CN"
+  },{
+    "name": "日语",
+    "value": "ja"
+  }, {
+    "name": "韩语",
+    "value": "ko"
+  },{
+    "name": "西班牙语",
+    "value": "es"
+  }, {
+    "name": "法语",
+    "value": "fr"
+  }],
+  "Levels": [{
+    "name": "SFW/大众级",
+    "value": "SFW"
+  }, {
+    "name": "NSFW/限制级",
+    "value": "NSFW"
+  }],
   "Greetings": {
     "deletegreetings": "删除",
     "thisoperationcannotbewithdrawn": "此操作不可撤销！"

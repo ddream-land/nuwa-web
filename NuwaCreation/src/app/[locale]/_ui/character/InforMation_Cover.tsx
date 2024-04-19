@@ -10,7 +10,6 @@ import {
 
 function InforMation_Cover() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
   const { cover , setCover } = useCover();
   const { isReplacingTheCoverLoding, handleReplacingTheCover } = useCoverHandler();
 

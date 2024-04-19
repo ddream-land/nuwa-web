@@ -28,7 +28,7 @@ export function useChara() {
           creator_notes: "",
           system_prompt: "",
           post_history_instructions: "",
-          tags: [],
+          tags: "",
           creator: "",
           character_version: "",
           alternate_greetings: [],
@@ -54,6 +54,51 @@ export function useChara() {
     }, [chara]);
     return { chara, setChara };
   }
+
+export function getChara() {
+  const defaultChara = {
+    name: "",
+    description: "",
+    personality: "",
+    scenario: "",
+    first_mes: "",
+    mes_example: "",
+    creatorcomment: "",
+    avatar: "none",
+    chat: "",
+    talkativeness: "0.5",
+    fav: false,
+    spec: "chara_card_v2",
+    spec_version: "2.0",
+    data: {
+      name: "",
+      description: "",
+      personality: "",
+      scenario: "",
+      first_mes: "",
+      mes_example: "",
+      creator_notes: "",
+      system_prompt: "",
+      post_history_instructions: "",
+      tags: "",
+      creator: "",
+      character_version: "",
+      alternate_greetings: [],
+      extensions: {
+        talkativeness: "0.5",
+        fav: false,
+        world: "",
+        depth_prompt: { prompt: "", depth: 4 },
+      },
+    },
+    create_date: "",
+  };
+  if (typeof window !== "undefined") {
+    const charaed = localStorage.getItem("chara");
+    return charaed ? JSON.parse(charaed) || defaultChara : defaultChara;
+  }
+  return defaultChara;
+}
 
   export function useCharacterBook() {
     const {chara} = useChara()

@@ -27,6 +27,7 @@ export type TypeChara = {
     character_version: string;
     alternate_greetings: string[];
     extensions: {
+      avatar: string | undefined;
       talkativeness: string;
       fav: Boolean;
       world: string;
@@ -34,6 +35,14 @@ export type TypeChara = {
         prompt: string;
         depth: string;
       };
+      voice: {
+        type: string,
+        sex: string,
+        name: string,
+      } | undefined | null,
+      languages: string[],
+      level: string,
+      cclicense: string,
     };
     character_book: TypeCharacterBook | undefined;
   };
