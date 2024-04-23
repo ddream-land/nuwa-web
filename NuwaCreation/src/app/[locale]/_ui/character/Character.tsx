@@ -31,7 +31,7 @@ export default function Character() {
             selectedKey={pathname}
             variant="solid"
             classNames={{
-              base: "pr-62 fixed mt-0 z-40 py-2 overflow-x-scroll w-full pr-[200px] lg:pr-[500px]",
+              base: "pr-62 fixed mt-0 z-30 py-2 overflow-x-scroll w-full pr-[200px] lg:pr-[500px]",
               tabList: "bg-[#D9D9D9] py-2 overflow-x-scroll",
               cursor: "w-full bg-[#0C0C0C] text-white",
               tab:"group-data-[selected=true]:bg-[#0C0C0C] px-2 h-10",

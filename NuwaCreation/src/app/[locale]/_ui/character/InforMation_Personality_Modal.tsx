@@ -235,96 +235,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
               <>
                 <ModalBody>
                   <div className="grid grid-cols-3 gap-4 h-full  rounded-[50px]">
-                    <div className="bg-black rounded-[50px] h-full relative bg-[url('/character-inforMation-personality-model-bg.png')] bg-right-bottom bg-cover">
-                      <div className="p-4">
-                      {personalityDataList.map((category1, index1) => (
-                        <>
-                          {getFruitSelectedLength(category1.list) > 0 && <>
-                            <Card key={`${category1.name}${index1}`}className="py-4 bg-transparent text-white border-none shadow-none">
-                              <CardHeader className="pb-0 pt-2 flex-col items-start">
-                                <h4 className="font-bold text-large">{category1.name}</h4>
-                              </CardHeader>
-                              <CardBody className="overflow-visible py-6">
-                              <div className="flex flex-wrap gap-4">
-                                {category1.list.map((category2, index2) => (
-                                  <>
-                                  {category2.list.map((pitem, index3) => (
-                                    <>
-                                    {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
-                                      key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
-                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
-                                      variant="flat"
-                                    >
-                                      {pitem.name}
-                                    </Chip>}
-                                    </>
-                                  ))}
-                                  </>
-                                ))}
-                              </div>
-                            </CardBody>
-                          </Card>
-                          <Divider className="bg-white" />
-                          </>
-                          }
-                        </>
-                      ))}
-                      {customerPersonalityDataList.map((category1, index1) => (
-                        <>
-                          {getFruitSelectedLength(category1.list) > 0 && <>
-                            <Card key={index1} className="py-4 bg-transparent text-white border-none shadow-none">
-                              <CardHeader className="pb-0 pt-2 flex-col items-start">
-                                <h4 className="font-bold text-large">{category1.name}</h4>
-                              </CardHeader>
-                              <CardBody className="overflow-visible py-6">
-                              <div className="flex flex-wrap gap-4">
-                                {category1.list.map((category2, index2) => (
-                                  <>
-                                  {category2.list.map((pitem, index3) => (
-                                    <>
-                                    {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
-                                      key={`${index1}+${index2}+${index3}`}
-                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
-                                      variant="flat"
-                                    >
-                                      {pitem.name}
-                                    </Chip>}
-                                    </>
-                                  ))}
-                                  </>
-                                ))}
-                              </div>
-                            </CardBody>
-                          </Card>
-                          <Divider className="bg-white" />
-                          </>
-                          }
-                        </>
-                      ))}
-                      </div>
-                      <Button
-                        onClick={() => {
-                          onClose();
-                        }}
-                        className="absolute top-4 right-4 h-12 w-12 p-0 rounded-full bg-white z-40"
-                        type="button"
-                        color="default"
-                        variant="flat"
-                        isIconOnly
-                      >
-                        <XMarkIcon className="h-8 w-8 text-black font-black absolute" aria-hidden="true" />
-                      </Button>
-                      <div
-                        className="cursor-pointer flex flex-row items-center justify-center absolute bottom-4 right-4 h-16 w-52 z-40 bg-[url('/character-inforMation-personality-model-insert-bg.png')] bg-no-repeat bg-center bg-contain"
-                        onClick={handleInsertPersonality}
-                      >
-                        <span className="text-black text-xl ont-semibold">插入</span>
-                        <NuwaInsertIcon className='h-4 w-11 text-black' aria-hidden="true" />
-                      </div>
-                    </div>
-
                     <div className="col-span-2 bg-white rounded-[50px] h-full py-16 px-8 relative">
                       <Tabs
                         aria-label="Options"
@@ -452,6 +362,96 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                       </Tabs>
                       
                     </div>
+                    <div className="bg-black rounded-[50px] h-full relative bg-[url('/character-inforMation-personality-model-bg.png')] bg-right-bottom bg-cover">
+                      <div className="p-4">
+                      {personalityDataList.map((category1, index1) => (
+                        <>
+                          {getFruitSelectedLength(category1.list) > 0 && <>
+                            <Card key={`${category1.name}${index1}`}className="py-4 bg-transparent text-white border-none shadow-none">
+                              <CardHeader className="pb-0 pt-2 flex-col items-start">
+                                <h4 className="font-bold text-large">{category1.name}</h4>
+                              </CardHeader>
+                              <CardBody className="overflow-visible py-6">
+                              <div className="flex flex-wrap gap-4">
+                                {category1.list.map((category2, index2) => (
+                                  <>
+                                  {category2.list.map((pitem, index3) => (
+                                    <>
+                                    {pitem.selected && <Chip
+                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
+                                      key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
+                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
+                                      variant="flat"
+                                    >
+                                      {pitem.name}
+                                    </Chip>}
+                                    </>
+                                  ))}
+                                  </>
+                                ))}
+                              </div>
+                            </CardBody>
+                          </Card>
+                          <Divider className="bg-white" />
+                          </>
+                          }
+                        </>
+                      ))}
+                      {customerPersonalityDataList.map((category1, index1) => (
+                        <>
+                          {getFruitSelectedLength(category1.list) > 0 && <>
+                            <Card key={index1} className="py-4 bg-transparent text-white border-none shadow-none">
+                              <CardHeader className="pb-0 pt-2 flex-col items-start">
+                                <h4 className="font-bold text-large">{category1.name}</h4>
+                              </CardHeader>
+                              <CardBody className="overflow-visible py-6">
+                              <div className="flex flex-wrap gap-4">
+                                {category1.list.map((category2, index2) => (
+                                  <>
+                                  {category2.list.map((pitem, index3) => (
+                                    <>
+                                    {pitem.selected && <Chip
+                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
+                                      key={`${index1}+${index2}+${index3}`}
+                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
+                                      variant="flat"
+                                    >
+                                      {pitem.name}
+                                    </Chip>}
+                                    </>
+                                  ))}
+                                  </>
+                                ))}
+                              </div>
+                            </CardBody>
+                          </Card>
+                          <Divider className="bg-white" />
+                          </>
+                          }
+                        </>
+                      ))}
+                      </div>
+                      <Button
+                        onClick={() => {
+                          onClose();
+                        }}
+                        className="absolute top-4 right-4 h-12 w-12 p-0 rounded-full bg-white z-40"
+                        type="button"
+                        color="default"
+                        variant="flat"
+                        isIconOnly
+                      >
+                        <XMarkIcon className="h-8 w-8 text-black font-black absolute" aria-hidden="true" />
+                      </Button>
+                      <NuwaButton
+                        color="gray"
+                        className="absolute bottom-4 right-4 h-16 w-52 z-10"
+                        onClick={handleInsertPersonality}
+                      >
+                      插入
+                      </NuwaButton>
+                    </div>
+
                   </div>
                 </ModalBody>
               </>
