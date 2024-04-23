@@ -30,6 +30,20 @@
     "talkativeness1": "talkative",
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed",
     "avatar": "avatar",
+    "avatartip": "Select voice technology you want to integrate",
+    "avatartip2": "Please select the image you want to add",
+    "avatartip3": "#{index} {type} avatar",
+    "avatartip4": "{type} avatar",
+    "avatarmodalcancelbtn": "cancel",
+    "avatarmodaladdbtn": "add",
+    "LIVE2D": "LIVE2D",
+    "LIVE2Dtip": "Check out the Live2D official documentation >",
+    "3D": "3D",
+    "3Dtip": "Check out the 3D official documentation >",
+    "IMAGE": "IMAGE",
+    "IMAGEtip": "png",
+    "none": "none",
+    "plus": "add",
     "voice": "voice",
     "voicetab": {
       "desc": "Select voice technology you want to integrate",
@@ -47,7 +61,6 @@
     "copyrighttip2": "For details, please visit：",
     "copyrighttip3": "How do I choose?",
     "advancedset": "advanced"
-    
   },
   "Preview": {
     "tags": "tags",
@@ -101,8 +114,11 @@
     "title2": "Nuwa Creation Platform — a free, powerful, and open sourced character creation tool",
     "nuwaLabs": "Nuwa Labs",
     "quickstart": "Quick Start",
+    "understandandlearn": "Understand and learn",
     "createDigitalLife": "Create Digital Life",
-    "createWorldBook": "Create World Book"
+    "createWorldBook": "Create World Book",
+    "readDigitalLife": "Read Digital Life",
+    "readWorldBook": "Read World Book"
   },
   "Footer": {
     "nuwaLabs": "Nuwa Labs",
@@ -130,11 +146,18 @@
     "serverstatus": "Server Status",
     "settings": "Settings",
     "worldbook": "World Book",
-    "dog": "CC"
+    "dog": "CC",
+    "charabook": "My Digital Life"
+  },
+  "CharaBook": {
+    "character": "Digital Life",
+    "worldbook": "World Book"
   },
   "Previews": {
     "addgreetings": "Add Greetings",
     "charactercardnamesmust": "Character card names must",
+    "charactercarddescsmust": "Character card desc must",
+    "charactercardfirstmessmust": "Character card first message must",
     "export": "Export",
     "exportingcharactercards": "Exporting Character Cards",
     "import": "Import",

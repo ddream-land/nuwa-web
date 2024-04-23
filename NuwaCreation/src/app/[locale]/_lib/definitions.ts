@@ -28,6 +28,7 @@ export type TypeChara = {
     alternate_greetings: string[];
     extensions: {
       avatar: string | undefined;
+      avatars: TypeAvatar[];
       talkativeness: string;
       fav: Boolean;
       world: string;
@@ -48,6 +49,11 @@ export type TypeChara = {
   };
   create_date: string;
 };
+
+export type TypeAvatar = {
+  type: string;
+  url: string;
+}
 
 export type TypeCharacterBook = {
   name: string;

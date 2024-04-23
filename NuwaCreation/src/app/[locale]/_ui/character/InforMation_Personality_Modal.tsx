@@ -210,13 +210,14 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
         </Modal>
         <Button
           variant="ghost"
-          className="border w-44 rounded-full"
+          className="border w-36 text-[10px] h-14 rounded-[20px]"
           onPress={onOpen}
-          endContent={<ArrowUpRightIcon className="h-6 w-6"/>}
+          startContent={<ArrowUpRightIcon className="h-5 w-5"/>}
         >
             打开PList生成器
         </Button>
         <Modal 
+          isDismissable={!msgModal.isOpen}
           isOpen={isOpen} 
           onOpenChange={onOpenChange}
           placement="bottom-center"

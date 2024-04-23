@@ -7,6 +7,9 @@ import NuwaButton from "../components/NuwaButton";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Link } from "@/navigation";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
+import { TrashIcon } from "@heroicons/react/24/outline";
+const InsertUserOrChar = dynamic(() => import("../components/InsertUserOrChar"), { ssr: false })
 
 export default function Mes_Example() {
   const descTextareaRefs = useRef<{ [key: string]: RefObject<HTMLElement> | null }>({});
@@ -23,29 +26,6 @@ export default function Mes_Example() {
     return item;
   });
   const [mesExampleList, setMesExampleList] = React.useState(initNewMesExampleList);
-
-
-
-  const insertTextAtCursor = (text: string, index: number) => {
-    const currentDescTextareaRef = descTextareaRefs.current[index];
-    const startPos = (currentDescTextareaRef as any).selectionStart;
-    const endPos = (currentDescTextareaRef as any).selectionEnd | 0;
-    const value = (currentDescTextareaRef as any).value;
-    const textBefore = value?.substring(0, startPos);
-    const textAfter = value?.substring(endPos, value.length);
-    const newValue = textBefore + text + textAfter;
-
-    (currentDescTextareaRef as any).value = newValue;
-    (currentDescTextareaRef as any).selectionStart = startPos + text.length;
-    (currentDescTextareaRef as any).selectionEnd = startPos + text.length;
-
-    updateMesExamplePlist(newValue, index);
-    // setChara((prevChara) => ({
-    //   ...prevChara,
-    //   data: { ...prevChara.data, description: newValue },
-    // }));
-    // setDescriptionValue(newValue);
-  };
 
   const saveMesExample = (newMesExampleList: string[]) => {
     // 保存到chara
@@ -118,68 +98,62 @@ export default function Mes_Example() {
         return (
         <div className="flex flex-row gap-4 mt-4" key={index}>
           <div
-            className=" p-16 flex flex-col cursor-pointer text-xl bg-black rounded-[40px] w-full min-h-[300px] bg-no-repeat bg-right-bottom bg-cover bg-[url('/character-mesExample-list-item-bg.png')]"
+            className="group relative p-10 flex flex-row items-end cursor-pointer text-xl bg-black rounded-[40px] w-full min-h-[300px] bg-no-repeat bg-right-bottom bg-cover bg-[url('/character-mesExample-list-item-bg.png')]"
           >
-            <textarea
-              ref={r => { (descTextareaRefs.current[index] as any) = r; }}
-              placeholder="请在这里填写对话示例"
-              value={item}
-              onChange={e => {
-                updateMesExamplePlist(e.target.value, index)
-              }}
-              className="border-none outline-none w-full h-full resize-none mb-6 bg-transparent text-white"
-            />
-          </div>
-          <div className="w-[114px] flex flex-col gap-4">
-
-          <Popover placement="top" color="danger">
-            <PopoverTrigger>
-              <Button className="w-full rounded-[40px] h-[174px] bg-white border border-solid border-black flex items-center justify-center" size="sm" isIconOnly>
-                <XMarkIcon className="h-4 w-4 text-black" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent>  
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
-                  setMesExampleList(newMesExampleList);
-                  saveMesExample(newMesExampleList);
+            <div className="mr-4 grow h-full">
+              <textarea
+                ref={r => { (descTextareaRefs.current[index] as any) = r; }}
+                placeholder="请在这里填写对话示例"
+                value={item}
+                onChange={e => {
+                  updateMesExamplePlist(e.target.value, index)
                 }}
-                size="sm"
-                color="danger"
-              >
-                {t('Previews.mymindismadeup')}
-              </Button>
-            </PopoverContent>
-          </Popover>
-
-            <div className="w-full h-32 flex flex-col bg-[#D5D5D5] text-center rounded-xl text-[10px] cursor-pointer">
-              <div
-                onClick={() => {
-                  insertTextAtCursor('{{user}}', index);
-                }}
-                className="h-1/2 rounded-xl leading-[64px] text-[#272727]"
-              >插入玩家名称</div>
-              <div
-                onClick={() => {
-                  insertTextAtCursor('{{char}}', index);
-                }}
-                className="h-1/2 rounded-xl leading-[64px] bg-black text-white"
-              >
-                插入数字生命名称
-              </div>
+                className="border-none outline-none w-full h-full resize-none mb-6 bg-transparent text-white"
+              />
             </div>
-          </div> 
+
+
+            <Popover placement="top" color='warning'>
+              <PopoverTrigger>
+                <Button
+                  className="absolute top-10 right-10 bg-white text-white opacity-0 group-hover:opacity-100"
+                  startContent={<TrashIcon className="h-5 w-5 text-black"/>}
+                  isIconOnly
+                ></Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <Button 
+                  className="w-full" 
+                  size="sm" 
+                  color="warning"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
+                    setMesExampleList(newMesExampleList);
+                    saveMesExample(newMesExampleList);
+                  }}
+                >    
+                  {t('Previews.mymindismadeup')}
+                </Button>
+              </PopoverContent>
+            </Popover>
+
+            <div className="opacity-0 group-hover:opacity-100">
+              <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
+                updateMesExamplePlist(newValue, index);
+              }} />
+            </div>
+            
+          </div>
         </div>
       )})}
 
 
-      <div className="flex justify-end mt-10 w-full">
+      {/* <div className="flex justify-end mt-10 w-full">
         <Link href='/character/avatar'>
           <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
         </Link> 
-      </div>
+      </div> */}
      
     </>
   );

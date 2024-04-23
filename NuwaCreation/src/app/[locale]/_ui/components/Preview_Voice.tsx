@@ -79,7 +79,10 @@ function Preview_Voice() {
                 selectedVoiceType === TypeVoiceType.Microsoft ? 'bg-black': 'bg-white'
               ))}
             >
-              <MicrosoftTTSIcon color={selectedVoiceType === TypeVoiceType.Microsoft ? 'white' : 'black'} className={classNames('h-32 w-32')} aria-hidden="true" />
+              <MicrosoftTTSIcon
+                className={classNames('h-32 w-32', selectedVoiceType === TypeVoiceType.Microsoft ? 'fill-white' : 'fill-black')}
+                aria-hidden="true"
+                />
               <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight', (
                 selectedVoiceType === TypeVoiceType.Microsoft ? 'text-white' : 'text-stone-950'
               ))} >Microsoft TTS API</div>

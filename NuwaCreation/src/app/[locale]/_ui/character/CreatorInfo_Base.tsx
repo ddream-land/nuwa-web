@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
+import { Input } from "@nextui-org/react";
 
 function CreatorInfo_Base() {
   const t = useTranslations();

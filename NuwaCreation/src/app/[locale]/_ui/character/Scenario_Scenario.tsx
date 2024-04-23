@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
+import InsertUserOrChar from "../components/InsertUserOrChar";
 
 function Scenario_Scenario() {
   const t = useTranslations();
@@ -10,8 +11,7 @@ function Scenario_Scenario() {
 
   const [scenarioValue, setScenarioValue] = React.useState(chara.data.scenario);
 
-  const handleScenarioChange = (e:any) => {
-    const newValue = e.target.value;
+  const handleScenarioChange = (newValue:string) => {
     setChara((prevChara) => ({
       ...prevChara,
       data: { ...prevChara.data, scenario: newValue },
@@ -48,29 +48,20 @@ function Scenario_Scenario() {
         >
           {t('Character.scenario')}
         </label>
-        <div className="flex flex-row items-end mt-10 grow">  
+        <div className="flex flex-col items-end mt-10 grow">  
             <textarea
               ref={descTextareaRef}
               placeholder={`${t('Character.scenario')}`}
               value={chara.data.scenario}
-              onChange={handleScenarioChange}
-              className="mr-4 grow text-white border-none outline-none w-full h-full resize-none mb-6 bg-transparent"
+              onChange={(e) => (handleScenarioChange(e.target.value))}
+              className="grow text-white border-none outline-none w-full h-full resize-none mb-6 bg-transparent break-all"
             />
-          <div className="shrink-0 w-32 h-32 flex flex-col bg-[#D5D5D5] text-center rounded-xl text-[10px] cursor-pointer">
-            <div
-              onClick={() => {
-                insertTextAtCursor('{{user}}');
-              }}
-              className="h-1/2 rounded-xl leading-[64px] text-[#272727]"
-            >插入玩家名称</div>
-            <div
-              onClick={() => {
-                insertTextAtCursor('{{char}}');
-              }}
-              className="h-1/2 rounded-xl leading-[64px] bg-white text-black"
-            >
-              插入数字生命名称
-            </div>
+          <div className="shrink-0">
+            <InsertUserOrChar getTextRef={() => {
+              return descTextareaRef.current
+            }} onDone={(newValue) => {
+              handleScenarioChange(newValue);
+            }} />
           </div>
         </div> 
       </div>    

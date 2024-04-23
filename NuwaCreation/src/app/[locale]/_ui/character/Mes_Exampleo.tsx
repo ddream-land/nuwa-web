@@ -138,7 +138,7 @@ export default function Mes_Example() {
           </div>
           <div className="w-[114px] flex flex-col gap-4">
 
-          <Popover placement="top" color="danger">
+          <Popover placement="top" color="warning">
             <PopoverTrigger>
               <Button className="w-full rounded-[40px] h-[174px] bg-white border border-solid border-black flex items-center justify-center" size="sm" isIconOnly>
                 <XMarkIcon className="h-4 w-4 text-black" />

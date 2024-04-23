@@ -13,7 +13,7 @@ import Image from "next/image";
 function InforMation() {
   
   return (
-    <>   
+    <div>   
       <div className="grid grid-cols-3 gap-4">
         <InforMation_Cover />
         <div
@@ -27,45 +27,20 @@ function InforMation() {
           
             <InforMation_Description />
           </div>
-          
-
-          {
-          /*
-          <div className="">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.tagstoembed')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.tags}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, tags: e.target.value } }))}
-                autoComplete="off"
-                type="text"
-                variant="underlined"
-              />
-            </div>
-          </div>
-          
-          */}
         </div>
 
       </div>
       <div>
 
-      <div className="relative">
-        <div className="w-11/12">
-          <InforMation_FirstMessage />
-        </div>
+        <InforMation_FirstMessage />
+        <InforMation_AlternateGreetings />
         
-        <Link href='/character/scenario'>
-          <Image className=" absolute -right-1 top-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link>
       </div>
-      <InforMation_AlternateGreetings />
-      </div>
-    </>
+      
+      {/* <Link href='/character/scenario' className="flex flex-row-reverse mt-10">
+        <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
+      </Link> */}
+    </div>
   );
 }
 

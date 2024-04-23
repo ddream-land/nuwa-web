@@ -218,10 +218,10 @@ function Scenario_WorldBook() {
               </div>
             )}
         </div>
-        <Divider />
+        {/* <Divider />
         <Link href='/character/mesexample'>
           <Image className=" absolute -right-2 -bottom-3 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link> 
+        </Link>  */}
       </div>
     </div>
   );

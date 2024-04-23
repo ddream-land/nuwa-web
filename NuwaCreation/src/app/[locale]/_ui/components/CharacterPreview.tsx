@@ -24,7 +24,7 @@ function CharacterPreview({chara}: {chara: TypeChara}) {
       <Preview_PristMessage />
       <Preview_BaseContent />
       {chara.data.mes_example && <Preview_MesExample />}
-      {chara.data.extensions.avatar && <Preview_Avatar />}
+      {chara.data.extensions.avatars && chara.data.extensions.avatars.length > 0 && <Preview_Avatar />}
       {selectedVoiceType !== TypeVoiceType.None && <Preview_Voice />}
       <Preview_AdvancedSet />
       {chara.data.character_book && <Preview_WorldBook />}

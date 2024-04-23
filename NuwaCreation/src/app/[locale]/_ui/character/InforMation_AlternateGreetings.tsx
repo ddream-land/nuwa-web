@@ -1,14 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { RefObject, useRef, useState } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import InsertUserOrChar from "../components/InsertUserOrChar";
 
 function InforMation_AlternateGreetings() {
+  const descTextareaRefs = useRef<{ [key: string]: RefObject<HTMLElement> | null }>({});
   const t = useTranslations();
   const { chara , setChara } = useChara();
   const [deleteCount, setDeleteCount] = useState(1);
+
+  const updateAlternateGreetings = (newValue: string, index: number) => {
+    setChara(prev => ({
+      ...prev,
+      data: {
+        ...prev.data, 
+        alternate_greetings: prev.data.alternate_greetings.map((greet, i) => 
+          i === index ? newValue : greet  
+        )
+      }
+    }))
+  }
 
   const handleAddGreetingsClick = () => {
     
@@ -27,41 +41,38 @@ function InforMation_AlternateGreetings() {
   return (
       <div>
         {chara.data.alternate_greetings.map((item, index) => (
-          <div className="flex flex-col grow mt-6" key={deleteCount + index}>
-            <div className="py-4 flex flex-col bg-white h-32 rounded-[40px] p-7">
+          <div className="group relative flex flex-col grow mt-6" key={deleteCount + index}>
+            <div className="py-4 flex flex-col bg-white h-52 rounded-[40px] p-7">
               <label
                 className="block text-lg font-medium leading-8 mb-1"
               >
                 {t('Character.firstmessage')}{index + 1}*
               </label>
-              <div className="flex flex-row mt-2 grow shrink">  
-                <div className="mr-4 grow">
+              <div className="flex flex-row items-end mt-2 grow shrink">  
+                <div className="mr-4 grow h-full">
                   <textarea
+                    ref={r => { (descTextareaRefs.current[index] as any) = r; }}
                     placeholder=''
                     value={item}
                     onChange={e => {
-                      setChara(prev => ({
-                        ...prev,
-                        data: {
-                          ...prev.data, 
-                          alternate_greetings: prev.data.alternate_greetings.map((greet, i) => 
-                            i === index ? e.target.value : greet  
-                          )
-                        }
-                      }))
+                      updateAlternateGreetings(e.target.value, index)
                     }}
-                    className="border-none outline-none w-full resize-none mb-6"
+                    className="border-none h-full outline-none w-full resize-none mb-6 break-all"
                   />
                 </div>
-                <Popover placement="top" color='danger'>
+                <Popover placement="top" color='warning'>
                   <PopoverTrigger>
-                    <Button className="bg-black text-white">{t('Greetings.deletegreetings')}</Button>
+                    <Button
+                      className=" absolute top-4 right-4 bg-black text-white opacity-0 group-hover:opacity-100"
+                      startContent={<TrashIcon className="h-5 w-5"/>}
+                      isIconOnly
+                    ></Button>
                   </PopoverTrigger>
                   <PopoverContent>
                     <Button 
                       className="w-full" 
                       size="sm" 
-                      color="danger"
+                      color="warning"
                       onClick={() => {
                         setChara(prev => ({
                           ...prev,
@@ -77,6 +88,12 @@ function InforMation_AlternateGreetings() {
                     </Button>
                   </PopoverContent>
                 </Popover>
+
+                <div className="opacity-0 group-hover:opacity-100">
+                  <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
+                    updateAlternateGreetings(newValue, index);
+                  }} />
+                </div>
               </div>
             </div>
           </div>

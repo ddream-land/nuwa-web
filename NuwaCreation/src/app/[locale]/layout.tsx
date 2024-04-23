@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import "./globals.css";
 import { Providers } from "./providers";
-import Sidebar from "./_ui/Sidebar";
 import Header from "./_ui/Header";
 import Footer from "./_ui/Footer";
 import { NextIntlClientProvider,useMessages } from "next-intl";
+import Sidebar from "./_ui/sidebar/Sidebar";
 
 // const locales = ["en", "zh-CN", "zh-TW", "de", "es", "fr", "ja", "kr", "pt", "ru", "it"];
 const locales = ["en", "zh-CN"];
@@ -45,7 +45,7 @@ export default function RootLayout({
           <main className="lg:pl-72">
             <div className="">
               <NextIntlClientProvider messages={messages}>
-                <Header locale={locale} />
+                <Header />
               </NextIntlClientProvider>
               <div className="px-4 sm:px-6 lg:px-8 pt-4">{children}</div>
               <div className="pb-10 pt-10">
@@ -54,7 +54,6 @@ export default function RootLayout({
                 </NextIntlClientProvider>
               </div>
             </div>
-            
           </main>
         </Providers>
       </body>

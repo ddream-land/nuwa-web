@@ -30,6 +30,20 @@
     "talkativeness1": "话多",
     "zipcover": "JPG|PNG|WEBP 图片将自动压缩",
     "avatar": "形象",
+    "avatartip": "选择需要集成的语音技术",
+    "avatartip2": "请选择你要添加的形象",
+    "avatartip3": "#{index} {type}形象",
+    "avatartip4": "{type}形象",
+    "avatarmodalcancelbtn": "取消",
+    "avatarmodaladdbtn": "添加",
+    "LIVE2D": "LIVE2D",
+    "LIVE2Dtip": "查看Live2D官方文档 >",
+    "3D": "3D",
+    "3Dtip": "查看3D官方文档 >",
+    "IMAGE": "图片",
+    "IMAGEtip": "png",
+    "none": "无",
+    "plus": "添加",
     "voice": "声音",
     "voicetab": {
       "desc": "选择需要集成的语音技术",
@@ -100,8 +114,11 @@
     "title2": "免费、开源的数字生命创造工具",
     "nuwaLabs": "女娲实验室",
     "quickstart": "快速开始",
+    "understandandlearn": "了解和学习",
     "createDigitalLife": "创建数字生命",
-    "createWorldBook": "创建世界书"
+    "createWorldBook": "创建世界书",
+    "readDigitalLife": "读取数字生命",
+    "readWorldBook": "读取世界书"
   },
   "Footer": {
     "nuwaLabs": "女娲实验室",
@@ -129,11 +146,18 @@
     "serverstatus": "服务器状态",
     "settings": "设置",
     "worldbook": "世界书",
-    "dog": "防倒狗"
+    "dog": "防倒狗",
+    "charabook": "我的数字生命"
+  },
+  "CharaBook": {
+    "character": "数字生命",
+    "worldbook": "世界书"
   },
   "Previews": {
     "addgreetings": "添加问候",
     "charactercardnamesmust": "数字生命卡名称必须",
+    "charactercarddescsmust": "数字生命卡描述必须",
+    "charactercardfirstmessmust": "数字生命卡首条消息必须",
     "export": "导出",
     "exportingcharactercards": "导出数字生命卡",
     "import": "导入",

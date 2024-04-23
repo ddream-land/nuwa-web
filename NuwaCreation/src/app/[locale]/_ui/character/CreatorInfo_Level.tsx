@@ -18,7 +18,7 @@ function CreatorInfo_Level() {
       <div className="flex flex-col h-full w-full py-7 px-7 rounded-[40px]">
         <div className="flex flex-row items-center">
           <div
-            className="text-neutral-950 text-lg font-semibold leading-loose tracking-tight mr-2"
+            className=" shrink-0 text-neutral-950 text-lg font-semibold leading-loose tracking-tight mr-2"
           >
             {t('Character.level')}
           </div>
