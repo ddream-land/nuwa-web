@@ -1,52 +1,43 @@
 'use client'
-import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
+import React, { useState } from "react";
+import { Button, Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
 import { useTranslations } from "next-intl";
+import AlterMessage from "../components/AlterMessage";
 
 export default function App() {
   const  t = useTranslations();
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState(t('Settings.DelDone'))
+
   const handleDelLocalestorge = () => {
     // Delete all items from localStorage
     localStorage.clear();
-    onOpenChange();
-    alert(t('Settings.DelDone'));
+    setMessage(t('Settings.DelDone'));
+    setIsOpen(true);
   };
 
   return (
     <>
-      <Button color="danger" variant="flat" onPress={onOpen}>{t('Settings.idecidedtotry')}</Button>
-      <Modal  isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent >
-          {(onClose) => (
-            <>
-              <ModalHeader  className="flex flex-col gap-1 text-rose-500">{t('Settings.thisoperationsisirrevocable')}</ModalHeader>
-              <ModalBody>
-                <h1 className="text-red-500 text-xl font-extrabold">{t('Settings.haveyoureallythoughtthisthrough')}</h1>
-              
-              </ModalBody>
-              <ModalFooter>
-                <Button color="success" variant="light" onPress={onClose}>
-                  {t('Settings.close')}
-                </Button>
-                <Popover placement="right" color="danger">
-                <PopoverTrigger>
-                  <Button color="danger">
-                    {t('Settings.imsure')}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <Button onClick={handleDelLocalestorge} color="danger">
-                  {t('Settings.DELETE')}
-                  </Button>
-                </PopoverContent>
-              </Popover>
-
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
+        setIsOpen(false)
+      }} />
+      <Popover placement="top" color='danger'>
+        <PopoverTrigger>
+          <Button color="primary" variant="solid">{t('Settings.clearbtn')}</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <Button 
+            className="w-full font-semibold" 
+            size="sm" 
+            color="danger"
+            onClick={(e) => {
+              handleDelLocalestorge();
+            }}
+          >    
+            {t('Previews.mymindismadeup')}
+          </Button>
+        </PopoverContent>
+      </Popover>
     </>
   );
 }

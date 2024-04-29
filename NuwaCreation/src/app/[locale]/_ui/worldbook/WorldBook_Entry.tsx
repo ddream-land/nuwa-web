@@ -1,44 +1,38 @@
 "use client";
 import React from "react";
 import { useTranslations } from "next-intl";
-import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
-import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
-import NuwaFormWrapper from "../components/NuwaFormWrapper";
-import { TypeCharacterBookEntriy } from "../../_lib/definitions";
-import WorldBook_Entry_Wrapper from "./WorldBook_Entry_Wrapper";
-import WorldBook_Entry_L from "./WorldBook_Entry_L";
-import WorldBook_Entry_R from "./WorldBook_Entry_R";
-import PreviewWrapper from "../components/PreviewWrapper";
+import { TypeWorldBookEntriy } from "../../_lib/definitions";
+import WorldBook_Entry_Content from "./WorldBook_Entry_Content";
+import WorldBook_Entry_Keys from "./WorldBook_Entry_Keys";
+import WorldBook_Entry_Name from "./WorldBook_Entry_Name";
+import WorldBook_Entry_Secondary_Keys from "./WorldBook_Entry_Secondary_Keys";
+import WorldBook_Entry_Insertion_Order from "./WorldBook_Entry_Insertion_Order";
+import WorldBook_Entry_Depth from "./WorldBook_Entry_Depth";
+import WorldBook_Entry_Position from "./WorldBook_Entry_Position";
+import WorldBook_Entry_Status from "./WorldBook_Entry_Status";
 
 export default function WorldBook_Entry({value, isPreview = false, onChange}: {
-  value?: TypeCharacterBookEntriy,
+  value?: TypeWorldBookEntriy,
   isPreview?: boolean,
-  onChange: (value: TypeCharacterBookEntriy) => void,
+  onChange: (value: TypeWorldBookEntriy) => void,
 }) {
   const t = useTranslations();
 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4">
-      {isPreview ? (
-        <>
-          <PreviewWrapper>
-            <WorldBook_Entry_L value={value} isPreview={isPreview} onChange={onChange}/>
-          </PreviewWrapper>
-          <PreviewWrapper>
-            <WorldBook_Entry_R value={value} isPreview={isPreview} onChange={onChange}/>
-          </PreviewWrapper>
-        </>
-      ): (
-        <>
-          <WorldBook_Entry_Wrapper>
-            <WorldBook_Entry_L value={value} isPreview={isPreview} onChange={onChange}/>
-          </WorldBook_Entry_Wrapper>
-          <WorldBook_Entry_Wrapper>
-            <WorldBook_Entry_R value={value} isPreview={isPreview} onChange={onChange}/>
-          </WorldBook_Entry_Wrapper>  
-        </>
-      )}  
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
+      <div className="sm:col-start-3 sm:col-end-9 grid gap-20 mb-20 pt-20">
+        <WorldBook_Entry_Name value={value} isPreview={isPreview} onChange={onChange}/>
+        <WorldBook_Entry_Content value={value} isPreview={isPreview} onChange={onChange}/>
+        <WorldBook_Entry_Keys value={value} isPreview={isPreview} onChange={onChange}/>
+        {/* <WorldBook_Entry_Secondary_Keys value={value} isPreview={isPreview} onChange={onChange}/>
+        <div className="grid grid-cols-1 gap-20 sm:grid-cols-2">
+          <WorldBook_Entry_Insertion_Order value={value} isPreview={isPreview} onChange={onChange}/>
+          <WorldBook_Entry_Depth value={value} isPreview={isPreview} onChange={onChange}/>
+        </div>
+        <WorldBook_Entry_Position value={value} isPreview={isPreview} onChange={onChange}/>
+        <WorldBook_Entry_Status value={value} isPreview={isPreview} onChange={onChange}/> */}
+      </div>
     </div>
   );
 }

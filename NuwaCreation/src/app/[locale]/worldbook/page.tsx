@@ -2,7 +2,7 @@ import React from "react";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import dynamic from 'next/dynamic';
 
-const WorldBook = dynamic(() => import('../_ui/worldbook/WorldBook'), {
+const WorldBookList = dynamic(() => import('../_ui/worldbook/WorldBookList'), {
   ssr: false
 });
 
@@ -12,7 +12,7 @@ export default function WorldBookPage() {
   return (
     <div className="flex w-full flex-col">
       <NextIntlClientProvider messages={messages}>
-        <WorldBook />
+        <WorldBookList />
       </NextIntlClientProvider>
     </div>
   );

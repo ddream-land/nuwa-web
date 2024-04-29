@@ -1,14 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { Button, Card, CardBody, CardHeader, Checkbox, Chip, Divider, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tab, Tabs, useDisclosure } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Chip, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tab, Tabs, useDisclosure } from "@nextui-org/react";
 import {
   XMarkIcon,
   ArrowUpRightIcon,
   PlusIcon,
+  ArrowLongRightIcon,
 } from '@heroicons/react/24/outline';
-import NuwaInsertIcon from "../icons/NuwaInsertIcon";
 import NuwaButton from "../components/NuwaButton";
 import { cloneDeep, trim } from "lodash-es";
 
@@ -198,7 +197,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
   }
 
   return (
-    <div className="h-6/12 py-4 flex flex-col">
+    <div className="flex flex-col">
         <Modal placement={"top"} isOpen={msgModal.isOpen} onOpenChange={msgModal.onOpenChange}>
           <ModalContent>
             {(onClose) => (
@@ -208,23 +207,23 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
             )}
           </ModalContent>
         </Modal>
-        <Button
-          variant="ghost"
-          className="border w-36 text-[10px] h-14 rounded-[20px]"
+        <NuwaButton
+          shadowghost="black"
           onPress={onOpen}
           startContent={<ArrowUpRightIcon className="h-5 w-5"/>}
         >
-            打开PList生成器
-        </Button>
+            {t('Character.personalitysummaryplist')}
+        </NuwaButton>
         <Modal 
           isDismissable={!msgModal.isOpen}
           isOpen={isOpen} 
           onOpenChange={onOpenChange}
           placement="bottom-center"
-          size="5xl"
+          size="full"
           scrollBehavior="inside"
           classNames={{
-            body: "bg-transparent py-6 h-full",
+            wrapper: "h-full w-5/6 mx-auto",
+            body: "bg-transparent py-6 h-full w-full",
             backdrop: "h-full",
             base: "border-none shadow-none bg-transparent  text-[#a8b0d3] h-full",
             closeButton: "hover:bg-white/5 active:bg-white/10",
@@ -234,43 +233,49 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
             {(onClose) => (
               <>
                 <ModalBody>
-                  <div className="grid grid-cols-3 gap-4 h-full  rounded-[50px]">
-                    <div className="col-span-2 bg-white rounded-[50px] h-full py-16 px-8 relative">
+                  <div className="grid grid-cols-3 gap-4 h-full w-full rounded-[50px] relative">
+                    <div className="overflow-y-scroll col-span-2 bg-white rounded-[50px] h-full py-16 px-8 relative">
                       <Tabs
                         aria-label="Options"
                         variant="solid"
                         classNames={{
                           base: "mr-32",
-                          tabList: "bg-[#D9D9D9]",
+                          tabList: "bg-[#D9D9D9] h-14 px-4",
                           cursor: "w-full bg-[#0C0C0C] text-white",
-                          tab:"group-data-[selected=true]:bg-[#0C0C0C]",
+                          tab:"group-data-[selected=true]:bg-[#0C0C0C] px-4",
                           tabContent: "text-zinc-800 group-data-[selected=true]:text-white",
+                          panel: "overflow-y-scroll"
                         }}
                       >
                         {personalityDataList.filter((item) => !item.isCustomer).map((category1, index1) => (
                           <Tab key={`${category1.name}${index1}`} title={category1.name}>
                             <div className="flex flex-row-reverse">
-                              <Button onPress={plistModal.onOpen} variant="light" className="w-40" endContent={<PlusIcon/>}>
-                                添加自定义Plist
+                              <Button onPress={plistModal.onOpen} variant="light" startContent={<PlusIcon className="h-5 w-5"/>}>
+                                {t('Character.personalitysummaryplistType')}
                               </Button>
                               <Modal 
                                 isOpen={plistModal.isOpen} 
                                 onOpenChange={plistModal.onOpenChange}
                                 placement="top-center"
                                 className="rounded-[30px]"
+                                size="lg"
                                 hideCloseButton={true}
                               >
                                 <ModalContent>
                                   {(onClose) => (
                                     <>
-                                      <ModalHeader className="flex flex-col gap- text-4xl text-center py-8">自定义</ModalHeader>
+                                      <ModalHeader className="flex flex-col gap- text-4xl text-center py-8">{t('Character.personalitysummaryplistmtitle')}</ModalHeader>
                                       <ModalBody>
                                         <Input
                                           autoFocus
-                                          label="类型"
+                                          className="w-full"
+                                          label={t('Character.personalitysummaryplistmtype')}
+                                          placeholder={t('Character.personalitysummaryplistmtypetoken')}
                                           isDisabled={pListIndex >= 0}
                                           labelPlacement="outside-left"
                                           classNames={{
+                                            base: "w-full",
+                                            mainWrapper: "w-full",
                                             label: "text-[#171717] w-20 text-lg",
                                             input: [
                                               "text-lg",
@@ -284,7 +289,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                               "border-none",
                                             ],
                                           }}
-                                          placeholder=""
                                           variant="bordered"
                                           value={pListName}
                                           onChange={(e) => {
@@ -292,9 +296,13 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                           }}
                                         />
                                         <Input
-                                          label="属性"
+                                          className="w-full"
+                                          label={t('Character.personalitysummaryplistmtypeattr')}
+                                          placeholder={t('Character.personalitysummaryplistmtypeattrtoken')}
                                           labelPlacement="outside-left"
                                           classNames={{
+                                            base: "w-full",
+                                            mainWrapper: "w-full",
                                             label: "text-[#171717] w-20 text-lg",
                                             input: [
                                               "text-lg",
@@ -308,7 +316,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                               "border-none",
                                             ],
                                           }}
-                                          placeholder="多个用,分隔"
                                           variant="bordered"
                                           value={pListProps}
                                           onChange={(e) => {
@@ -317,8 +324,8 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                         />
                                       </ModalBody>
                                       <ModalFooter>
-                                        <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat" onPress={handleModalOnClose}>取消</NuwaButton>
-                                        <NuwaButton className="h-16 w-48 text-xl" color="gray" onPress={insertCustomerPlist}>添加</NuwaButton>
+                                        <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat" onPress={handleModalOnClose}>{t('Character.personalitysummaryplistmcancel')}</NuwaButton>
+                                        <NuwaButton className="h-16 w-48 text-xl" color="gray" onPress={insertCustomerPlist}>{t('Character.personalitysummaryplistmsave')}</NuwaButton>
                                       </ModalFooter>
                                     </>
                                   )}
@@ -326,7 +333,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                               </Modal>
                             </div>
                             
-
                             <Divider className="bg-[#171717]" />
                             {category1.list.filter((item) => item.name !== 'customerCategory').map((category2, index2) => (
                               <Card key={`${index1}+${index2}`} className="py-4 bg-transparent text-white border-none shadow-none">
@@ -349,89 +355,90 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                 </CardBody>
                               </Card>
                             ))}
-
-                            <Button onPress={() => {
-                              plistModal.onOpen();
-                              usePListName(category1.name);
-                              usePListIndex(index1);
-                            }}  variant="light" className="w-40 absolute bottom-4 right-6" endContent={<PlusIcon/>}>
-                              添加自定义身份
+                            <Button
+                              onPress={() => {
+                                plistModal.onOpen();
+                                usePListName(category1.name);
+                                usePListIndex(index1);
+                              }} 
+                            variant="light" className="absolute bottom-4 right-6" startContent={<PlusIcon className="h-5 w-5"/>}>
+                              {t('Character.personalitysummaryplistRole')}
                             </Button> 
                           </Tab>
                         ))}
                       </Tabs>
                       
                     </div>
-                    <div className="bg-black rounded-[50px] h-full relative bg-[url('/character-inforMation-personality-model-bg.png')] bg-right-bottom bg-cover">
-                      <div className="p-4">
-                      {personalityDataList.map((category1, index1) => (
-                        <>
-                          {getFruitSelectedLength(category1.list) > 0 && <>
-                            <Card key={`${category1.name}${index1}`}className="py-4 bg-transparent text-white border-none shadow-none">
-                              <CardHeader className="pb-0 pt-2 flex-col items-start">
-                                <h4 className="font-bold text-large">{category1.name}</h4>
-                              </CardHeader>
-                              <CardBody className="overflow-visible py-6">
-                              <div className="flex flex-wrap gap-4">
-                                {category1.list.map((category2, index2) => (
-                                  <>
-                                  {category2.list.map((pitem, index3) => (
+                    <div className="bg-black overflow-y-scroll rounded-[50px] h-full relative bg-[url('/character-inforMation-personality-model-bg.png')] bg-right-bottom bg-cover">
+                      <div className="p-4 pb-16 grid grid-cols-1 divide-y">
+                        {personalityDataList.map((category1, index1) => (
+                          <div>
+                            {getFruitSelectedLength(category1.list) > 0 && <>
+                              <Card key={`${category1.name}${index1}`}className="py-4 bg-transparent text-white border-none shadow-none">
+                                <CardHeader className="pb-0 pt-2 flex-col items-start">
+                                  <h4 className="font-bold text-large">{category1.name}</h4>
+                                </CardHeader>
+                                <CardBody className="overflow-visible py-6">
+                                <div className="flex flex-wrap gap-4">
+                                  {category1.list.map((category2, index2) => (
                                     <>
-                                    {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
-                                      key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
-                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
-                                      variant="flat"
-                                    >
-                                      {pitem.name}
-                                    </Chip>}
+                                    {category2.list.map((pitem, index3) => (
+                                      <>
+                                      {pitem.selected && <Chip
+                                        className="bg-white h-9 cursor-pointer px-4 w-auto "
+                                        key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
+                                        endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
+                                        variant="flat"
+                                      >
+                                        {pitem.name}
+                                      </Chip>}
+                                      </>
+                                    ))}
                                     </>
                                   ))}
-                                  </>
-                                ))}
-                              </div>
-                            </CardBody>
-                          </Card>
-                          <Divider className="bg-white" />
-                          </>
-                          }
-                        </>
-                      ))}
-                      {customerPersonalityDataList.map((category1, index1) => (
-                        <>
-                          {getFruitSelectedLength(category1.list) > 0 && <>
-                            <Card key={index1} className="py-4 bg-transparent text-white border-none shadow-none">
-                              <CardHeader className="pb-0 pt-2 flex-col items-start">
-                                <h4 className="font-bold text-large">{category1.name}</h4>
-                              </CardHeader>
-                              <CardBody className="overflow-visible py-6">
-                              <div className="flex flex-wrap gap-4">
-                                {category1.list.map((category2, index2) => (
-                                  <>
-                                  {category2.list.map((pitem, index3) => (
+                                </div>
+                              </CardBody>
+                              </Card>
+                              </>
+                            }
+                          </div>
+                        ))}
+                        {customerPersonalityDataList.map((category1, index1) => (
+                          <div>
+                            {getFruitSelectedLength(category1.list) > 0 && <>
+                              <Card key={index1} className="py-4 bg-transparent text-white border-none shadow-none">
+                                <CardHeader className="pb-0 pt-2 flex-col items-start">
+                                  <h4 className="font-bold text-large">{category1.name}</h4>
+                                </CardHeader>
+                                <CardBody className="overflow-visible py-6">
+                                <div className="flex flex-wrap gap-4">
+                                  {category1.list.map((category2, index2) => (
                                     <>
-                                    {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
-                                      key={`${index1}+${index2}+${index3}`}
-                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
-                                      variant="flat"
-                                    >
-                                      {pitem.name}
-                                    </Chip>}
+                                    {category2.list.map((pitem, index3) => (
+                                      <>
+                                      {pitem.selected && <Chip
+                                        className="bg-white h-9 cursor-pointer px-4 w-auto "
+                                        key={`${index1}+${index2}+${index3}`}
+                                        endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
+                                        variant="flat"
+                                      >
+                                        {pitem.name}
+                                      </Chip>}
+                                      </>
+                                    ))}
                                     </>
                                   ))}
-                                  </>
-                                ))}
-                              </div>
-                            </CardBody>
-                          </Card>
-                          <Divider className="bg-white" />
-                          </>
-                          }
-                        </>
-                      ))}
+                                </div>
+                              </CardBody>
+                              </Card>
+                              </>
+                            }
+                          </div>
+                        ))}
                       </div>
-                      <Button
+                    </div>
+
+                    <Button
                         onClick={() => {
                           onClose();
                         }}
@@ -445,13 +452,12 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                       </Button>
                       <NuwaButton
                         color="gray"
-                        className="absolute bottom-4 right-4 h-16 w-52 z-10"
+                        className=" absolute bottom-4 right-4 z-10 w-32 h-12 text-base"
                         onClick={handleInsertPersonality}
+                        endContent={<ArrowLongRightIcon className="h-8 w-8 fill-white" />}
                       >
-                      插入
+                        {t('Character.personalitysummaryplistinsert')}
                       </NuwaButton>
-                    </div>
-
                   </div>
                 </ModalBody>
               </>

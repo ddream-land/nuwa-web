@@ -1,35 +1,60 @@
 {
+  "CharacterList": {
+    "createbutton": "创建"
+  },
   "Character": {
     "charactername": "数字生命名",
+    "characternametoken": "请在这输入数字生命名",
     "characternote": "数字生命卡标签",
     "characterversion": "数字生命版本",
+    "characterversiontoken": "在这里输入数字生命版本",
     "cover": "封面",
     "createdby": "创建者",
+    "createdbytoken": "在这里输入创建者名称",
     "creatorsnotes": "创作者注释",
+    "creatorsnotestoken": "在这里输入创作者注释",
     "depthprompt": "深度",
     "description": "描述",
-    "descriptiontoken": "描述标记",
+    "descriptiontoken": "在这里输入描述",
     "firstmessage": "首条消息",
-    "firstmessagetoken": "首条消息标记",
-    "information": "信息",
+    "firstmessagetoken": "在这里输入首条消息",
+    "basics": "信息",
     "jailbreak": "越狱提示",
-    "jailbreaktoken": "越狱标记",
+    "jailbreaktoken": "在这里输入越狱提示",
     "mainprompt": "主要提示覆盖",
-    "mainprompttoken": "主要提示标记",
+    "mainprompttoken": "在这里输入自定义提示覆盖，可以取代默认的系统提示符。",
     "mesexample": "对话示例",
+    "mesexampletoken": "在这里输入对话示例",
     "modifythebasicinsormationofthecharactercard": "修改数字生命卡的基本信息",
     "personalitysummary": "个性摘要",
+    "personalitysummarytoken": " 在这里描述你角色的个性摘要",
+    "personalitysummaryplist": "快速输入",
+    "personalitysummaryplistType": "添加自定义类别",
+    "personalitysummaryplistRole": "添加自定义属性",
+    "personalitysummaryplistmtitle": "自定义",
+    "personalitysummaryplistmtype": "类别",
+    "personalitysummaryplistmtypetoken": "在这里输入类别",
+    "personalitysummaryplistmtypeattr" : "属性",
+    "personalitysummaryplistmtypeattrtoken": "在这里输入属性，多个用\",\"分隔",
+    "personalitysummaryplistmsave": "保存",
+    "personalitysummaryplistmcancel": "取消",
+    "personalitysummaryplistinsert": "添加",
     "promptoverrdies": "主要提示词覆盖",
     "replacementofthecover": "更换",
-    "scenario": "情境",
-    "scenarioWorldbookTitle": "包含世界书",
+    "plot": "情境",
+    "plottoken": "在这里输入情境",
+    "plotWorldbookTitle": "包含世界书",
+    "plotWorldbooklinkbtn": "关联世界书",
+    "plotWorldbookunlinkbtn": "解除关联",
+    "plotWorldbookchoose": "选择世界书",
     "tagstoembed": "嵌入标签",
     "talkativeness": "健谈程度",
     "talkativeness0": "害羞",
     "talkativeness05": "正常",
-    "talkativeness1": "话多",
+    "talkativeness1": "健谈",
     "zipcover": "JPG|PNG|WEBP 图片将自动压缩",
     "avatar": "形象",
+    "avatartitle": "形象",
     "avatartip": "选择需要集成的语音技术",
     "avatartip2": "请选择你要添加的形象",
     "avatartip3": "#{index} {type}形象",
@@ -37,20 +62,27 @@
     "avatarmodalcancelbtn": "取消",
     "avatarmodaladdbtn": "添加",
     "LIVE2D": "LIVE2D",
-    "LIVE2Dtip": "查看Live2D官方文档 >",
+    "LIVE2Dtip": "请按照规范上传zip文件",
+    "LIVE2Dlinktip": "更多信息请",
+    "LIVE2Dlink": "查看Live2D官方文档 >",
     "3D": "3D",
+    "3Dlink": "",
     "3Dtip": "查看3D官方文档 >",
+    "3Dtip2": "敬请期待...",
     "IMAGE": "图片",
-    "IMAGEtip": "png",
+    "IMAGElink": "",
+    "IMAGEtip": "支持的格式: PNG, JPG, JPEG",
     "none": "无",
     "plus": "添加",
     "voice": "声音",
     "voicetab": {
+      "voice": "声音",
       "desc": "选择需要集成的语音技术",
       "sex": "声音性别",
       "male": "男",
       "female": "女",
-      "type": "音色选择"
+      "type": "音色选择",
+      "more": "敬请期待"
     },
     "creatorinfo": "创建信息",
     "language": "支持的语言（可多选）",
@@ -59,15 +91,21 @@
     "copyright": "版权",
     "copyrighttip1": "选择你的CC许可证协议[4.0]",
     "copyrighttip2": "获取详细介绍请访问：",
-    "copyrighttip3": "我该如何选择？",
-    "advancedset": "高级设置"
+    "copyrighttip3": "关于 CC LICENSES",
+    "advancedset": "高级设置",
+    "insertuserorchardelete": "删除",
+    "insertuserorcharuser": "插入玩家名称",
+    "insertuserorcharchat": "插入数字生命名称"
   },
   "Preview": {
     "tags": "标签",
     "tagTip": "在发布后帮助其他用户更精准的搜索和筛选到你的数字生命",
     "tagsinputplaceholder": "添加标签",
     "tagAddButton": "添加",
-    "basecontent": "基本内容"
+    "basecontent": "基本内容",
+    "exportbtn": "导出",
+    "unnamed": "未命名",
+    "plot": "情景"
   },
   "Voices": {
     "male": [
@@ -83,27 +121,56 @@
     "name": "英语",
     "value": "en"
   }, {
-    "name": "中文",
+    "name": "普通话",
     "value": "zh-CN"
-  },{
-    "name": "日语",
-    "value": "ja"
+  }, {
+    "name": "广东话",
+    "value": "zh-GD"
   }, {
     "name": "韩语",
     "value": "ko"
   },{
-    "name": "西班牙语",
-    "value": "es"
+    "name": "日语",
+    "value": "ja"
   }, {
     "name": "法语",
     "value": "fr"
+  }, {
+    "name": "意大利语",
+    "value": "it_IT"
+  },{
+    "name": "俄语",
+    "value": "ru_RU"
   }],
-  "Levels": [{
+  "LevelsOptions": [{
     "name": "SFW/大众级",
     "value": "SFW"
   }, {
     "name": "NSFW/限制级",
     "value": "NSFW"
+  }],
+  "ConstantOptions": [{
+    "name": "常量",
+    "value": true
+  }, {
+    "name": "正常",
+    "value": false
+  }],
+  "PositionOptions": [{
+    "name": "字符之前",
+    "value": 0
+  }, {
+    "name": "字符之后",
+    "value": 1
+  }, {
+    "name": "数字生命之前",
+    "value": 2
+  }, {
+    "name": "数字生命之后",
+    "value": 3
+  }, {
+    "name": "@D",
+    "value": 4
   }],
   "Greetings": {
     "deletegreetings": "删除",
@@ -111,14 +178,23 @@
   },
   "HomePage": {
     "title1": "基于BRC-1111协议",
-    "title2": "免费、开源的数字生命创造工具",
+    "title2": "女娲创作平台",
+    "title3": "免费、开源的数字生命创造工具",
     "nuwaLabs": "女娲实验室",
     "quickstart": "快速开始",
-    "understandandlearn": "了解和学习",
-    "createDigitalLife": "创建数字生命",
-    "createWorldBook": "创建世界书",
+    "understandandlearn": "资源库",
+    "createDigitalLife": "创建",
+    "createDigitalLife2": "数字生命",
+    "createWorldBook": "创建",
+    "createWorldBook2": "世界书",
     "readDigitalLife": "读取数字生命",
-    "readWorldBook": "读取世界书"
+    "readWorldBook": "读取世界书",
+    "morebtn": "更多",
+    "understandandlearnListItem1": "角色设计",
+    "understandandlearnListItem2": "角色管理",
+    "understandandlearnListItem3": "模型选择",
+    "understandandlearnListItem4": "世界书撰写",
+    "understandandlearnListItem5": "热键"
   },
   "Footer": {
     "nuwaLabs": "女娲实验室",
@@ -164,7 +240,7 @@
     "importingcharactercards": "导入数字生命卡",
     "importok": "导入成功，请刷新浏览器如果没有内容",
     "isitalldone": "继续:一切完成了吗?",
-    "mymindismadeup": "我已下定决心!",
+    "mymindismadeup": "你确定？",
     "thisoperationoverwritesthedata": "继续:此操作将覆盖数据!"
   },
   "Settings": {
@@ -182,27 +258,63 @@
     "imsure": "我确定。",
     "settingthedisplayofthewebsite": "设置网站显示",
     "thisoperationsisirrevocable": "继续:此操作不可撤销",
-    "websitedisplaysettings": "网站显示设置"
+    "websitedisplaysettings": "网站显示设置",
+    "title": "设置",
+    "feedback": "反馈",
+    "contactus": "联系我们",
+    "clear": "清理缓存",
+    "clearbtn": "清除"
   },
   "WorldBook": {
-    "D": "@D",
     "addnewbook": "添加新的世界书",
-    "afteran": "字符之后",
-    "afterchar": "数字生命之后",
-    "beforechar": "数字生命之前",
+    "worldbooknull": "无世界书",
     "berforean": "字符之前",
+    "afteran": "字符之后",
+    "beforechar": "数字生命之前",
+    "afterchar": "数字生命之后",
+    "D": "@D",
     "constan": "常量",
     "content": "内容",
+    "contenttoken": "在这里输入本章的内容",
     "delete": "删除",
     "deletebook": "删除世界书",
     "depth": "深度",
     "normal": "正常",
     "optionalfilter": "可选过滤器",
+    "optionalfiltertoken": "在这里输入可选过滤器",
     "orfer": "顺序",
     "position": "位置",
     "primarykeywords": "主要关键词",
     "status": "状态",
-    "titlememo": "标题/备忘",
-    "untitledbook": "无标题世界书"
+    "title": "标题",
+    "titletoken": "在这输入标题.",
+    "untitledbook": "未命名世界书",
+    "untitledbookEntry": "未命名章节"
+  },
+  "Me": {
+    "title": "个人信息",
+    "usename": "用户名",
+    "usenametoken": "在这输入用户名",
+    "email": "邮箱",
+    "emailtoken": "在这输入邮箱",
+    "web3wallet": "Web3钱包",
+    "web3walletbtn": "关联",
+    "updatepassword": "修改密码",
+    "updatepasswordbtn": "修改",
+    "deleteaccount": "注销账号",
+    "deleteaccountbtn": "注销",
+    "logoutbtn": "退出",
+    "savebtn": "保存"
+  },
+  "Web3": {
+    "changewallet": "更改钱包",
+    "connecting": "连接中 ...",
+    "copyaddress": "复制地址",
+    "copied": "已复制",
+    "disconnect": "断开连接",
+    "haswallet": "连接",
+    "nowallet": "选择钱包",
+    "modeltitle": "连接一个 Solana 上的钱包",
+    "detected": "已识别"
   }
 }

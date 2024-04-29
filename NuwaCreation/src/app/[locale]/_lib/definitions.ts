@@ -1,3 +1,5 @@
+import { TypeAvatar } from "./definitions.avatar";
+
 export type TypeChara = {
   name: string;
   description: string;
@@ -27,16 +29,16 @@ export type TypeChara = {
     character_version: string;
     alternate_greetings: string[];
     extensions: {
-      avatar: string | undefined;
+      avatar?: string | undefined;
       avatars: TypeAvatar[];
       talkativeness: string;
       fav: Boolean;
       world: string;
       depth_prompt: {
         prompt: string;
-        depth: string;
+        depth: number;
       };
-      voice: {
+      voice?: {
         type: string,
         sex: string,
         name: string,
@@ -45,65 +47,47 @@ export type TypeChara = {
       level: string,
       cclicense: string,
     };
-    character_book: TypeCharacterBook | undefined;
+    character_book?: TypeWorldBook;
   };
   create_date: string;
 };
 
-export type TypeAvatar = {
-  type: string;
-  url: string;
-}
+export type TypeCharaList = TypeCharaListItem[];
 
-export type TypeCharacterBook = {
+export type TypeCharaListItem = {
+  uid: string;
+  chara: TypeChara;
+  cover: string,
+};
+export type TypeWorldBook = {
   name: string;
 
-  // entries: (Iterable<any> & any[]) | undefined;
-  entries: Array<TypeCharacterBookEntriy> | [];
-  // character_book: {
-  //   entries: [
-  //     {
-  //       id: Number;
-  //       key: string[];
-  //       secondary_keys: string[];
-  //       comment: string;
-  //       content: string;
-  //       constant: Boolean;
-  //       selective: Boolean;
-  //       insertion_order: Number;
-  //       enabled: Boolean;
-  //       position: string;
-  //       extensions: {
-  //         position: Number;
-  //         exclude_recursion: Boolean;
-  //         display_index: Number;
-  //         probability: Number;
-  //         useProbability: Boolean;
-  //         depth: Number;
-  //       };
-  //     }
-  //   ];
-  //   name: string;
-  // };
+  entries: {[index: string]: TypeWorldBookEntriy};
+  // entries: Array<TypeWorldBookEntriy> | [];
 };
 
-export type TypeCharacterBookEntriy = {
-  id: Number;
+export type TypeWorldBookEntriy = {
+  uid: string;
   keys: string[];
   secondary_keys: string[];
   comment: string;
   content: string;
-  constant: Boolean;
+  constant: Boolean | null;
   selective: Boolean;
   insertion_order: Number;
   enabled: Boolean;
-  position: string;
+  position: Number | null;
+  depth: Number;
   extensions: {
-    position: Number;
     exclude_recursion: Boolean;
-    display_index: Number;
+    display_index: string;
     probability: Number;
     useProbability: Boolean;
-    depth: Number;
   };
 };
+export type TypeWorldBookItem = {
+  uid: string;
+  worldBook: TypeWorldBook;
+};
+
+export type TypeWorldBookList = TypeWorldBookItem[];

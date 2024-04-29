@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
-import { Switch } from "@headlessui/react";
 import { useTranslations } from "next-intl";
-import ThemeSwitcher from "./ThemeSwitcher";
-import LanguageSwitcher from "./LanguageSwitcher";
 import ClearLocalstorge from "./ClearLocalstorge";
-import WorldBookPositionSet from "./WorldBookPositionSet";
+import FeedbackIcon from "../icons/FeedbackIcon";
+import NuwaButton from "../components/NuwaButton";
+import ClearIcon from "../icons/ClearIcon";
+import ContactUsIcon from "../icons/ContactUsIcon";
+import { DocumentDuplicateIcon, GlobeAltIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export default function Settings() {
   const t = useTranslations();
@@ -13,84 +14,60 @@ export default function Settings() {
     useState(true);
 
   return (
-    <>
-      <div className="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
-        <div>
-          <h2 className="text-base font-semibold leading-7">
-            {t("Settings.websitedisplaysettings")}
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-500">
-            {t("Settings.settingthedisplayofthewebsite")}
-          </p>
+    <div className="px-4 sm:px-36">
+      <div className="py-16">
+        <div className="text-neutral-800 text-[40px] font-normal leading-[73px] tracking-tight">
+          {t("Settings.title")}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 divide-y">
+        <div className="flex flex-row justify-between py-5">
+          <div className="flex flex-row gap-2 items-center">
+            <div className="w-6">
+              <DocumentDuplicateIcon className={""} />
+            </div>
+            <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.feedback')}</div>
+          </div>
+          <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+            info@nuwalabs.org
+          </div>
+        </div>
+        <div className="flex flex-col justify-between py-5">
+          <div className="flex flex-row gap-2 items-center">
+            <div className="w-6">
+              <GlobeAltIcon className={""} />
+            </div>
+            <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.contactus')}</div>
+          </div>
 
-          <dl className="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
-            <Switch.Group as="div" className="flex pt-6">
-              <Switch.Label
-                as="dt"
-                className="flex-none pr-6 font-medium sm:w-64"
-                passive
-              >
-                {t("Settings.displaylanguage")}
-              </Switch.Label>
-              <dd className="flex flex-auto items-center justify-end">
-                <LanguageSwitcher />
-              </dd>
-            </Switch.Group>
-            {/* <Switch.Group as="div" className="flex pt-6">
-              <Switch.Label
-                as="dt"
-                className="flex-none pr-6 font-medium sm:w-64"
-                passive
-              >
-                {t("Settings.darkmode")}
-              </Switch.Label>
-              <dd className="flex flex-auto items-center justify-end">
-                <ThemeSwitcher />
-              </dd>
-            </Switch.Group> */}
-          </dl>
-          <div className="pt-16">
-            <h2 className="text-base font-semibold leading-7 text-red-500">
-              {t("Settings.hazardousoperations")}
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-500">
-              {t("Settings.ifyouhaveproblemsusingityoucantry")}
-            </p>
-            <dl className="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
-              <Switch.Group as="div" className="flex pt-6">
-                <Switch.Label
-                  as="dt"
-                  className="flex-none pr-6 font-medium sm:w-64"
-                  passive
-                >
-                  {t("Settings.clearalldata")}
-                </Switch.Label>
-                <dd className="flex flex-auto items-center justify-end">
-                  <ClearLocalstorge />
-                </dd>
-              </Switch.Group>
-            </dl>
-            {/* <dl className="mt-6 space-y-6 divide-y divide-gray-100 border-t border-gray-200 text-sm leading-6">
-              <Switch.Group as="div" className="flex pt-6">
-                <Switch.Label
-                  as="dt"
-                  className="flex-none pr-6 font-medium sm:w-64"
-                  passive
-                >
-                  更改所有世界書位置{" "}
-                  <span className="inline-flex items-center rounded-md bg-yellow-100 px-1.5 py-0.5 text-xs font-medium text-yellow-800">
-                    Beta
-                  </span>
-                </Switch.Label>
-
-                <dd className="flex flex-auto items-center justify-end">
-                  <WorldBookPositionSet/>
-                </dd>
-              </Switch.Group>
-            </dl> */}
+          <div className="mt-8 mb-0 gap-10 flex flex-row">
+            <NuwaButton
+              shadowghost="white"
+              className="w-[140px]"
+            >X（Twitter）</NuwaButton>
+            <NuwaButton
+              shadowghost="white"
+              className="w-[140px]"
+            >Discord</NuwaButton>
+            <NuwaButton
+              shadowghost="white"
+              className="w-[140px]"
+            >Telegram</NuwaButton>
+          </div>
+        </div>
+        <div className="flex flex-row justify-between py-5">
+          <div className="flex flex-row gap-2 items-center">
+            <div className="w-6">
+              <TrashIcon className={""} />
+            </div>
+            <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.clear')}</div>
+          </div>
+          <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+            <ClearLocalstorge />
           </div>
         </div>
       </div>
-    </>
+      
+    </div>
   );
 }

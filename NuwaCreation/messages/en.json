@@ -1,73 +1,111 @@
 {
+  "CharacterList": {
+    "createbutton": "Ceate"
+  },
   "Character": {
     "charactername": "Character Name",
+    "characternametoken": "Type character name here.",
     "characternote": "Character Card Tag",
-    "characterversion": "Character Version",
+    "characterversion": "Version",
+    "characterversiontoken": "Character's version",
     "cover": "Cover",
-    "createdby": "Created By",
+    "createdby": "Creator",
+    "createdbytoken": "Creator’s name",
     "creatorsnotes": "Creator's Notes",
-    "depthprompt": "Character Card Depth and Prompts",
+    "creatorsnotestoken": "Type creator’s notes here.",
+    "depthprompt": "Depth",
     "description": "Description",
-    "descriptiontoken": "Description Token",
-    "firstmessage": "First Message",
-    "firstmessagetoken": "First Message Token",
-    "information": "Information",
-    "jailbreak": "Jailbreak",
-    "jailbreaktoken": "Jailbreak Token",
-    "mainprompt": "Main Prompt",
-    "mainprompttoken": "Main Prompt Token",
-    "mesexample": "Message Example",
+    "descriptiontoken": "Type other description here.",
+    "firstmessage": "Greeting Message",
+    "firstmessagetoken": "Type the greeting message here.",
+    "basics": "Basics",
+    "jailbreak": "Jail Break",
+    "jailbreaktoken": "Type jail break information here.",
+    "mainprompt": "Self Defined Prompt",
+    "mainprompttoken": "Type self defined prompt here. This will replace the default system prompt.",
+    "mesexample": "Speech Style",
+    "mesexampletoken": "Please add speech style here. Recommend format:'{{user'}}: user's speech. '{{char'}}: digital life's speech",
     "modifythebasicinsormationofthecharactercard": "Modify the Basic Information of the Character Card",
-    "personalitysummary": "Personality Summary",
+    "personalitysummary": "Personality",
+    "personalitysummarytoken": "Describe your character’s personality here.",
+    "personalitysummaryplist": "Easy Generator",
+    "personalitysummaryplistType": "Custom Type",
+    "personalitysummaryplistRole": "Custom Attribute",
+    "personalitysummaryplistmtitle": "Custom",
+    "personalitysummaryplistmtype": "Type",
+    "personalitysummaryplistmtypetoken": "Add type here.",
+    "personalitysummaryplistmtypeattr" : "Attr",
+    "personalitysummaryplistmtypeattrtoken" : "Add attributes here, and seperate with \",\"",
+    "personalitysummaryplistmsave": "Save",
+    "personalitysummaryplistmcancel": "Cancel",
+    "personalitysummaryplistinsert": "Insert",
     "promptoverrdies": "Prompt Overrides",
     "replacementofthecover": "Replacement of the Cover",
-    "scenario": "Scenario",
-    "scenarioWorldbookTitle": "World Book",
+    "plot": "Plot",
+    "plottoken": "Type plot here.",
+    "plotWorldbookTitle": "Linked World Book",
+    "plotWorldbooklinkbtn": "Link a world book",
+    "plotWorldbookunlinkbtn": "Unlink",
+    "plotWorldbookchoose": "Select a World Book",
     "tagstoembed": "Tags to Embed",
     "talkativeness": "Talkativeness",
-    "talkativeness0": "shy",
-    "talkativeness05": "normal",
-    "talkativeness1": "talkative",
+    "talkativeness0": "Shy",
+    "talkativeness05": "Normal",
+    "talkativeness1": "Talkative",
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed",
-    "avatar": "avatar",
-    "avatartip": "Select voice technology you want to integrate",
-    "avatartip2": "Please select the image you want to add",
+    "avatar": "Avatar",
+    "avatartitle": "Avatar Type",
+    "avatartip": "Select the avatar type you want to add",
+    "avatartip2": "Avatar Type",
     "avatartip3": "#{index} {type} avatar",
     "avatartip4": "{type} avatar",
-    "avatarmodalcancelbtn": "cancel",
-    "avatarmodaladdbtn": "add",
+    "avatarmodalcancelbtn": "Cancel",
+    "avatarmodaladdbtn": "Upload",
     "LIVE2D": "LIVE2D",
-    "LIVE2Dtip": "Check out the Live2D official documentation >",
+    "LIVE2Dtip": "Please upload the zip file in the specified format.",
+    "LIVE2Dlinktip": "For more information, please check out the ",
+    "LIVE2Dlink": "Live2D Official Documentation >",
     "3D": "3D",
-    "3Dtip": "Check out the 3D official documentation >",
+    "3Dlink": "",
+    "3Dtip": "3D Official Documentation >",
+    "3Dtip2": "Coming Soon...",
     "IMAGE": "IMAGE",
-    "IMAGEtip": "png",
-    "none": "none",
-    "plus": "add",
-    "voice": "voice",
+    "IMAGElink": "",
+    "IMAGEtip": "Supported formats: PNG, JPG, JPEG",
+    "none": "None",
+    "plus": "Add",
+    "voice": "Voice",
     "voicetab": {
-      "desc": "Select voice technology you want to integrate",
-      "sex": "Voice Sex",
+      "voice": "Voice Method",
+      "desc": "Select the voice method you want to integrate",
+      "sex": "Voice Gender",
       "male": "Male",
       "female": "Female",
-      "type": "Voice Type"
+      "type": "Voice",
+      "more": "MORE TO COME"
     },
     "creatorinfo": "Creator’s Info",
-    "language": "Supported languages(multiple)",
-    "level": "level",
-    "leveltip": "If the content contains violence, pornography, or gore, select NSFW/ Restricted",
-    "copyright": "copyright",
+    "language": "Supported Languages",
+    "level": "Rating",
+    "leveltip": "Select 'NSFW' for content with violence, pornography, or gore.",
+    "copyright": "Copyrights",
     "copyrighttip1": "Choose your CC license agreement[4.0]",
     "copyrighttip2": "For details, please visit：",
-    "copyrighttip3": "How do I choose?",
-    "advancedset": "advanced"
+    "copyrighttip3": "ABOUT CC LICENSES",
+    "advancedset": "Advanced",
+    "insertuserorchardelete": "Delete",
+    "insertuserorcharuser": "Insert Player",
+    "insertuserorcharchat": "Insert Digital Life"
   },
   "Preview": {
-    "tags": "tags",
-    "tagTip": "Help other users more accurately search and filter your digital life after publication",
-    "tagsinputplaceholder": "add tag",
+    "tags": "Tags",
+    "tagTip": "Effective tagging helps others easily find your characters post-publication.",
+    "tagsinputplaceholder": "Add a tag",
     "tagAddButton": "add",
-    "basecontent": "Base Content"
+    "basecontent": "Base Content",
+    "exportbtn": "Export",
+    "unnamed": "Unnamed",
+    "plot": "Plot"
   },
   "Voices": {
     "male": [
@@ -83,27 +121,56 @@
     "name": "English",
     "value": "en"
   }, {
-    "name": "Chinese",
+    "name": "Mandarin",
     "value": "zh-CN"
   }, {
-    "name": "Japanese",
-    "value": "ja"
+    "name": "Cantonese",
+    "value": "zh-GD"
   }, {
     "name": "Korean",
     "value": "ko"
   }, {
-    "name": "spanish",
-    "value": "es"
+    "name": "Japanese",
+    "value": "ja"
   }, {
     "name": "French",
     "value": "fr"
+  }, {
+    "name": "Italian",
+    "value": "it_IT"
+  }, {
+    "name": "Russian",
+    "value": "ru_RU"
   }],
-  "Levels": [{
+  "LevelsOptions": [{
     "name": "SFW",
     "value": "SFW"
   }, {
     "name": "NSFW",
     "value": "NSFW"
+  }],
+  "ConstantOptions": [{
+    "name": "Constant",
+    "value": true
+  }, {
+    "name": "Normal",
+    "value": false
+  }],
+  "PositionOptions": [{
+    "name": "Before character",
+    "value": 0
+  }, {
+    "name": "After character",
+    "value": 1
+  }, {
+    "name": "Before character",
+    "value": 2
+  }, {
+    "name": "After character",
+    "value": 3
+  }, {
+    "name": "@D",
+    "value": 4
   }],
   "Greetings": {
     "deletegreetings": "Delete",
@@ -111,14 +178,23 @@
   },
   "HomePage": {
     "title1": "Based on HomoDeus Protocol",
-    "title2": "Nuwa Creation Platform — a free, powerful, and open sourced character creation tool",
+    "title2": "Nuwa Creation Platform",
+    "title3": "a free, powerful, and open sourced character creation tool",
     "nuwaLabs": "Nuwa Labs",
     "quickstart": "Quick Start",
-    "understandandlearn": "Understand and learn",
-    "createDigitalLife": "Create Digital Life",
-    "createWorldBook": "Create World Book",
-    "readDigitalLife": "Read Digital Life",
-    "readWorldBook": "Read World Book"
+    "understandandlearn": "Resources",
+    "createDigitalLife": "Create",
+    "createDigitalLife2": "Digital Life",
+    "createWorldBook": "Create",
+    "createWorldBook2": "World Book",
+    "readDigitalLife": "Load Digital Life",
+    "readWorldBook": "Load World Book",
+    "morebtn": "More",
+    "understandandlearnListItem1": "How to design a character",
+    "understandandlearnListItem2": "How to manage characters",
+    "understandandlearnListItem3": "How to select the right model",
+    "understandandlearnListItem4": "How to write a good world book",
+    "understandandlearnListItem5": "Hotkeys"
   },
   "Footer": {
     "nuwaLabs": "Nuwa Labs",
@@ -127,7 +203,7 @@
   },
   "Header": {
     "nuwaLabs": "Nuwa Labs",
-    "roleai": "Role AI",
+    "roleai": "role.ai",
     "BRC-1111": "BRC-1111"
   },
   "Metadata": {
@@ -142,7 +218,7 @@
     "greetings": "Alternative Greetings",
     "help": "Help",
     "home": "Overview",
-    "previews": "Previews",
+    "previews": "Preview",
     "serverstatus": "Server Status",
     "settings": "Settings",
     "worldbook": "World Book",
@@ -164,7 +240,7 @@
     "importingcharactercards": "Importing Character Cards",
     "importok": "Import successful, please refresh the browser if no content is displayed",
     "isitalldone": "Continue: Is it all done?",
-    "mymindismadeup": "My mind is made up!",
+    "mymindismadeup": "Confirm？",
     "thisoperationoverwritesthedata": "Continue: This operation will overwrite data!"
   },
   "Settings": {
@@ -182,27 +258,64 @@
     "imsure": "I'm sure.",
     "settingthedisplayofthewebsite": "Setting the Website Display",
     "thisoperationsisirrevocable": "Continue: This operation is irrevocable",
-    "websitedisplaysettings": "Website Display Settings"
+    "websitedisplaysettings": "Website Display Settings",
+    "title": "Settings",
+    "feedback": "Feedback",
+    "contactus": "Contact Us",
+    "clear": "Clear Cache",
+    "clearbtn": "clear"
   },
   "WorldBook": {
-    "D": "@D",
-    "addnewbook": "Add New World Book",
-    "afteran": "After character",
-    "afterchar": "After character",
-    "beforechar": "Before character",
+    "addnewbook": "Create New World Book",
+    "worldbooknull": "No World Book",
     "berforean": "Before character",
+    "afteran": "After character",
+    "beforechar": "Before character",
+    "afterchar": "After character",
+    "D": "@D",
     "constan": "Constant",
     "content": "Content",
+    "contenttoken": "Type the content of this chapter here.",
     "delete": "Delete",
     "deletebook": "Delete World Book",
     "depth": "Depth",
     "normal": "Normal",
     "optionalfilter": "Optional Filter",
+    "optionalfiltertoken": "Type optional filter here",
     "orfer": "Order",
     "position": "Position",
-    "primarykeywords": "Primary Keywords",
+    "primarykeywords": "Key Words",
+    "primarykeywordstoken": "Insert Keywords",
     "status": "Status",
-    "titlememo": "Title/Memo",
-    "untitledbook": "Untitled World Book"
+    "title": "Title",
+    "titletoken": "Type title here.",
+    "untitledbook": "Untitled World Book",
+    "untitledbookEntry": "Untitled Chapter"
+  },
+  "Me": {
+    "title": "My Profile",
+    "usename": "User Name",
+    "usenametoken": "Type User Name here.",
+    "email": "Email",
+    "emailtoken": "Type Email here.",
+    "web3wallet": "Web3 Wallet",
+    "web3walletbtn": "Connect",
+    "updatepassword": "Update Password",
+    "updatepasswordbtn": "Update",
+    "deleteaccount": "Delete Account",
+    "deleteaccountbtn": "Delete",
+    "logoutbtn": "Log Out",
+    "savebtn": "Save"
+  },
+  "Web3": {
+    "changewallet": "Change wallet",
+    "connecting": "Connecting ...",
+    "copyaddress": "Copy address",
+    "copied": "Copied",
+    "disconnect": "Disconnect",
+    "haswallet": "Connect",
+    "nowallet": "Select Wallet",
+    "modeltitle": "Connect a wallet on Solana to continue",
+    "detected": "Detected"
   }
 }

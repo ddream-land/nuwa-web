@@ -3,7 +3,7 @@ import {useCheckbox, Chip, VisuallyHidden, tv, CheckboxGroup} from "@nextui-org/
 
 const checkbox = tv({
   slots: {
-    base: "border-black hover:bg-gray-200 bg-white h-[41px] rounded-[25px]",
+    base: "border-black hover:bg-gray-200 bg-white h-10 rounded-md border border-black border-opacity-20",
     content: "text-black w-[155px] text-center"
   },
   variants: {
@@ -47,7 +47,7 @@ const CustomCheckbox = (props : any) => {
         }}
         color="primary"
         variant="faded"
-        {...getLabelProps()}
+        // {...getLabelProps()}
       >
         {children ? children : isSelected ? "Enabled" : "Disabled"}
       </Chip>
@@ -62,12 +62,14 @@ export default function NuwaCheckbox({items, value, onChange}: {
   onChange: (value: any) => void
 }) {
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="w-full">
       <CheckboxGroup
-        className="gap-1"
         orientation="horizontal"
         value={value}
         onChange={onChange}
+        classNames={{
+          wrapper: "gap-x-10 gap-y-4"
+        }}
       >
         {items.map((item) => (
           <CustomCheckbox key={item.value} value={item.value}>{item.name}</CustomCheckbox>

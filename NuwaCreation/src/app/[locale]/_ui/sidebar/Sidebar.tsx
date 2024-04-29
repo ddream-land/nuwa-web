@@ -1,12 +1,11 @@
 'use client'
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { usePathname } from '@/navigation';
+import { Link, usePathname } from '@/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import {
   Bars3Icon,
-  UserIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import NuwaDigitLifeIcon from '../icons/NuwaDigitLifeIcon';
@@ -15,13 +14,13 @@ import NuwaWorldBookIcon from '../icons/NuwaWorldBookIcon';
 import NuwaSettingsIcon from '../icons/NuwaSettingsIcon';
 import SidebarItem from './SidebarItem';
 import LangSwitcher from './LangSwitcher';
+import { Avatar } from '@nextui-org/react';
 
 const navigation = [
   { name: 'Navigation.home', href: '/', icon: NuwaHomePageIcon, current: false },
-  { name: 'Navigation.character', href: '/character', icon: NuwaDigitLifeIcon, current: false },
+  { name: 'Navigation.character', href: '/charas', icon: NuwaDigitLifeIcon, current: false },
   { name: 'Navigation.worldbook', href: '/worldbook', icon: NuwaWorldBookIcon, current: false },
   // { name: 'Navigation.greetings', href: '/greetings', icon: DocumentPlusIcon, current: false },
-  { name: 'Navigation.charabook', href: '/charabook', icon: UserIcon, current: false },
   { name: 'Navigation.settings', href: '/settings', icon: NuwaSettingsIcon, current: false },
 ]
 // const teams: any[] = [
@@ -49,7 +48,7 @@ export default function Sidebar() {
   
   return (
     <>
-      <div className='z-50'>
+      <div className='z-50 fixed lg:block top-0 w-full'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -61,7 +60,7 @@ export default function Sidebar() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-gray-900/80" />
+              <div className="fixed inset-0 bg-white" />
             </Transition.Child>
 
             <div className="fixed inset-0 flex">
@@ -92,12 +91,12 @@ export default function Sidebar() {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 pb-2 rounded-r-3xl">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#2C2C2C]  pb-2 rounded-r-3xl">
                     <div className="flex flex-col justify-center h-16 shrink-0 items-start pl-16 pt-6">
                       <Image
                         width={96}
                         height={20}
-                        src="/tittle-logo.png"
+                        src="/title-logo-white.png"
                         alt=""
                       />
                       <div className='text-neutral-600 text-xs'>Nuwa Digital Life Labs</div>
@@ -133,7 +132,10 @@ export default function Sidebar() {
                         )}
                         
                       </ul>
-                    </nav>             
+                    </nav>
+                    <div className='flex flex-row justify-center pb-6 w-full'>
+                      <LangSwitcher />
+                    </div>            
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -144,12 +146,12 @@ export default function Sidebar() {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 rounded-r-3xl">
-            <div className="flex flex-col justify-center h-16 shrink-0 items-start pl-16 mt-14 mb-2">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#2C2C2C]  rounded-r-3xl">
+            <div className="flex flex-col justify-center h-16 shrink-0 items-start pl-16 mt-4 mb-2">
               <Image
                 width={96}
                 height={20}
-                src="/tittle-logo.png"
+                src="/title-logo-white.png"
                 alt=""
               />
               <div className='text-neutral-600 text-[10px]'>Nuwa Digital Life Labs</div>
@@ -181,21 +183,28 @@ export default function Sidebar() {
                 </li>
               </ul>
             </nav>
+            <div className='flex flex-row justify-center pb-6 w-full'>
+              <LangSwitcher />
+            </div>       
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white dark:bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-2 shadow-sm sm:px-6 lg:hidden">
           <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
           <div className="flex-1 text-sm font-semibold leading-6">Nuwa</div>
 
-          <div className=' mr-8'>
+          <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
+            <Avatar />
+          </Link>
+          {/* <div className='mr-4'>
             <LangSwitcher />
-          </div>
+          </div> */}
         </div>
       </div>
+      <div className='h-20 lg:hidden'></div>
     </>
   )
 }

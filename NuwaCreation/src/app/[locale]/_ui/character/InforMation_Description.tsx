@@ -1,54 +1,57 @@
 "use client";
 import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { Button } from "@nextui-org/react";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import InsertUserOrChar from "../components/InsertUserOrChar";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import {textareaProps} from "../components/NuwaTextarea";
+import { Textarea } from "@nextui-org/react";
 
 function InforMation_Description() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
   const descTextareaRef = useRef(null);
 
 
   const handleDescriptionChange = (e:any) => {
     const newValue = e.target.value;
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, description: newValue },
-    }));
+    setDesc(newValue)
   };
 
+  const setDesc = (desc:string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            description: desc,
+          }
+        }
+      },
+    })
+  }
+  
+
   return (
-    <div className="group h-6/12 py-4 flex flex-col">
-      <label
-        className="block text-lg font-medium leading-8 mb-1"
-      >
-        {t('Character.description')}*
-      </label>
-      <div className="flex flex-row mt-2 grow">  
-        <div className="mr-4 grow">
-          <textarea
-            ref={descTextareaRef}
-            placeholder="Description"
-            value={chara.data.description}
-            onChange={handleDescriptionChange}
-            className="border-none outline-none w-full h-full resize-none mb-6 break-all"
-          />
-        </div>
-        <div className="opacity-0 group-hover:opacity-100">
+    <div className="relative group">
+      <Textarea
+        {...textareaProps as any}
+        label={<div>{t('Character.description')}<span className="text-red-500">*</span></div>}
+        ref={descTextareaRef}
+        placeholder={t('Character.descriptiontoken')}
+        value={charaListItem.chara.data.description}
+        onChange={handleDescriptionChange}
+      />
+      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-10 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
           <InsertUserOrChar getTextRef={() => {
             return descTextareaRef.current
           }} onDone={(newValue) => {
-            setChara((prevChara) => ({
-              ...prevChara,
-              data: { ...prevChara.data, description: newValue },
-            }));
+            setDesc(newValue)
           }} />
-        </div>
-        
-      </div>     
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import {useRadio, Chip, VisuallyHidden, tv, RadioGroup} from "@nextui-org/react"
 
 const radio = tv({
   slots: {
-    base: "border-black hover:bg-gray-200 bg-white h-[41px] rounded-[25px]",
+    base: "border-black hover:bg-gray-200 bg-white h-10 rounded-md border border-black border-opacity-20",
     content: "text-black w-[155px] text-center"
   },
   variants: {
@@ -36,7 +36,16 @@ const CustomRadio = (props : any) => {
   const styles = radio({ isSelected, isFocusVisible })
 
   return (
-    <label {...getBaseProps()}>
+    <label {...getBaseProps()} onClick={(e) => {
+      if (e.currentTarget.getAttribute('data-selected') === "true") {
+        // 阻止事件冒泡
+        e.stopPropagation();
+   
+        // 阻止事件的默认行为
+        e.preventDefault();
+        props.onChange();
+      }
+    }}>
       <VisuallyHidden>
         <input {...getInputProps()} />
       </VisuallyHidden>
@@ -47,7 +56,7 @@ const CustomRadio = (props : any) => {
         }}
         color="primary"
         variant="faded"
-        {...getLabelProps()}
+        // {...getLabelProps()}
       >
         {children ? children : isSelected ? "Enabled" : "Disabled"}
       </Chip>
@@ -57,20 +66,25 @@ const CustomRadio = (props : any) => {
 
 
 export default function NuwaRadio({items, value, onChange}: {
-  items: {name: string, value: string}[],
-  value: string,
+  items: {name: string, value: any}[],
+  value: any,
   onChange: (e: any) => void
 }) {
   return (
     <div className="flex flex-col gap-1 w-full">
       <RadioGroup
-        className="gap-1"
         orientation="horizontal"
         value={value}
-        onChange={onChange}
+        onChange={(e) => {
+          debugger
+          onChange(e)
+        }}
+        classNames={{
+          wrapper: "gap-x-10 gap-y-4"
+        }}
       >
         {items.map((item) => (
-          <CustomRadio key={item.value} value={item.value}>{item.name}</CustomRadio>
+          <CustomRadio key={item.value} value={item.value} onChange={onChange}>{item.name}</CustomRadio>
         ))}
       </RadioGroup>
     </div>

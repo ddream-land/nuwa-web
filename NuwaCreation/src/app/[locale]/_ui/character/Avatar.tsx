@@ -1,131 +1,109 @@
 "use client"
 
 import React from "react";
-import { useChara } from "../../_lib/utils";
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { Link } from "@/navigation";
-import { TypeAvatarType } from "../../_lib/definitions.avatar";
+import { TypeAvatar, TypeAvatarType } from "../../_lib/definitions.avatar";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import IconCard from "../components/IconCard";
 import NuwaButton from "../components/NuwaButton";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { textareaProps } from "../components/NuwaTextarea";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Avatar() {
-  // const initAvatarList = [{
-  //   url: 'LIVE2D',
-  //   type: TypeAvatarType.LIVE2D
-  // }, {
-  //   url: '3D',
-  //   type: TypeAvatarType["3D"]
-  // }, {
-  //   url: 'image',
-  //   type: TypeAvatarType.IMAGE
-  // }]
   const t = useTranslations();
-  const messages = useMessages();
-  const { chara , setChara } = useChara();
   const uploadModal = useDisclosure();
 
   const [selectedAvatarType, setSelectedAvatarType] = React.useState<TypeAvatarType>(TypeAvatarType.LIVE2D);
   
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: TypeAvatar[]) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              avatars: newValue
+            }
+          }
+        }
+      },
+    })
+  }
 
   const handleSetSelectedAvatarType = (avatarType : TypeAvatarType) => {
     setSelectedAvatarType(avatarType)
   }
 
   const clearAvatarList = () => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          avatars: []
-        }
-      },
-    }));
+    setCharaListItem([]);
   }
 
   const handleAddAvatar = () => {
     let newAvatars: any[] = [];
-    if (chara.data.extensions.avatars) {
+    if (charaListItem.chara.data.extensions.avatars) {
       newAvatars = [
-        ...chara.data.extensions.avatars
+        ...charaListItem.chara.data.extensions.avatars
       ]
     }
     newAvatars.push({
       url: "demo",
       type: selectedAvatarType
     })
-
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          avatars: newAvatars
-        }
-      },
-    }));
+    setCharaListItem(newAvatars);
 
     uploadModal.onClose();
   }
 
   const handerRemoveAvatar = (index: number) => {
     let newAvatars = [
-      ...chara.data.extensions.avatars
+      ...charaListItem.chara.data.extensions.avatars
     ]
     newAvatars.splice(index, 1);
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          avatars: newAvatars
-        }
-      },
-    }));
+    setCharaListItem(newAvatars);
   }
 
 
- 
 
   return (
-    <div className="relative bg-white h-full w-full pt-20 pb-40 rounded-[40px]">
-      <div className="px-7">
-        <h2 className="text-lg font-semibold">{t('Character.avatar')}</h2>
-        <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.avatartip')}</div>
-        <div className="flex flex-row flex-wrap gap-[42px] mt-[20px]">
-        <div
-            onClick={() => {
-              clearAvatarList();
-            }}
-            className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
-          >
-            <NoSymbolIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
-            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.none')}</div>
-          </div>
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10 mb-20">
+      <div className="sm:col-start-3 sm:col-end-9 grid gap-20">
+        <div>
+          <h2 className={textareaProps.classNames.label}>{t('Character.avatartitle')}</h2>
+          <div className="text-stone-500 text-sm font-normal leading-none tracking-tight -mt-4">{t('Character.avatartip')}</div>
+          <div className="flex flex-row flex-wrap gap-[42px] mt-8">
           <div
-            onClick={() => {
-              uploadModal.onOpen();
-            }}
-            className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
-          >
-            <PlusIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
-            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.plus')}</div>
+              onClick={() => {
+                clearAvatarList();
+              }}
+              className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
+            >
+              <NoSymbolIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
+              <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.none')}</div>
+            </div>
+            <div
+              onClick={() => {
+                uploadModal.onOpen();
+              }}
+              className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
+            >
+              <PlusIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
+              <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.plus')}</div>
+            </div>
           </div>
         </div>
-
         <div className="flex flex-col flex-wrap gap-[42px] mt-[20px]">
-   
-          {chara.data.extensions.avatars && chara.data.extensions.avatars.map((item, index) => {
+          {charaListItem.chara.data.extensions.avatars && charaListItem.chara.data.extensions.avatars.map((item, index) => {
             return (
               <div>
                 <div className="text-black text-[32px] font-['SF Pro'] leading-[57.98px] tracking-tight">
@@ -139,7 +117,7 @@ export default function Avatar() {
                     iconType={item.type}
                   />
 
-                <Popover placement="top" color='warning'>
+                <Popover placement="top" color='danger'>
                   <PopoverTrigger>
                     <Button
                       className=" absolute top-2 right-2 bg-white text-black opacity-0 group-hover:opacity-100"
@@ -149,9 +127,9 @@ export default function Avatar() {
                   </PopoverTrigger>
                   <PopoverContent>
                     <Button 
-                      className="w-full" 
+                      className="w-full font-semibold" 
                       size="sm" 
-                      color="warning"
+                      color="danger"
                       onClick={() => {
                         handerRemoveAvatar(index);
                       }}
@@ -164,8 +142,7 @@ export default function Avatar() {
                 </div>
               </div>
             )
-          })}
-          
+          })}         
         </div>
       </div>
       
@@ -197,6 +174,16 @@ export default function Avatar() {
                         className="shrink-0"
                       >
                         <IconCard 
+                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType.IMAGE)}
+                          isActive={selectedAvatarType === TypeAvatarType.IMAGE }
+                          iconType="IMAGE"
+                        />
+                        <div></div>
+                      </div>
+                      <div
+                        className="shrink-0"
+                      >
+                        <IconCard 
                           onClick={() => handleSetSelectedAvatarType(TypeAvatarType.LIVE2D)}
                           isActive={selectedAvatarType === TypeAvatarType.LIVE2D }
                           iconType="LIVE2D"
@@ -209,26 +196,28 @@ export default function Avatar() {
                           onClick={() => handleSetSelectedAvatarType(TypeAvatarType["3D"])}
                           isActive={selectedAvatarType === TypeAvatarType["3D"] }
                           iconType="3D"
+                          disabled={true}
                         />
-                      </div>
-                      <div
-                        className="shrink-0"
-                      >
-                        <IconCard 
-                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType.IMAGE)}
-                          isActive={selectedAvatarType === TypeAvatarType.IMAGE }
-                          iconType="IMAGE"
-                        />
+                        <div className="w-full text-center text-sm py-2 text-gray-400">{t('Character.3Dtip2')}</div>
                       </div>
                     </div>
                     {selectedAvatarType === TypeAvatarType.LIVE2D && (
-                      <div className="mt-10 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dtip`)}</div>
+                      <div className="h-20">
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dtip`)}</div>
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dlinktip`)}{t(`Character.LIVE2Dlink`)}</div>
+                      </div>
                     )}
                     {selectedAvatarType === TypeAvatarType["3D"] && (
-                      <div className="mt-10 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtip`)}</div>
+                      <div className="h-20">
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiptip`)}</div>
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiplink`)}</div>
+                      </div>
                     )}
                     {selectedAvatarType === TypeAvatarType.IMAGE && (
-                      <div className="mt-10 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGEtip`)}</div>
+                      <div className="h-20">
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGEtip`)}</div>
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGElink`)}</div>
+                      </div>
                     )}
                   </div>
                 </ModalBody>
@@ -241,9 +230,6 @@ export default function Avatar() {
           </ModalContent>
         </Modal>
 
-      {/* <Link href='/character/voice'>
-        <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-      </Link> */}
     </div>
   );
 }

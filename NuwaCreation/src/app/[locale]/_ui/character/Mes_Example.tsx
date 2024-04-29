@@ -1,22 +1,20 @@
-import React, { createRef, RefObject, useEffect, useRef } from "react";
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure } from "@nextui-org/react";
-import { useChara } from "../../_lib/utils";
+import React, { createRef, RefObject, useRef } from "react";
+import { Button, Popover, PopoverContent, PopoverTrigger, Textarea } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { trim } from "lodash-es";
-import NuwaButton from "../components/NuwaButton";
-import { XMarkIcon } from "@heroicons/react/20/solid";
-import { Link } from "@/navigation";
-import Image from "next/image";
 import dynamic from 'next/dynamic';
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { textareaProps } from "../components/NuwaTextarea";
+import NuwaButton from "../components/NuwaButton";
 const InsertUserOrChar = dynamic(() => import("../components/InsertUserOrChar"), { ssr: false })
 
 export default function Mes_Example() {
   const descTextareaRefs = useRef<{ [key: string]: RefObject<HTMLElement> | null }>({});
   const t = useTranslations();
-  const { chara, setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
 
-  let initNewMesExampleList = chara.data.mes_example.split('<START>');
+  let initNewMesExampleList = charaListItem.chara.data.mes_example.split('<START>');
   initNewMesExampleList = initNewMesExampleList.filter((_, index: number) => {
     return index !== 0;
   })
@@ -27,21 +25,27 @@ export default function Mes_Example() {
   });
   const [mesExampleList, setMesExampleList] = React.useState(initNewMesExampleList);
 
-  const saveMesExample = (newMesExampleList: string[]) => {
-    // 保存到chara
-    setChara({
-      ...chara,
-      data: {
-        ...chara.data,
-        mes_example: mesExampleListToMesExample(newMesExampleList)
-      }
+  const setCharaListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            mes_example: newValue,
+          }
+        }
+      },
     })
   }
 
-  // useEffect(() => {
-  //   saveMesExample();
-  // }, [mesExampleList])
+  const saveMesExample = (newMesExampleList: string[]) => {
+    // 保存到chara
+    setCharaListItem(mesExampleListToMesExample(newMesExampleList));
 
+  }
 
   const mesExampleListToMesExample = (mesExampleList: string[]) => {
     const newMesExample = mesExampleList.map((item) => {
@@ -51,7 +55,7 @@ export default function Mes_Example() {
   }
 
 
-  const insertNewMesExamplePlist = () => {
+  const insertNewMesExample = () => {
     descTextareaRefs.current[mesExampleList.length] = createRef<HTMLElement>();
     const newMesExampleList = [
       ...mesExampleList,
@@ -75,10 +79,10 @@ export default function Mes_Example() {
 }
 
   return (
-    <>
-      <div
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10 mb-20">
+      {/* <div
         onClick={() => {
-          insertNewMesExamplePlist();
+          insertNewMesExample();
         }}
         className=" relative cursor-pointer text-xl border border-black border-solid rounded-[30px] w-full h-[236px] flex items-center justify-center bg-no-repeat bg-[bottom_0.5rem_right_1rem] bg-white bg-[url('/character-mesExample-add-first-bg.png')]">
 
@@ -91,70 +95,67 @@ export default function Mes_Example() {
         <div className="shrink-0">
           添加对话示例
         </div>
-      </div>
-
-
-      {mesExampleList.map((item, index) =>{
-        return (
-        <div className="flex flex-row gap-4 mt-4" key={index}>
-          <div
-            className="group relative p-10 flex flex-row items-end cursor-pointer text-xl bg-black rounded-[40px] w-full min-h-[300px] bg-no-repeat bg-right-bottom bg-cover bg-[url('/character-mesExample-list-item-bg.png')]"
-          >
-            <div className="mr-4 grow h-full">
-              <textarea
-                ref={r => { (descTextareaRefs.current[index] as any) = r; }}
-                placeholder="请在这里填写对话示例"
-                value={item}
-                onChange={e => {
-                  updateMesExamplePlist(e.target.value, index)
-                }}
-                className="border-none outline-none w-full h-full resize-none mb-6 bg-transparent text-white"
-              />
-            </div>
-
-
-            <Popover placement="top" color='warning'>
-              <PopoverTrigger>
-                <Button
-                  className="absolute top-10 right-10 bg-white text-white opacity-0 group-hover:opacity-100"
-                  startContent={<TrashIcon className="h-5 w-5 text-black"/>}
-                  isIconOnly
-                ></Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <Button 
-                  className="w-full" 
-                  size="sm" 
-                  color="warning"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
-                    setMesExampleList(newMesExampleList);
-                    saveMesExample(newMesExampleList);
-                  }}
-                >    
-                  {t('Previews.mymindismadeup')}
-                </Button>
-              </PopoverContent>
-            </Popover>
-
-            <div className="opacity-0 group-hover:opacity-100">
-              <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
-                updateMesExamplePlist(newValue, index);
-              }} />
-            </div>
-            
-          </div>
-        </div>
-      )})}
-
-
-      {/* <div className="flex justify-end mt-10 w-full">
-        <Link href='/character/avatar'>
-          <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link> 
       </div> */}
-     
-    </>
+      <div className="sm:col-start-3 sm:col-end-9 grid gap-2">
+        {mesExampleList.map((item, index) => (
+          <div className="relative group" key={index}>
+            <Textarea
+              {...textareaProps as any}
+              ref={r => { (descTextareaRefs.current[index] as any) = r; }}
+              placeholder={t('Character.mesexampletoken')}
+              value={item}
+              onChange={e => {
+                updateMesExamplePlist(e.target.value, index)
+              }}
+            />
+            <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-10 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+              <Popover placement="top" color='danger'>
+                <PopoverTrigger>
+                  <NuwaButton
+                    shadowghost="black"
+                    className="mb-2 w-full hidden"
+                  >
+                    {t('Character.insertuserorchardelete')}
+                  </NuwaButton>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <Button 
+                    className="w-full font-semibold" 
+                    size="sm" 
+                    color="danger"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
+                      setMesExampleList(newMesExampleList);
+                      saveMesExample(newMesExampleList);
+                    }}
+                  >    
+                    {t('Previews.mymindismadeup')}
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            <NuwaButton
+              shadowghost="black"
+              className="mb-2 w-full"
+              onClick={(e) => {
+                e.stopPropagation();
+                const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
+                setMesExampleList(newMesExampleList);
+                saveMesExample(newMesExampleList);
+              }}
+                >
+                  {t('Character.insertuserorchardelete')}
+            </NuwaButton>
+                <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
+                  updateMesExamplePlist(newValue, index);
+                }} />
+            </div>
+          </div>
+        ))}
+        <div className="flex flex-row-reverse mt-2">   
+          <Button onClick={insertNewMesExample} variant="ghost" className="w-full h-20 border-dashed border border-zinc-800"><PlusIcon className="h-32 w-32 text-black"/></Button>  
+        </div>   
+      </div>
+    </div>
   );
 }
