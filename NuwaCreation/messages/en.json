@@ -95,14 +95,22 @@
     "advancedset": "Advanced",
     "insertuserorchardelete": "Delete",
     "insertuserorcharuser": "Insert Player",
-    "insertuserorcharchat": "Insert Digital Life"
+    "insertuserorcharchat": "Insert Digital Life",
+    "advancedsettip": "Please leave it as default if you have no knowledge of the content of this page.",
+    "advancedsetdoc": "See Documentation",
+    "advancedsetreset": "Reset",
+    "publishbtn": "Publish",
+    "publishsuccess": "Publish succeeded",
+    "deletesuccess": "Delete succeeded",
+    "drafts": "Drafts",
+    "published": "Published"
   },
   "Preview": {
     "tags": "Tags",
     "tagTip": "Effective tagging helps others easily find your characters post-publication.",
     "tagsinputplaceholder": "Add a tag",
     "tagAddButton": "add",
-    "basecontent": "Base Content",
+    "basecontent": "Basics",
     "exportbtn": "Export",
     "unnamed": "Unnamed",
     "plot": "Plot"
@@ -176,7 +184,7 @@
     "deletegreetings": "Delete",
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"
   },
-  "HomePage": {
+  "Overview": {
     "title1": "Based on HomoDeus Protocol",
     "title2": "Nuwa Creation Platform",
     "title3": "a free, powerful, and open sourced character creation tool",
@@ -188,7 +196,9 @@
     "createWorldBook": "Create",
     "createWorldBook2": "World Book",
     "readDigitalLife": "Load Digital Life",
+    "readDigitalLifetip": "Please upload a png file",
     "readWorldBook": "Load World Book",
+    "readWorldBooktip": "Please upload a json file",
     "morebtn": "More",
     "understandandlearnListItem1": "How to design a character",
     "understandandlearnListItem2": "How to manage characters",
@@ -207,7 +217,7 @@
     "BRC-1111": "BRC-1111"
   },
   "Metadata": {
-    "description": "Sweet as Honey",
+    "description": "Nuwa Character Editor",
     "title": "Character Editor | Nuwa"
   },
   "Navigation": {
@@ -290,7 +300,12 @@
     "title": "Title",
     "titletoken": "Type title here.",
     "untitledbook": "Untitled World Book",
-    "untitledbookEntry": "Untitled Chapter"
+    "untitledbookEntry": "Untitled Chapter",
+    "publishbtn": "Publish",
+    "publishsuccess": "Publish succeeded",
+    "deletesuccess": "Delete succeeded",
+    "drafts": "Drafts",
+    "published": "Published"
   },
   "Me": {
     "title": "My Profile",
@@ -317,5 +332,40 @@
     "nowallet": "Select Wallet",
     "modeltitle": "Connect a wallet on Solana to continue",
     "detected": "Detected"
+  },
+  "Error": {
+    "localstoragefull": "The local storage space is full. Please delete it and perform operations again"
+  },
+  "User": {
+    "email": "Email",
+    "code": "Code",
+    "password": "Password",
+    "mailcodesuccess": "A verification code has been sent, please check your mailbox.",
+    "loginsuccess": "Log in succeeded",
+    "registersuccess": "Register succeeded",
+    "resetpasswordsuccess": "Reset password succeeded",
+    "deleteusersuccess": "Account cancellation succeeded",
+    "sysfail": "System fail",
+    "registertitle": "Sign Up",
+    "registersend": "Send",
+    "registersubmit": "Sign Up",
+    "logintitle": "Log In",
+    "logintitle2": "By continuing, you agree to our User Agreement and acknowledge that you understand the Privacy Policy.",
+    "loginsubmit": "Log In",
+    "loginforgotpassword": "Forgot password?",
+    "loginsignuptitle": "New to DDream.LAND? ",
+    "loginsignuplink": "Sign Up",
+    "resetpasswordtitle": "Reset Password",
+    "resetpasswordsend": "Send",
+    "resetpasswordsubmit": "Reset",
+    "deleteusertitle": "Account cancellation",
+    "deleteusersend": "Send",
+    "deleteusersubmit": "Cancel",
+    "edituserinfosuccess": "Save succeeded"
+  },
+  "UserFormSchema": {
+    "email": "Invalid email format, please check your email address.",
+    "password": "Password must be at least 6 characters.",
+    "code": "Incorrect verification code, please check the code."
   }
 }

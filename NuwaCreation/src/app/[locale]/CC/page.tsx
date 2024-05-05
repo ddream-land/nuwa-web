@@ -1,6 +1,6 @@
 import React from 'react'
 import { NextIntlClientProvider,useMessages } from "next-intl";
-import CC from '../_ui/CC/CC';
+import CC from '@/app/ui/CC/CC';
 
 export default function CCPage() {
   const messages = useMessages();

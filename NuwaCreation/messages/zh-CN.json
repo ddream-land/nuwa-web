@@ -95,7 +95,15 @@
     "advancedset": "高级设置",
     "insertuserorchardelete": "删除",
     "insertuserorcharuser": "插入玩家名称",
-    "insertuserorcharchat": "插入数字生命名称"
+    "insertuserorcharchat": "插入数字生命名称",
+    "advancedsettip": "如果您不了解本页的内容，请将其保留为默认设置。",
+    "advancedsetdoc": "查看文档",
+    "advancedsetreset": "重置",
+    "publishbtn": "发布",
+    "publishsuccess": "发布成功",
+    "deletesuccess": "删除成功",
+    "drafts": "草稿箱",
+    "published": "已发布"
   },
   "Preview": {
     "tags": "标签",
@@ -176,7 +184,7 @@
     "deletegreetings": "删除",
     "thisoperationcannotbewithdrawn": "此操作不可撤销！"
   },
-  "HomePage": {
+  "Overview": {
     "title1": "基于BRC-1111协议",
     "title2": "女娲创作平台",
     "title3": "免费、开源的数字生命创造工具",
@@ -188,7 +196,9 @@
     "createWorldBook": "创建",
     "createWorldBook2": "世界书",
     "readDigitalLife": "读取数字生命",
+    "readDigitalLifetip": "请上传一张png图片",
     "readWorldBook": "读取世界书",
+    "readWorldBooktip": "请上传一个json文件",
     "morebtn": "更多",
     "understandandlearnListItem1": "角色设计",
     "understandandlearnListItem2": "角色管理",
@@ -207,7 +217,7 @@
     "BRC-1111": "BRC-1111"
   },
   "Metadata": {
-    "description": "甘之若饴",
+    "description": "女娲数字生命编辑器",
     "title": "数字生命编辑器 | Nuwa"
   },
   "Navigation": {
@@ -285,11 +295,17 @@
     "orfer": "顺序",
     "position": "位置",
     "primarykeywords": "主要关键词",
+    "primarykeywordstoken": "输入一个关键词",
     "status": "状态",
     "title": "标题",
     "titletoken": "在这输入标题.",
     "untitledbook": "未命名世界书",
-    "untitledbookEntry": "未命名章节"
+    "untitledbookEntry": "未命名章节",
+    "publishbtn": "发布",
+    "publishsuccess": "发布成功",
+    "deletesuccess": "删除成功",
+    "drafts": "草稿箱",
+    "published": "已发布"
   },
   "Me": {
     "title": "个人信息",
@@ -316,5 +332,40 @@
     "nowallet": "选择钱包",
     "modeltitle": "连接一个 Solana 上的钱包",
     "detected": "已识别"
+  },
+  "Error": {
+    "localstoragefull": "本地存储空间已满，请删除后在操作"
+  },
+  "User": {
+    "email": "邮箱",
+    "code": "验证码",
+    "password": "密码",
+    "mailcodesuccess": "发送验证码成功,请查看您的邮箱",
+    "loginsuccess": "登录成功",
+    "registersuccess": "注册成功",
+    "resetpasswordsuccess": "修改密码成功",
+    "deleteusersuccess": "注销账户成功",
+    "sysfail": "系统报错",
+    "registertitle": "注册",
+    "registersend": "发送验证码",
+    "registersubmit": "注册",
+    "logintitle": "登录",
+    "logintitle2": "继续阅读即表示您同意我们的用户协议并承认您理解隐私政策.",
+    "loginsubmit": "登录",
+    "loginforgotpassword": "忘记密码?",
+    "loginsignuptitle": "新的 DDream.LAND? ",
+    "loginsignuplink": "注册",
+    "resetpasswordtitle": "修改密码",
+    "resetpasswordsend": "发送验证码",
+    "resetpasswordsubmit": "修改",
+    "deleteusertitle": "注销账户",
+    "deleteusersend": "发送验证码",
+    "deleteusersubmit": "注销",
+    "edituserinfosuccess": "保存成功"
+  },
+  "UserFormSchema": {
+    "email": "邮箱格式错误，请检查你的邮箱地址",
+    "password": "密码最短6位",
+    "code": "验证码错误"
   }
 }

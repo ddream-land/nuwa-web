@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import {nextui} from "@nextui-org/react";
+import plugin from 'tailwindcss';
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -17,6 +18,15 @@ const config: Config = {
     },
   },
   darkMode: "class",
+  variants: {
+    '.scrollbar-hide': {
+      '-ms-overflow-style': 'none',
+      'scrollbar-width': 'none',
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
+    },
+  },
   plugins: [
     nextui({
       prefix: "nextui", // prefix for themes variables
@@ -41,7 +51,7 @@ const config: Config = {
         },
         // ... custom themes
       },
-    }),
+    })
   ],
 }
 export default config
