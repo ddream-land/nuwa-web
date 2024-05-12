@@ -26,7 +26,7 @@ function Preview_BaseInfo({charaItem}: {charaItem: TypeCharaListItem}) {
       <div
         className="overflow-hidden flex flex-col w-full"
       >
-        <Tooltip showArrow={true} color="primary" content={chara.data.name|| t('Preview.unnamed')} className="text-lg">
+        <Tooltip classNames={{ content: [ "w-[80vh]"] }} color="primary" content={chara.data.name|| t('Preview.unnamed')} className="text-lg">
           <div className="truncate text-black text-[100px] font-semibold leading-[120px] tracking-wide mt-4">{chara.data.name || t('Preview.unnamed')}</div>
         </Tooltip>
         {/* <div className="my-10 w-full text-neutral-950 text-base font-normal leading-[29px] tracking-tight">{chara.data.description}</div> */}

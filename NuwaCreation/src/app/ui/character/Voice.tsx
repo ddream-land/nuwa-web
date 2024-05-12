@@ -1,15 +1,12 @@
 "use client"
 
 import React, { useEffect, useRef } from "react";
-import { useChara } from "@/app/lib/utils";
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { NoSymbolIcon, PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
-import MicrosoftTTSIcon from "@/app/icons/MicrosoftTTSIcon";
+import NuwaTTSIcon from "@/app/icons/NuwaTTSIcon";
 import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
 import Image from "next/image";
-import { Link } from "@/navigation";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "@/app/lib/definitions.voice";
-import { TypeAvatar } from "@/app/lib/definitions.avatar";
 import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 
@@ -17,27 +14,46 @@ function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
+export const enVoices:TypeVoiceNameList = {
+  "female": [
+    { "name": "en-female-lisa", "value": "lisa","audio": "https://renwu-bucket.oss-cn-chengdu.aliyuncs.com/ExampleVoice/lisa20240424194411601689.wav"}
+  ],
+  "male": []
+}
+
+export const zhCnVoices:TypeVoiceNameList = {
+  "female": [
+    { "name": "中文-女-萝莉", "value": "qiqi","audio": "https://renwu-bucket.oss-cn-chengdu.aliyuncs.com/ExampleVoice/qiqi20240424195249598869.wav"},
+    { "name": "中文-女-少女", "value": "youla","audio": "https://renwu-bucket.oss-cn-chengdu.aliyuncs.com/ExampleVoice/youla20240424195335821436.wav"}
+  ],
+  "male": [
+    { "name": "中文-男-青年", "value": "shenli","audio": "https://renwu-bucket.oss-cn-chengdu.aliyuncs.com/ExampleVoice/shenli20240424194934724912.wav"},
+    { "name": "中文-男-少年", "value": "kong","audio": "https://renwu-bucket.oss-cn-chengdu.aliyuncs.com/ExampleVoice/shenli20240424194934724912.wav"},
+    { "name": "中文-男-大叔", "value": "zhongli","audio": "https://renwu-bucket.oss-cn-chengdu.aliyuncs.com/ExampleVoice/zhongli20240424195454356657.wav"}
+  ]
+}
+
 export default function Voice() {
+  const locale = useLocale();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlay, setIsPlay] = React.useState({name: '', isPlay: false} as {name: string, isPlay: boolean});
   const t = useTranslations();
-  const messages = useMessages();
-  const { Voices } = messages;
-  const initVoiceNameList = Voices;
+  const voiceList = locale === 'en' ? enVoices : zhCnVoices;
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(charaListItem.chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
-  
-  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(charaListItem.chara.data.extensions.voice?.sex as voiceSex || voiceSex.Male);
-  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(charaListItem.chara.data.extensions.voice?.name || '');
-
-  const [voiceNameList, setVoiceNameList] = React.useState<TypeVoiceNameList>(initVoiceNameList as unknown as TypeVoiceNameList);
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(charaListItem.chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
+  let initSelectedVoiceSex:voiceSex = voiceSex.Female;
+  if (charaListItem.chara.data.extensions.nuwa_voice?.sex && voiceList[charaListItem.chara.data.extensions.nuwa_voice?.sex as voiceSex].length > 0) {
+    initSelectedVoiceSex = charaListItem.chara.data.extensions.nuwa_voice?.sex as voiceSex;
+  }
+  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(initSelectedVoiceSex);
+  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(charaListItem.chara.data.extensions.nuwa_voice?.name || '');
 
   const setCharaListItem = (newValue: {
     type: string,
     sex: string,
-    name: string,
+    name: string
   } | null) => {
     charaListItemDispatch({
       type: "changed",
@@ -49,7 +65,11 @@ export default function Voice() {
             ...charaListItem.chara.data,
             extensions: {
               ...charaListItem.chara.data.extensions,
-              voice: newValue
+              nuwa_voice: {
+                version: 'v1',
+                language: locale === 'zh-CN' ? 'zh-cn' : 'en',
+                ...newValue
+              }
             }
           }
         }
@@ -97,20 +117,20 @@ export default function Voice() {
               ))} >{t('Character.none')}</div>
             </div>
             <div
-              onClick={() => handleSetSelectedVoiceType(TypeVoiceType.Microsoft)}
+              onClick={() => handleSetSelectedVoiceType(TypeVoiceType.Nuwa)}
               className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
-                selectedVoiceType === TypeVoiceType.Microsoft ? 'bg-black': 'bg-white'
+                selectedVoiceType === TypeVoiceType.Nuwa ? 'bg-black': 'bg-white'
               ))}
             >
-              <MicrosoftTTSIcon
+              <NuwaTTSIcon
                 className={classNames('w-32 group-hover:fill-white', (
-                  selectedVoiceType === TypeVoiceType.Microsoft ? 'fill-white' : 'fill-stone-950'
+                  selectedVoiceType === TypeVoiceType.Nuwa ? 'fill-white' : 'fill-stone-950'
                 ))}
                 aria-hidden="true"
               />
               <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white', (
-                selectedVoiceType === TypeVoiceType.Microsoft ? 'text-white' : 'text-stone-950'
-              ))} >Microsoft TTS API</div>
+                selectedVoiceType === TypeVoiceType.Nuwa ? 'text-white' : 'text-stone-950'
+              ))} >Nuwa TTS API</div>
             </div>
             <div className="flex flex-col items-center justify-center w-[174px] h-[206px] ">
               <Image width={96} height={20} src="/character-voice-more.png" alt="" />
@@ -159,7 +179,7 @@ export default function Voice() {
                     setSelectedVoiceName(key.currentKey)
                   }}
                 >
-                  {voiceNameList[selectedVoiceSex].map((item: TypeVoiceName) => {
+                  {voiceList[selectedVoiceSex].map((item: TypeVoiceName) => {
                     return (
                       <ListboxItem 
                         classNames={{

@@ -19,7 +19,6 @@ function Preview_PristMessage() {
   const [swiperRef, setSwiperRef] = useState(null);
   const [swiperActiveIndex, setSwiperActiveIndex] = useState(0);
 
-
   const msgList = [first_messageValue, ...alternate_greetings]
   
   function classNames(...classes:any) {
@@ -52,7 +51,7 @@ function Preview_PristMessage() {
                 return (
                   <SwiperSlide key={index}>
                     <div className="h-full flex items-center">
-                      <Tooltip showArrow={true} color="primary" content={item} className="text-lg">
+                      <Tooltip classNames={{ content: [ "w-[80vh]"] }} color="primary" content={item} className="text-lg">
                         <div className="break-words w-full max-w-full overflow-hidden text-ellipsis line-clamp-5">{item}</div>
                       </Tooltip>
                     </div>

@@ -1,5 +1,5 @@
-import { baseApiHander } from "@/app/lib/base.api";
-import { useTranslations } from "next-intl";
+import { useLabels } from "../context/LabelsContext";
+import { baseApiHander } from "./base.api";
 
 
 const apiUrlList = {
@@ -12,47 +12,45 @@ const apiUrlList = {
 }
 
 export function mailCode() {
-  const t = useTranslations();
+  const labels = useLabels();
   return baseApiHander({
     url: apiUrlList.mailCode,
-    successMsg: t("User.mailcodesuccess")
+    successMsg: labels.User.mailcodesuccess
   })
 }
 
 export function register() {
-  const t = useTranslations();
+  const labels = useLabels();
   return baseApiHander({
     url: apiUrlList.register,
-    successMsg: t("User.registersuccess")
+    successMsg: labels.User.registersuccess
   })
 }
 
 export function resetPassword() {
-  const t = useTranslations();
+  const labels = useLabels();
   return baseApiHander({
     url: apiUrlList.resetPassword,
-    successMsg: t("User.resetpasswordsuccess")
+    successMsg: labels.User.resetpasswordsuccess
   })
 }
 
 export function deleteUser() {
-  const t = useTranslations();
+  const labels = useLabels();
   return baseApiHander({
     url: apiUrlList.deleteUser,
     mustLogin: true,
-    successMsg: t("User.deleteusersuccess")
+    successMsg: labels.User.deleteusersuccess
   })
 }
 
 export function login() {
-  const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.login
   })
 }
 
 export function logout() {
-  const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.logout
   })

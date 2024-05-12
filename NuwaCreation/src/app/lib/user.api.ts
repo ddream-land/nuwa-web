@@ -7,11 +7,12 @@ const apiUrlList = {
   editUserInfo: `/api/v1/user/info/edit`,
 }
 
-export function getUserInfo() {
+export function getUserInfo({noLoginGotoLogin = false}: {noLoginGotoLogin?: boolean}) {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.getUserInfo,
     mustLogin: true,
+    noLoginGotoLogin: false,
   })
 }
 

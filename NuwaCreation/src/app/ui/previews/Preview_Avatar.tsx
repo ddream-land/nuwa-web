@@ -16,7 +16,7 @@ function Preview_Avatar() {
       <PreviewTitle>{t('Character.avatar')}</PreviewTitle>
       <div className="flex flex-col flex-wrap gap-[42px] mt-[20px]">
    
-          {chara.data.extensions.avatars.map((item, index) => {
+          {chara.data.extensions.nuwa_avatars.list.map((item, index) => {
             return (
               <div key={index} className="w-full flex flex-row justify-between items-center">
                 <IconCard 

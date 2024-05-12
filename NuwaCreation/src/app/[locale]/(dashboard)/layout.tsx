@@ -1,15 +1,10 @@
-import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import Header from "@/app/ui/dashboard/Header";
-import Footer from "@/app/ui/dashboard/Footer";
 import { NextIntlClientProvider,useMessages } from "next-intl";
-import Sidebar from "@/app/ui/dashboard/sidebar/Sidebar";
 import { AlterMessageContextProvider } from "@/app/ui/components/AlterMessageContextProvider";
+import DashboardLayout from "@/app/ui/layout/DashboardLayout";
 
 const locales = ["en", "zh-CN"];
-
-const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata({
   params: { locale },
@@ -38,16 +33,11 @@ export default function RootLayout({
     <>
       <NextIntlClientProvider messages={messages}>
         <AlterMessageContextProvider>
-        <Sidebar/>
-        <main className="lg:pl-72">
-          <div className="">
-              <Header />
-            <div className="px-4 sm:px-12 lg:px-14 pt-4">{children}</div>
-            <div className="pb-10 pt-10">
-              <Footer />
+          <DashboardLayout>
+            <div className=" min-h-[80vh]">
+              {children}
             </div>
-          </div>
-        </main>
+          </DashboardLayout>
         </AlterMessageContextProvider>
       </NextIntlClientProvider>
     </>

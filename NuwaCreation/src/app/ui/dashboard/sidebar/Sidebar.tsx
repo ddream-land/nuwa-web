@@ -14,7 +14,6 @@ import NuwaWorldBookIcon from '@/app/icons/NuwaWorldBookIcon';
 import NuwaSettingsIcon from '@/app/icons/NuwaSettingsIcon';
 import SidebarItem from './SidebarItem';
 import LangSwitcher from './LangSwitcher';
-import { Avatar } from '@nextui-org/react';
 import HeaderAvatar from '../HeaderAvatar';
 
 const navigation = [

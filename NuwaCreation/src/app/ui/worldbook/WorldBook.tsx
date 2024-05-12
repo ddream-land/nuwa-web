@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import {
   Button,
+  Input,
   Popover,
   PopoverContent,
   PopoverTrigger,
   Tab,
   Tabs,
-  Tooltip,
 } from "@nextui-org/react";
 import { defaultWorldBookEntry, uuid } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
@@ -28,14 +28,15 @@ export default function WorldBook({worldBooka, isPreview = false}: {
   let latestWorldBook = useRef(worldBook);
   const uid = isPreview ? worldBooka?.name : worldBookItem.uid;
   const worldBookItemDispatch = useWorldBookItemDispatch();
+  const titleInputRefs = useRef<{ [key: string]: RefObject<HTMLInputElement> | null }>({});
+  const [editEntryUid, setEditEntryUid] = useState<string | undefined>(undefined);
 
   let initSelectedEntry = undefined;
 
   if (worldBook?.entries && Object.keys(worldBook.entries).length > 0) {
     initSelectedEntry = worldBook.entries[Object.keys(worldBook.entries)[0]] 
   }
-  const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
-  const [editEntry, setEditEntry] = React.useState<TypeWorldBookEntriy>();
+  const [selectedEntry, setSelectedEntry] = useState(initSelectedEntry);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
@@ -66,7 +67,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
     }
 
     // 选择新添加的
-    if (latestWorldBook?.current) {
+    if (latestWorldBook?.current && latestWorldBook?.current.entries) {
       if (Object.keys(worldBook.entries).length > Object.keys(latestWorldBook?.current.entries).length) {
         const keys = Object.keys(worldBook?.entries);
         const length = keys.length;
@@ -138,18 +139,6 @@ export default function WorldBook({worldBooka, isPreview = false}: {
       },
     })
   }
-  const setWorldBookItemName = (newValue:string) => {
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-          name: newValue
-        }
-      },
-    })
-  }
   
   return (
     <>
@@ -169,7 +158,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           </div>
         )}
       </div>
-      {(!worldBook || Object.keys(worldBook.entries).length === 0) && (
+      {(!worldBook || !worldBook.entries|| Object.keys(worldBook.entries).length === 0) && (
         <div className="h-40"></div>
       )}
       <Tabs
@@ -178,39 +167,104 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           ref={tabsRef}
           selectedKey={selectedEntry?.uid}
           size="lg"
+          keyboardActivation="manual"
+          shouldSelectOnPressUp={false}
           classNames={{
             base: "sticky top-0 ml-0 z-30 overflow-x-scroll scrollbar-hide bg-white w-full h-full shrink-0",
             tabList: "overflow-x-scroll scrollbar-hide gap-10 py-0 border-b border-solid border-black/20 max-w-full pr-20 h-full",
             cursor: "w-full bg-[#0C0C0C] text-white",
             tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
-            tabContent: "text-neutral-700 h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
+            tabContent: "h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
             panel: "overflow-y-scroll scrollbar-hide",
           }}
         >
 
-          {worldBook && Object.keys(worldBook.entries).map((key) => (
+          {worldBook && worldBook.entries && Object.keys(worldBook.entries).map((key, index) => (
             <Tab
               key={key}
               id={uid}
+              shouldSelectOnPressUp={false}
               title={
-                <div
-                  className="flex flex-row items-center group justify-center"
-                  onClick={() => {
-                    if (selectedEntry?.uid === worldBook.entries[key].uid) {
-                      setEditEntry(worldBook.entries[key])
-                      return
-                    } else {
-                      setSelectedEntry(worldBook.entries[key])
-                    }
-                    
-                  }}
-                >
-                  <div
-                    className="truncate w-40"
-                  >{worldBook.entries[key].comment}</div>
+                <div className="flex flex-row items-center group justify-center">
+                  {selectedEntry?.uid === worldBook.entries[key].uid ? (
+                    <Popover
+                      placement="top"
+                      color="danger"
+                      className=""
+                      offset={-26}
+                      onClose={() => {setEditEntryUid(undefined)}}
+                      classNames={{
+                        base: [  
+                          // arrow color
+                          "bg-transparent",
+                          "border-none",
+                        ],
+                        content: [
+                          "bg-transparent",
+                          "border-none",
+                          "shadow-none",
+                          "p-0"
+                        ],
+                      }}
+                    >
+                      <PopoverTrigger>
+                        <div
+                          className={`truncate w-40 text-neutral-700`}
+                          onClick={() => {
+                            if (selectedEntry?.uid === worldBook.entries[key].uid) {
+                              setEditEntryUid(worldBook.entries[key].uid)
+                              const inputRef = titleInputRefs.current[worldBook.entries[key].uid];
+                              inputRef?.current?.focus();
+                            }
+                          }}
+                        >{worldBook.entries[key].comment}</div>
+                      </PopoverTrigger>
+                      <PopoverContent>  
+                        <Input
+                          ref={(r) => {
+                            titleInputRefs.current[worldBook.entries[key].uid]= {
+                              current: r,
+                            };
+                          }}
+                          value={worldBook.entries[key].comment}
+                          variant="flat"
+                          onChange={(e) => {
+                            const newWorldBook =  {
+                              ...worldBook,
+                              entries: {
+                                ...worldBook.entries,
+                                [key]: {
+                                  ...worldBook.entries[key],
+                                  comment: e.target.value
+                                }
+                              }
+                            }
+        
+                            setWorldBookItem(newWorldBook)
+                          }}
+                          size="sm"
+                          classNames={{
+                            input: "h-6 bg-transparent",
+                            innerWrapper: "h-6 py-0 bg-transparent",
+                            inputWrapper: "h-6 py-0 shadow-none bg-white data-[hover=true]:bg-white group-data-[focus=true]:bg-white",
+                          }}
+                          className={`w-48 bg-transparent`}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  
+                  ): (
+                    <div
+                      className={`truncate w-40 text-neutral-700`}
+                      onClick={() => {
+                        setSelectedEntry(worldBook.entries[key])
+                      }}
+                    >{worldBook.entries[key].comment}</div>
+                  )}
+                 
+                  
                   {!isPreview && 
                     <Popover
-                      key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`}
                       placement="top"
                       color="danger"
                       className=""
@@ -253,8 +307,6 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                     }
 
                     setWorldBookItem(newWorldBook)
-
-                    // setSelectedEntry(newSelectedEntry);
                   }}
                 />
               </div>

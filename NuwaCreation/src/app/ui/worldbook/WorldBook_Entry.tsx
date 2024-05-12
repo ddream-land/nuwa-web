@@ -21,8 +21,8 @@ export default function WorldBook_Entry({value, isPreview = false, onChange}: {
 
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
-      <div className="sm:col-start-3 sm:col-end-9 grid gap-20 mb-20 pt-20">
-        <WorldBook_Entry_Name value={value} isPreview={isPreview} onChange={onChange}/>
+      <div className="sm:col-start-3 sm:col-end-9 grid gap-20 mb-20 pt-10">
+        {/* <WorldBook_Entry_Name value={value} isPreview={isPreview} onChange={onChange}/> */}
         <WorldBook_Entry_Content value={value} isPreview={isPreview} onChange={onChange}/>
         <WorldBook_Entry_Keys value={value} isPreview={isPreview} onChange={onChange}/>
         {/* <WorldBook_Entry_Secondary_Keys value={value} isPreview={isPreview} onChange={onChange}/>

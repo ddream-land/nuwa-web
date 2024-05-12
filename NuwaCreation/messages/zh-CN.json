@@ -65,7 +65,7 @@
     "LIVE2Dtip": "请按照规范上传zip文件",
     "LIVE2Dlinktip": "更多信息请",
     "LIVE2Dlink": "查看Live2D官方文档 >",
-    "3D": "3D",
+    "VRM": "VRM",
     "3Dlink": "",
     "3Dtip": "查看3D官方文档 >",
     "3Dtip2": "敬请期待...",
@@ -114,16 +114,6 @@
     "exportbtn": "导出",
     "unnamed": "未命名",
     "plot": "情景"
-  },
-  "Voices": {
-    "male": [
-      { "name": "小明", "value": "ming5", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
-      { "name": "小黑", "value": "hei6", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/e8f4c1c0-c6f6-43d0-9885-8e0a87ebd9cb.wav"}
-    ],
-    "female": [
-      { "name": "小红", "value": "hong7", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
-      { "name": "小美", "value": "mei8", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
-    ]
   },
   "Languages": [{
     "name": "英语",
@@ -305,7 +295,8 @@
     "publishsuccess": "发布成功",
     "deletesuccess": "删除成功",
     "drafts": "草稿箱",
-    "published": "已发布"
+    "published": "已发布",
+    "savetip": "修改后自动保存"
   },
   "Me": {
     "title": "个人信息",
@@ -334,7 +325,8 @@
     "detected": "已识别"
   },
   "Error": {
-    "localstoragefull": "本地存储空间已满，请删除后在操作"
+    "localstoragefull": "本地存储空间已满，请删除后在操作",
+    "draftscharacterlimit": "限制3个"
   },
   "User": {
     "email": "邮箱",

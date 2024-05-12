@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import {
   XMarkIcon
@@ -16,22 +16,22 @@ import { getIsLogin } from "@/app/lib/base.api";
 import { useRouter } from "@/navigation";
 import { deleteCharacterByUid, getCharacterByUid } from "@/app/lib/utils";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import LoginModal from "@/app/nuwa-login-ui/components/LoginModal";
 
 function CharacterEdit({ onDone, onPublish, chara }: {
   onDone?: () => void,
   onPublish?: () => void,
   chara?: TypeCharaListItem | undefined
 }) {
-  const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations();
   const editModal = useDisclosure();
-  const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
+
   const [isRelease, setIsRelease] = useState(false);
   const publishCharacterApi = publishCharacter();
   const isLogin = getIsLogin();
   const amDispatch = useAmDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
 
   useEffect(() => {
@@ -39,13 +39,28 @@ function CharacterEdit({ onDone, onPublish, chara }: {
       editModal.onOpen();
     }
   }, [chara])
+
+  async function publishCharacterToServer(lastCharacter: TypeCharaListItem, onClose: () => void) {
+    setIsRelease(true);
+
+    if (lastCharacter) {
+      const res = await publishCharacterApi.send({
+        "uid": lastCharacter.uid,
+        "chara": lastCharacter.chara,
+        "cover": lastCharacter.cover,
+      });
+      if (res && res.code === 0) {
+        deleteCharacterByUid(lastCharacter.uid);
+        onClose();
+        onPublish && onPublish();
+      }
+    }
+
+    setIsRelease(false);
+  }
   
   return (
     <>
-      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
-        setIsOpen(false)
-      }} />
-
       <Modal
         isDismissable={false}
         size="full"
@@ -112,25 +127,10 @@ function CharacterEdit({ onDone, onPublish, chara }: {
 
 
                           if(!isLogin) {
-                            router.push('/login')
+                            setIsOpen(true);
                             return
                           }
-                          setIsRelease(true);
-    
-                          if (lastCharacter) {
-                            const res = await publishCharacterApi.send({
-                              "uid": lastCharacter.uid,
-                              "chara": lastCharacter.chara,
-                              "cover": lastCharacter.cover,
-                            })
-                            if (res && res.code === 0) {
-                              deleteCharacterByUid(chara.uid)
-                              onClose();
-                              onPublish && onPublish();
-                            }
-                          }
-    
-                          setIsRelease(false);
+                          await publishCharacterToServer(lastCharacter, onClose);
                         }}
                       >{t("Character.publishbtn")}</Button>
                     )}
@@ -149,6 +149,19 @@ function CharacterEdit({ onDone, onPublish, chara }: {
           )}
         </ModalContent>
       </Modal>
+
+
+      <LoginModal
+        locale={locale}
+        isOpen={isOpen}
+        openPage="login"
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        onLogin={() => {
+          setIsOpen(false);
+        }}
+      />
     </>
   );
 }

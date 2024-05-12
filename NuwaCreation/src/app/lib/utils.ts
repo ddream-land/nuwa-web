@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { TypeChara, TypeWorldBook, TypeWorldBookEntriy, TypeWorldBookItem, TypeWorldBookList, TypeCharaList, TypeCharaListItem } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
 import { keyBy, clone, findIndex } from "lodash-es";
+import { useTranslations } from "next-intl";
 
 const defaultChara = {
   name: "",
@@ -37,7 +38,10 @@ const defaultChara = {
       fav: false,
       world: "",
       depth_prompt: { prompt: "", depth: 4 },
-      avatars: [],
+      nuwa_avatars: {
+        version:"v1",
+        list: []
+      },
       languages: [],
       level: "",
       cclicense: "",
@@ -291,8 +295,28 @@ export const getCharaList = (): TypeCharaList => {
 
 
 export const pushCharaList = (charaList: TypeCharaList) => {
+  if (charaList.length > 3) {
+    return {
+      success: false,
+      message: 'Error.draftscharacterlimit'
+    }
+  }
   if (typeof window !== "undefined") {
+    try {
       localStorage.setItem("charaList", JSON.stringify(charaList));
+    } catch (e: any) {
+      return {
+        success: false,
+        message: "Error.localstoragefull",
+      }
+    }
+
+    return {
+      success: true,
+    }
+  }
+  return {
+    success: false,
   }
 };
 export const pushCharaListByUid = (newChara: TypeCharaListItem) => {
@@ -397,8 +421,28 @@ export const InsertWorldBook = (worldBook: TypeWorldBook) => {
 }
 
 export const pushWorldBookList = (worldBookList: TypeWorldBookList) => {
+  if (worldBookList.length > 3) {
+    return {
+      success: false,
+      message: 'Error.draftscharacterlimit'
+    }
+  }
   if (typeof window !== "undefined") {
+    try {
       localStorage.setItem("worldBookList", JSON.stringify(worldBookList));
+    } catch (e: any) {
+      return {
+        success: false,
+        message: "Error.localstoragefull",
+      }
+    }
+
+    return {
+      success: true,
+    }
+  }
+  return {
+    success: false,
   }
 };
 

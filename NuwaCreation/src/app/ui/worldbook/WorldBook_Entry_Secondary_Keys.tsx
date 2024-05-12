@@ -12,7 +12,6 @@ export default function WorldBook_Entry_Secondary_Keys({value, isPreview = false
 }) {
   const t = useTranslations();
 
-
   return (
     <Textarea
       {...textareaProps as any}

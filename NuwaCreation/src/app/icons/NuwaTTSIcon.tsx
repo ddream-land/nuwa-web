@@ -1,4 +1,4 @@
-const MicrosoftTTSIcon = ({ className }: { className: string }) => {
+const NuwaTTSIcon = ({ className }: { className: string }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -16,4 +16,4 @@ const MicrosoftTTSIcon = ({ className }: { className: string }) => {
   );
 };
 
-export default MicrosoftTTSIcon;
+export default NuwaTTSIcon;

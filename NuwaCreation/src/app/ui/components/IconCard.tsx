@@ -11,7 +11,7 @@ function classNames(...classes:any) {
 
 export const IconCardType = {
   "LIVE2D": LIVE2DIcon,
-  "3D": A3DIcon,
+  "VRM": A3DIcon,
   "IMAGE": ImageIcon,
 }
 
@@ -38,7 +38,7 @@ function IconCard({onClick, isActive = false, iconType = "LIVE2D", disabled = fa
         aria-hidden="true"
       />
     )}
-    {iconType === "3D" && (
+    {iconType === "VRM" && (
       <A3DIcon
         className={classNames('w-24 group-hover:fill-white', (
           isActive ? 'fill-white' : 'fill-stone-950'

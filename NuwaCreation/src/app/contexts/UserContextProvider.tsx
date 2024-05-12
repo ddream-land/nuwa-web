@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { FC, ReactNode, useCallback, useMemo } from "react";
 import { TypeUser } from "@/app/lib/definitions.user";
 import { useReducer } from "react";
@@ -12,11 +12,16 @@ export const UserDispatchContext = createContext(null as any);
 
 
 
-export function UserProvider({ children, value }: {children: React.ReactNode, value: TypeUser}) {
+export function UserContextProvider({ children, value }: {children: React.ReactNode, value: TypeUser}) {
+  
   const [user, dispatch] = useReducer(
     userReducer,
-    value as never
+    value
   );
+
+  useEffect(() => {
+    dispatch({ type: 'set', payload: value });
+  }, [value])
 
   return (
     <UserContext.Provider value={user as any}>
@@ -27,19 +32,18 @@ export function UserProvider({ children, value }: {children: React.ReactNode, va
   );
 }
 
-export function useCharaListItem() {
+export function useUser() {
   return useContext(UserContext);
 }
 
-export function useCharaListItemDispatch() {
+export function useUserDispatch() {
   return useContext(UserDispatchContext);
 }
 
 function userReducer(value: TypeUser, action: any) {
   switch (action.type) {
-    case 'mailcode': {
-      // const charaList = getCharaList();
-      // return charaList.filter((t) => t.uid !== action.payload.uid);
+    case 'set': {
+      return action.payload;
     }
     default: {
       throw Error('Unknown action: ' + action.type);

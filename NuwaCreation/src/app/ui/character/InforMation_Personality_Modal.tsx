@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button, Card, CardBody, CardHeader, Chip, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tab, Tabs, useDisclosure } from "@nextui-org/react";
 import {
   XMarkIcon,
@@ -11,7 +11,7 @@ import {
 import NuwaButton from "../components/NuwaButton";
 import { cloneDeep, trim } from "lodash-es";
 
-const originalPersonalityData = [
+const originalPersonalityDataZhCN = [
   {
     name: "身份",
     list: [
@@ -168,26 +168,186 @@ const originalPersonalityData = [
     ]
   },
 ]
-const personalityData = originalPersonalityData.map((item) => {
-  return {
-    name: item.name,
-    isCustomer: false,
-    list: item.list.map((item2) => {
-      return {
-        name: item2.name,
-        isCustomer: false,
-        list: item2.list.map((item3) => {
-          return {
-            name: item3,
-            selected: false,
-          }
-        })
-      }
-    })
-  }
-})
+const originalPersonalityDataEn = [
+  {
+    "name": "Identity",
+    "list": [
+      {
+      "name": "Age Group",
+      "list": ['Boy', 'Girl', 'Young Man', 'Young Woman', 'Middle-Aged Man', 'Middle-Aged Woman', 'Elderly Man', 'Elderly Woman', 'Little Girl', 'Little Boy', 'Child'],
+    },
+    {
+      "name": "Social Status",
+      "list": ['Racer', 'CEO', 'Senior Student', 'Young Master', 'E-sports Champion', 'Scientist', 'Professor', 'Programmer', 'Chef', 'Doctor', 'Detective','Rich Heir','Lawyer','Shop Manager','Leading Actor','Boss','Painter','Rich Second Generation','General','Military Strategist','Nobleman','Tyrant','Imperial Guard','Heir Apparent','Emperor','Top Student','Scholar','Wanderer','Lords','Senior Brother','God of War','Guard','Police','Assassin','Thief','Elementary Student','Middle School Student','University Student','School Belle','School Hunk','Nun','Nurse','Idol','Junior Sister','Junior Girl','Senior Girl','Teacher','Star','Dancer','Maid','Young Lady','Princess','Queen'],
+    },
+    {
+      "name": "Non-human",
+      "list": ['Vampire','Half-Beast','Fairy','Elf','Mermaid','Magical Girl','Angel','Devil','Doll','Shrine Maiden','Robot','Alien','Ghost','Zombie','Ghost','Werewolf','Giant'],
+    },
+    {
+      "name": "Specific Age Description",
+      "list": ['8 years old','12 years old','14 years old','17 years old','18 years old','20 years old','25 years old','30 years old','36 years old','48 years old','56 years old','68 years old','72 years old'],
+    }
+  ]
+  },
+  {
+    "name": "Personality",
+    "list": [
+      {
+      "name": "Popular Online",
+      "list": ['Gentle and Elegant','Calm and Scheming','Cold and Indifferent','Unruly','Arrogant and Domineering','Silly and Funny','Charming and Brutal','Bright and Cheerful','Inferior and Sensitive','Suspicious','Two-Faced','Poor at Expressing','Tough on the Outside, Soft on the Inside','Frail','Delusional about Own Importance','Tsundere','Perfectionist','Perfectionist','Chuunibyo','Aloof'],
+    }, 
+    {
+      "name": "Extraversion",
+      "list": ['Extroverted', 'Talkative', 'Cheerful', 'Sociable', 'Active', 'Introverted', 'Silent', 'Lonely', 'Shy', 'Timid', 'Detached'],
+    },
+    {
+      "name": "Conscientiousness",
+      "list": ['Serious', 'Responsible', 'Reliable', 'Diligent', 'Meticulous', 'Honest', 'Accountable', 'Careless', 'Casual', 'Lazy', 'Sloppy' ],
+    },
+    {
+      "name": "Agreeableness",
+      "list": ['Warm', 'Kind', 'Friendly', 'Simple', 'Generous', 'Easygoing', 'Approachable', 'Indifferent', 'Cold', 'Reclusive', 'Harsh', 'Arrogant', 'Proud', 'Cold-Hearted'],
+    },
+    {
+      "name": "Neuroticism",
+      "list": ['Calm', 'Stable', 'Strong', 'Composed', 'Confident', 'Rational', 'Optimistic', 'Open-Minded', 'Resilient', 'Anxious', 'Melancholic', 'Pessimistic', 'Emotional', 'Depressed', 'Irritable', 'Over-Sensitive'],
+    }, 
+    {
+      "name": "Openness",
+      "list": ['Innovative', 'Clever', 'Imaginative', 'Curious', 'Independent Thinking', 'Romantic', 'Traditional', 'Conservative', 'Formalistic', 'Authoritarian', 'Restrained'],
+    }, 
+    ]
+  },
+  {
+    "name": "Appearance",
+    "list": [
+      {
+      "name": "Body Type",
+      "list": ['Slim','Voluptuous','Tall','Short','Slightly Chubby','Obese','Thin','Broad-Shouldered','Well-Proportioned','Slender','Muscular','Athletic','Muscular','Graceful','Bulky','Broad and Powerful','Pot-Bellied','Graceful','Frail','Skin and Bones'],
+    }, 
+    {
+      "name": "Eyebrows",
+      "list": ['Thick Eyebrows','Willow Leaf Eyebrows','Straight Eyebrows','Sword Eyebrows','Crescent Eyebrows','Arched Eyebrows','Peaks Eyebrows','Slanted Eyebrows','Curved Eyebrows','Elegant Eyebrows','Clear Eyed','Kind-Eyed','Sly Eyes','Almond Eyes'],
+    },
+    {
+      "name": "Eyes",
+      "list": ['Almond Eyes','Deer Eyes','Peach Blossom Eyes','Phoenix Eyes','Fox Eyes','Willow Leaf Eyes','Phoenix Eyes','Droopy Eyes','Slit Eyes','Narrow Eyes','Puffy Eyes','Triangular Eyes'],
+    },
+    {
+      "name": "Ears",
+      "list": ['Hears Everything','Large Ears','Elfin Ears','Fanning Ears','Cat Ears','Dog Ears','Fox Ears','Rabbit Ears'],
+    },
+    {
+      "name": "Lips",
+      "list": ['Thick Lips','Thin Lips','Small and Cherry Lips','Red Lips White Teeth','Pointy-Chin Cheekbones','Rosy Lips','Pale Lips','Wide Mouth','Tiger Teeth'],
+    },
+    {
+      "name": "Hair",
+      "list": ['Long Hair','Short Hair','Black Hair','White Hair','Silver Hair','Red Hair','Blonde Hair','Curly Hair','Slick Back','Crew Cut','Bun','Buzz Cut','Middle Part','Straight Bangs','High Ponytail','Double Ponytails','Black Cascading Hair','Waist-long Hair','Disheveled','Unkempt and Dirty'],
+    },
+    {
+      "name": "Clothing",
+      "list": ['T-Shirt','Coat','Robe','Suit','Leather Jacket','Military Uniform','Traditional Dress','Taoist Robe','Armor','Imperial Robe','Tuxedo','Long Skirt','Dress','Shirt','Mini Skirt','Maid Outfit','Shorts','Tracksuit','Denim','Sailor Uniform','Apron','School Uniform','Wedding Dress','Tight-fitting','Cheongsam','Kimono','Lolita Fashion','Bikini','Schoolgirl Uniform','Swimwear','Ankle Socks','Tights','Over-Knee Socks','Pantyhose','Suspender Tights','Sneakers','Flats','Slippers','Leather Shoes','High Heels','Boots','Sandals','Dance Shoes'],
+    },
+    ]
+  },
+  {
+    "name": "Likes",
+    "list": [
+      {
+      "name": "Sports/Hobbies",
+      "list": ['Football','Basketball','Baseball','Table Tennis','Swimming','Yoga','Climbing','Skiing','Skydiving','Rowing','Surfing','Diving'],
+    }, 
+    {
+      "name": "Artistic Hobbies",
+      "list": ['Painting','Photography','Ceramics','Singing','Dancing','Drama','Magic','Writing','Reading','Poetry','Music'],
+    },
+    {
+      "name": "Learning Hobbies",
+      "list": ['Programming','Cooking','Gardening','History','Astronomy','Psychology','Philosophy','Physics','English','Japanese','French'],
+    },
+    {
+      "name": "Entertainment Hobbies",
+      "list": ['Movies','TV Shows','Video Games','Board Games','Music Festivals','Parties'],
+    },
+    {
+      "name": "Animals",
+      "list": ['Small Animals','Cats','Dogs','Rabbits','Insects'],
+    }
+    ]
+  },
+  {
+    "name": "Dislikes",
+    "list": [
+      {
+      "name": "Food",
+      "list": ['Durian','Cilantro','Onion','Celery'],
+    }, 
+    {
+      "name": "Emotions",
+      "list": ['Frustration','Sadness','Failure','Loneliness'],
+    },     
+    {
+      "name": "Character Traits",
+      "list": ['Arrogance','Deceit','Lying','Betrayal','Injustice'],
+    }
+    ]
+  },
+  {
+    "name": "16 Personality MBTI",
+    "list": [
+      {
+      "name": "MBTI",
+      "list": ['ISTJ(Logistician)','ISTP(Virtuoso)','ISFJ(Defender)','ISFP(Adventurer)','INFJ(Advocate)','INFP(Mediator)','INTJ(Architect)','INTP(Logician)','ESTP(Entrepreneur)','ESFP(Performer)','ENFP(Campaigner)','ENTP(Debater)','ESTJ(Executive)','ESFJ(Consul)','ENFJ(Protagonist)','ENTJ(Commander)'],
+    }, 
+    ]
+  },
+  {
+    "name": "Language Style",
+    "list": [
+    {
+      "name": "Popular Styles",
+      "list": ['Proud and Arrogant','Rude and Clumsy','Cruelly Cold','Gentle and Caring','Quirky','Witty and Humorous','Melancholic','Stubborn','Serious','Broad-Minded','Indifferent','Vibrant','Vibrant','Funny','Scheming','Tsundere','Silly','Yandere','Sarcastic','Naive'],
+    }, 
+    {
+      "name": "More Styles",
+      "list": ['Humorous','Wild','Antique','Satirical','Minimalist','Aloof','Lively','Relaxed','Formal','Strategic','Gentle and Elegant','Gentle and Elegant','Impulsive','Experienced','Cute','Soft','Rigorous','Deep','Free-Spirited','Mature','Steady','Steady'],
+    }, 
+    {
+      "name": "Type",
+      "list": ['Literary Language','Colloquial Language','Internet Slang','Modern Colloquial','Classical Chinese','Classical Chinese'],
+    }, 
+    {
+      "name": "By Role",
+      "list": ['Normal Style','Retro Style','Noble Style','Girl Style','Boy Style','Slang Style','Child Style','Elder Style','Robot Style','Gentleman Style','Lady Style'],
+    }, 
+    ]
+  },
+]
+
 
 function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: {setPersonalityNewValue: Function, oldPersonalityValue: string}) {
+  const locale = useLocale();
+  const originalPersonalityData = (locale === 'en') ? originalPersonalityDataEn : originalPersonalityDataZhCN;
+  const personalityData = originalPersonalityData.map((item) => {
+    return {
+      name: item.name,
+      isCustomer: false,
+      list: item.list.map((item2) => {
+        return {
+          name: item2.name,
+          isCustomer: false,
+          list: item2.list.map((item3) => {
+            return {
+              name: item3,
+              selected: false,
+            }
+          })
+        }
+      })
+    }
+  })
   const t = useTranslations();
   const {isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
   const plistModal = useDisclosure();

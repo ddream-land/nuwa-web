@@ -20,7 +20,6 @@ export default function WorldBook_Entry_Content({value, isPreview = false, onCha
       placeholder={t('WorldBook.contenttoken')}
       value={value?.content}
       onChange={(e: { target: { value: any; }; }) => (
-
         onChange({ ...value, content: e.target.value } as TypeWorldBookEntriy)
       )}
     />

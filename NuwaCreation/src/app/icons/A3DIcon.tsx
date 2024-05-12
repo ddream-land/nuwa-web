@@ -1,5 +1,5 @@
 
-const MicrosoftTTSIcon = ({ className }: { className: string}) => {
+const M3DIcon = ({ className }: { className: string}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -19,4 +19,4 @@ const MicrosoftTTSIcon = ({ className }: { className: string}) => {
   );
 };
 
-export default MicrosoftTTSIcon;
+export default M3DIcon;

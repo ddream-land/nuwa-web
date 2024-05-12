@@ -37,7 +37,7 @@ function AlterMessages({messages, isOpen = false, onClose}: {messages: string[],
             <ModalBody>
               <div className="flex flex-col gap-3">
                 {messages.map((msg, index) => (
-                  <div key={index} className="w-full h-14 px-4 bg-gray-800 rounded-[20px] flex justify-center items-center">
+                  <div key={index} className="text-center w-full h-14 px-4 bg-gray-800 rounded-[20px] flex justify-center items-center">
                     <div className="text-white text-sm font-bold">{msg}</div>
                   </div>
                 ))}

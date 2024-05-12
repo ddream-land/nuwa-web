@@ -65,7 +65,7 @@
     "LIVE2Dtip": "Please upload the zip file in the specified format.",
     "LIVE2Dlinktip": "For more information, please check out the ",
     "LIVE2Dlink": "Live2D Official Documentation >",
-    "3D": "3D",
+    "VRM": "VRM",
     "3Dlink": "",
     "3Dtip": "3D Official Documentation >",
     "3Dtip2": "Coming Soon...",
@@ -114,16 +114,6 @@
     "exportbtn": "Export",
     "unnamed": "Unnamed",
     "plot": "Plot"
-  },
-  "Voices": {
-    "male": [
-      { "name": "xiaoming", "value": "ming1", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
-      { "name": "xiaohei", "value": "hei2", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
-    ],
-    "female": [
-      { "name": "xiaohong", "value": "hong3","audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
-      { "name": "xiaomei", "value": "mei4", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
-    ]
   },
   "Languages": [{
     "name": "English",
@@ -305,7 +295,8 @@
     "publishsuccess": "Publish succeeded",
     "deletesuccess": "Delete succeeded",
     "drafts": "Drafts",
-    "published": "Published"
+    "published": "Published",
+    "savetip": "Changes will be saved automatically!"
   },
   "Me": {
     "title": "My Profile",
@@ -334,7 +325,8 @@
     "detected": "Detected"
   },
   "Error": {
-    "localstoragefull": "The local storage space is full. Please delete it and perform operations again"
+    "localstoragefull": "The local storage space is full. Please delete it and perform operations again",
+    "draftscharacterlimit": "Limit 3"
   },
   "User": {
     "email": "Email",

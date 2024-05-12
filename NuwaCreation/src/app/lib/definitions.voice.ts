@@ -1,6 +1,6 @@
 export enum TypeVoiceType {
   None = 'None',
-  Microsoft = 'Microsoft',
+  Nuwa = 'Nuwa',
 }
 export enum voiceSex {
   Male = 'male',

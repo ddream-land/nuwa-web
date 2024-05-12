@@ -3,6 +3,7 @@
 import { createContext, useContext, useReducer } from 'react';
 import AlterMessages from './AlterMessages';
 import { useImmerReducer } from 'use-immer';
+import { findIndex } from 'lodash-es';
 
 export const AmContext = createContext([]);
 export const AmDispatchContext = createContext(null as any);
@@ -38,7 +39,8 @@ export function useAmDispatch() {
 function amReducer(draft: string[], action: any) {
   switch (action.type) {
     case 'add': {
-      draft.push(action.payload);
+      const isHas = draft.find((item) => (item === action.payload));
+      !isHas && draft.push(action.payload);
       break;
     }
     case 'clear': {

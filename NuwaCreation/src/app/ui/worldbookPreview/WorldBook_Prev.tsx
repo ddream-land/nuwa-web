@@ -1,17 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
 import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+  Tooltip,
 } from "@nextui-org/react";
-import { uuid } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
 import { isNull } from "lodash-es";
-import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
-import { TypeWorldBook, TypeWorldBookEntriy } from "@/app/lib/definitions";
+import { TypeWorldBook } from "@/app/lib/definitions";
 import WorldBook_Entry from "./WorldBook_Entry";
 import { useWorldBookItem, useWorldBookItemDispatch } from "../worldbook/WorldBookContext";
 
@@ -21,8 +16,8 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
 }) {
   const t = useTranslations();
   const worldBookItem = useWorldBookItem();
-  const worldBook = isPreview ? worldBooka : worldBookItem.worldBook;
-  const uid = isPreview ? worldBooka?.name : worldBookItem.uid;
+  const worldBook = worldBooka;
+  const uid = worldBooka?.name;
   const worldBookItemDispatch = useWorldBookItemDispatch();
 
   let initSelectedEntry = undefined;
@@ -31,40 +26,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
     initSelectedEntry = worldBook.entries[Object.keys(worldBook.entries)[0]] 
   }
   const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
-
-  const handleDeleteButtonClick = (id: any) => {
-    // Implement the logic to delete the entry with the given id
-    setWorldBookItemDeleteEntries(id);
-    if (selectedEntry?.uid === id) {
-      setSelectedEntry(worldBook?.entries[Object.keys(worldBook?.entries)[0]])
-    }
-  };
-
-  const handleAddNewBookClick = () => {
-    const uid = uuid();
-    const defaultTemplate: TypeWorldBookEntriy = {
-      uid: uid,
-      keys: [],
-      secondary_keys: [],
-      comment: "",
-      content: "",
-      constant: true,
-      selective: true,
-      insertion_order: 100,
-      enabled: true,
-      position: 0,
-      depth: 4,
-      extensions: {
-        exclude_recursion: false,
-        display_index: uid,
-        probability: 100,
-        useProbability: true,
-      },
-    };
-
-    setWorldBookItemInNewEntries(defaultTemplate);
-    setSelectedEntry(defaultTemplate)
-  };
 
   useEffect(() => {
     isNull(selectedEntry) && worldBook?.entries && Object.keys(worldBook.entries).length > 0 &&setSelectedEntry(worldBook?.entries[0])
@@ -79,48 +40,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
       },
     })
   }
-  const setWorldBookItemInNewEntries = (newValue:TypeWorldBookEntriy) => {
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-          entries: {
-            ...worldBook?.entries,
-            [newValue.uid]: newValue
-          }
-        }
-      },
-    })
-  }
-  const setWorldBookItemDeleteEntries = (key: string) => {
-
-    delete worldBook?.entries[key];
-
-    
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-        }
-      },
-    })
-  }
-  const setWorldBookItemName = (newValue:string) => {
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-          name: newValue
-        }
-      },
-    })
-  }
   
   return (
     <>
@@ -129,62 +48,31 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
           <div
             className="z-10 -mb-9 pb-9 px-2 w-7/12 h-[132px] rounded-t-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
           >
-            <input
-              value={worldBook?.name}
-              disabled={isPreview}
-              onChange={(e) => {
-                const newValue = e.target.value;
-                setWorldBookItemName(newValue);
-              }}
-              className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
-            />
+            
+            <Tooltip classNames={{ content: [ "w-[80vh]"] }} color="primary" content={worldBook?.name || t('WorldBook.untitledbook')} className="text-lg">
+              <div className="px-4 w-full bg-transparent outline-none disabled:bg-transparent truncate" >{worldBook?.name}</div>
+            </Tooltip>
           </div>
           <div className="flex flex-row">
-            <div className="relative flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] pt-32 pb-12 -mr-2 h-[570px] pl-1">
-            {!isPreview && (
-              <Button
-                onClick={handleAddNewBookClick}
-                className="absolute top-2 right-4 bg-transparent p-0 z-40"
-                type="button"
-                color="default"
-                variant="flat"
-                isIconOnly
-              >
-                <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
-              </Button>
-            )}
-            {worldBook&& Object.keys(worldBook.entries).map((key) => (
+            <div className="relative flex flex-col shrink-0 gap-y-4 w-52 bg-[#D9D9D9]/30 rounded-xl pt-32 pb-12 -mr-2 h-[570px] pl-1">
+            {worldBook && Object.keys(worldBook.entries).map((key) => (
               <NuwaButton
                 key={`${uid}${worldBook.entries[key].uid}`}
                 className={`${
                   selectedEntry?.uid === worldBook.entries[key].uid ? "h-12" : "h-7"
-                } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
+                }  w-full rounded-l-xl bg-black text-white flex justify-center items-center cursor-pointer`}
                 onClick={() => {
                   setSelectedEntry(worldBook.entries[key]);
                 }}
-                endContent={!isPreview &&
-                  <Popover key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`} placement="top" color="danger">
-                    <PopoverTrigger>
-                      <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
-                        <XMarkIcon className="h-4 w-4 text-white" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent>  
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteButtonClick(worldBook.entries[key].uid)
-                        }}
-                        size="sm"
-                        color="danger"
-                      >
-                        {t('Previews.mymindismadeup')}
-                      </Button>
-                    </PopoverContent>
-                  </Popover>
-                }
               >
-                <div className="mx-2 overflow-x-scroll">{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
+                <Tooltip classNames={{ content: [ "w-[80vh]"] }} color="primary" content={worldBook.entries[key].comment || t('WorldBook.untitledbook')} className="text-lg">
+                  <div
+                    className="mx-2 w-full truncate"
+                    onClick={() => {
+                      setSelectedEntry(worldBook.entries[key]);
+                    }}
+                  >{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
+                </Tooltip>
               </NuwaButton>
             ))}
           </div>
@@ -196,7 +84,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
                     value={selectedEntry}
                     isPreview={isPreview}
                     onChange={(newSelectedEntry) => {
-
                       const newWorldBook =  {
                         ...worldBook,
                         entries: {
@@ -204,9 +91,7 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
                           [newSelectedEntry.uid]: newSelectedEntry
                         }
                       }
-
                       setWorldBookItem(newWorldBook)
-
                       setSelectedEntry(newSelectedEntry);
                     }}
                   />

@@ -33,7 +33,10 @@ export default function Avatar() {
             ...charaListItem.chara.data,
             extensions: {
               ...charaListItem.chara.data.extensions,
-              avatars: newValue
+              nuwa_avatars: {
+                ...charaListItem.chara.data.extensions.nuwa_avatars,
+                list: newValue,
+              }
             }
           }
         }
@@ -51,9 +54,9 @@ export default function Avatar() {
 
   const handleAddAvatar = () => {
     let newAvatars: any[] = [];
-    if (charaListItem.chara.data.extensions.avatars) {
+    if (charaListItem.chara.data.extensions. nuwa_avatars) {
       newAvatars = [
-        ...charaListItem.chara.data.extensions.avatars
+        ...charaListItem.chara.data.extensions.nuwa_avatars.list
       ]
     }
     newAvatars.push({
@@ -67,7 +70,7 @@ export default function Avatar() {
 
   const handerRemoveAvatar = (index: number) => {
     let newAvatars = [
-      ...charaListItem.chara.data.extensions.avatars
+      ...charaListItem.chara.data.extensions.nuwa_avatars.list
     ]
     newAvatars.splice(index, 1);
     setCharaListItem(newAvatars);
@@ -103,7 +106,7 @@ export default function Avatar() {
           </div>
         </div>
         <div className="flex flex-col flex-wrap gap-[42px] mt-[20px]">
-          {charaListItem.chara.data.extensions.avatars && charaListItem.chara.data.extensions.avatars.map((item, index) => {
+          {charaListItem.chara.data.extensions.nuwa_avatars && charaListItem.chara.data.extensions.nuwa_avatars.list.map((item, index) => {
             return (
               <div>
                 <div className="text-black text-[32px] font-['SF Pro'] leading-[57.98px] tracking-tight">
@@ -193,9 +196,9 @@ export default function Avatar() {
                         className="shrink-0"
                       >
                         <IconCard 
-                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType["3D"])}
-                          isActive={selectedAvatarType === TypeAvatarType["3D"] }
-                          iconType="3D"
+                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType["VRM"])}
+                          isActive={selectedAvatarType === TypeAvatarType["VRM"] }
+                          iconType="VRM"
                           disabled={true}
                         />
                         <div className="w-full text-center text-sm py-2 text-gray-400">{t('Character.3Dtip2')}</div>
@@ -207,7 +210,7 @@ export default function Avatar() {
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dlinktip`)}{t(`Character.LIVE2Dlink`)}</div>
                       </div>
                     )}
-                    {selectedAvatarType === TypeAvatarType["3D"] && (
+                    {selectedAvatarType === TypeAvatarType["VRM"] && (
                       <div className="h-20">
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiptip`)}</div>
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiplink`)}</div>

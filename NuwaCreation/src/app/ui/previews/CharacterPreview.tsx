@@ -17,7 +17,7 @@ function CharacterPreview({charaItem}: {charaItem: TypeCharaListItem}) {
   const t = useTranslations();
   const { chara } = charaItem;
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
   
   return (
   
@@ -28,7 +28,7 @@ function CharacterPreview({charaItem}: {charaItem: TypeCharaListItem}) {
       {chara.data.scenario &&  <Preview_Plot/>}
       {chara.data.character_book && <Preview_WorldBook worldBook={chara.data.character_book} />}
       {chara.data.mes_example && <Preview_MesExample />}
-      {chara.data.extensions.avatars && chara.data.extensions.avatars.length > 0 && <Preview_Avatar />}
+      {chara.data.extensions.nuwa_avatars && chara.data.extensions.nuwa_avatars.list.length > 0 && <Preview_Avatar />}
       {selectedVoiceType !== TypeVoiceType.None && <Preview_Voice />}
       <Preview_AdvancedSet />
       

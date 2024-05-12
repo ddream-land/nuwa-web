@@ -40,32 +40,32 @@ function WorldBook_Title() {
         <PencilEditIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 fill-black" /> 
       </div> */}
       <Input
-          ref={inputRef}
-          value={worldBookItem?.worldBook.name}
-          variant="underlined"
-          onChange={(e) => {
-            const newValue = e.target.value;
-            setWorldBookItemName(newValue);
-          }}
-          onBlur={() => setIsEdit(false)}
-          size="sm"
-          classNames={{
-            label: "",
-            input: "",
-            innerWrapper: "bg-transparent",
-            inputWrapper: "shadow-none",
-          }}
-          className={`w-full h-full px-10 bg-transparent outline-none disabled:bg-transparent ${isEdit ? 'block' : 'hidden'}`}
-        />
-        <div
-          className={`h-full flex-row items-center gap-2 overflow-hidden ${isEdit ? 'hidden' : 'flex'}`}
-          onClick={() => {
-            setIsEdit(true);
-          }}
-        >
-          <div className="overflow-hidden whitespace-nowrap text-overflow-ellipsis">{worldBookItem?.worldBook.name}</div>
-          <PencilEditIcon className="h-12 text-2xl text-default-400 pointer-events-none flex-shrink-0 " />
-        </div>
+        ref={inputRef}
+        value={worldBookItem?.worldBook.name}
+        variant="underlined"
+        onChange={(e) => {
+          const newValue = e.target.value;
+          setWorldBookItemName(newValue);
+        }}
+        onBlur={() => setIsEdit(false)}
+        size="sm"
+        classNames={{
+          label: "",
+          input: "",
+          innerWrapper: "bg-transparent",
+          inputWrapper: "shadow-none",
+        }}
+        className={`w-full h-full px-10 bg-transparent outline-none disabled:bg-transparent ${isEdit ? 'block' : 'hidden'}`}
+      />
+      <div
+        className={`h-full flex-row items-center gap-2 overflow-hidden ${isEdit ? 'hidden' : 'flex'}`}
+        onClick={() => {
+          setIsEdit(true);
+        }}
+      >
+        <div className="overflow-hidden whitespace-nowrap text-overflow-ellipsis">{worldBookItem?.worldBook.name}</div>
+        <PencilEditIcon className="h-12 text-2xl text-default-400 pointer-events-none flex-shrink-0 " />
+      </div>
     </div>
     
   );

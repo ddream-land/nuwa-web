@@ -10,6 +10,7 @@ import CharacterListItem from "./CharacterListItem";
 import { getIsLogin } from "@/app/lib/base.api";
 import { deleteCharacter, getCharacterAll } from "@/app/lib/character.api";
 import { CircularProgress } from "@nextui-org/react";
+import NoData from "./NoData";
 
 
 export default function CharacterList() {
@@ -17,7 +18,6 @@ export default function CharacterList() {
   let initCharaList = getCharaList();
   const [charaList, setCharaList] = useState<TypeCharaList>(initCharaList);
   const [ editChara, setEditChara ] = useState<TypeCharaListItem>();
-
 
   const [ characterPublishList, setCharacterPublishList ] = useState<{
     uid: string,
@@ -29,37 +29,35 @@ export default function CharacterList() {
     }
   }[]>([]);
   const [isInit, setIsInit] = useState(false);
-  const [startInit, setStartInit] = useState(true);
+  const [firstInit, setFirstInit] = useState(true);
   const isLogin = getIsLogin();
   const getCharacterAllApi = getCharacterAll()
   const deleteCharacterApi = deleteCharacter()
 
   const [isLoading, setIsLoading] = useState(false);
 
-  if (isLogin) {
+  useEffect(() => {
+    if (isLogin) {
+      !isInit && setIsInit(true)
+    } else {
+      setFirstInit(false)
+    }
+  }, [])
 
-    useEffect(() => {
-      if (!isInit) {
-        setIsInit(true)
-      }
-    }, [])
+  useEffect(() => {
+    if (isInit) {
+      init();
+    }
+  }, [isInit])
 
-    useEffect(() => {
-      const init = async () => {
-        const res = await getCharacterAllApi.send();
-        if (res && res.code === 0) {
-          setCharacterPublishList(res.data);
-        }
-        
-        setIsInit(false);
-        setStartInit(false)
-      }
-      if (isInit) {
-        init();
-      }
-      
-    }, [isInit])
-  
+  const init = async () => {
+    const res = await getCharacterAllApi.send();
+    if (res && res.code === 0) {
+      setCharacterPublishList(res.data);
+    }
+    setFirstInit(false)
+    setIsInit(false);
+    return res;
   }
 
   const deleteChara = ({index}: {index: number}) => {
@@ -71,8 +69,8 @@ export default function CharacterList() {
 
   return (
     <>
-      <div className="relative bg-white h-full w-full pt-0 pb-40 rounded-[40px] flex flex-col justify-center">
-        <div className="flex flex-row justify-end mt-2 z-4 mb-8">
+      <div className="relative bg-white h-full w-full pt-0 pb-40 rounded-[40px] flex flex-col justify-center min-h-[80vh]">
+        <div className="flex flex-row justify-end z-40 absolute right-0 top-0 mt-2">
           <CharacterCreate
             onCreateDone={(newChara) => {
               setCharaList(getCharaList())
@@ -80,32 +78,57 @@ export default function CharacterList() {
             }}
           />
         </div>
-        <div className="text-black text-3xl font-semibold">{t("Character.drafts")}</div>
-        <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
-          {charaList.map((chara, index) => (
-            <div className="w-[212px]" key={chara.uid}>
-              <CharacterListItem
-                chara={chara}
-                onEdit={() => {
-                  setEditChara(chara);
-                }}
-                onDelete={() => {
-                  deleteChara({index})
-                }} />
-            </div>
-          ))}
-        </div>
-          {isLogin && (
-            <>
-              <div className="text-black text-3xl font-semibold">{t("Character.published")}</div>
-              {(startInit || isLoading) ? (
-                <div className="w-full h-[300px] flex justify-center items-center">
-                  <CircularProgress size="md" aria-label="Loading..."/>
+
+        {(charaList.length !== 0) ? (
+          <>
+            <div className="text-black text-3xl font-semibold">{t("Character.drafts")}</div>
+            <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
+              {charaList.map((chara, index) => (
+                <div className="w-[212px]" key={`drafts-${chara.uid}`}>
+                  <CharacterListItem
+                    chara={chara}
+                    onEdit={() => {
+                      setEditChara(chara);
+                    }}
+                    onDelete={() => {
+                      deleteChara({index})
+                    }} />
                 </div>
-              ) : (
+              ))}
+            </div>
+          </>
+        ): (
+          <>
+            {!isLogin && (
+              <>
+              <NoData />
+              </>
+            )}
+          </>
+        )}
+        
+        {isLogin && (
+          <div className="relative">
+            {(firstInit || isLoading) ? (
+              <div className="absolute left-0 top-0 w-full h-full min-h-[300px] flex justify-center items-center z-10 bg-gray-50/50">
+                <CircularProgress size="md" aria-label="Loading..."/>
+              </div>
+            ) : (
+              <>
+                {characterPublishList.length === 0 && charaList.length === 0 && (
+                  <>
+                  <NoData />
+                  </>
+                )}
+              </>
+            )}
+
+            {characterPublishList.length !== 0 && (
+              <>
+                <div className="text-black text-3xl font-semibold">{t("Character.published")}</div>
                 <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
                   {characterPublishList.map((characterItem, index) => (
-                    <div key={characterItem.uid} className="w-auto h-[280px]">
+                    <div key={`pulish-${characterItem.ai.uid}`} className="w-auto h-[280px]">
                       <CharacterListItem
                         chara={characterItem.ai}
                         isPublished={true}
@@ -127,9 +150,12 @@ export default function CharacterList() {
                     </div>
                   ))}
                 </div>
-              )}
-            </>
-          )}
+              </>
+            )}
+
+          </div>
+        )}
+
         <CharacterEdit
           chara={editChara}
           onDone={() => {

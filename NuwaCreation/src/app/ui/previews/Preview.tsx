@@ -2,37 +2,40 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
-
-
 import NuwaButton from "../components/NuwaButton";
 import { TypeCharaListItem } from "@/app/lib/definitions";
 import CharacterPreview from "./CharacterPreview";
-import AlterMessage from "../components/AlterMessage";
+import { useAmDispatch } from "../components/AlterMessageContextProvider";
 
 function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
   const t = useTranslations();
   const previewModal = useDisclosure();
   const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
+  const amDispatch = useAmDispatch();
 
   const handleMakeChar = async (e: any) => {
     setIsMakeCharLoding(true)
     if (!charaItem.chara?.data?.name) {
-      setMessage(t("Previews.charactercardnamesmust"));
-      setIsOpen(true);
+      amDispatch({
+        type: "add",
+        payload: t("Previews.charactercardnamesmust"),
+      })
       setIsMakeCharLoding(false)
       return;
     }
     if (!charaItem.chara?.data?.description) {
-      setMessage(t("Previews.charactercarddescsmust"));
-      setIsOpen(true);
+      amDispatch({
+        type: "add",
+        payload: t("Previews.charactercarddescsmust"),
+      })
       setIsMakeCharLoding(false)
       return;
     }
     if (!charaItem.chara?.data?.first_mes) {
-      setMessage(t("Previews.charactercardfirstmessmust"));
-      setIsOpen(true);
+      amDispatch({
+        type: "add",
+        payload: t("Previews.charactercardfirstmessmust"),
+      })
       setIsMakeCharLoding(false)
       return;
     }
@@ -74,9 +77,6 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
   
   return (
     <>
-      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
-        setIsOpen(false)
-      }} />
       <NuwaButton
         color="black"
         size="md"
@@ -87,7 +87,6 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
       >{t('Navigation.previews')}</NuwaButton>
 
       <Modal
-        isDismissable={!isOpen}
         size="full"
         isOpen={previewModal.isOpen}
         placement={'bottom'}
@@ -98,6 +97,28 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
           body: "h-full bg-neutral-100 rounded-t-3xl",
         }}
         hideCloseButton={true}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                opacity: {
+                  duration: 0.15,
+                },
+              },
+            },
+            exit: {
+              y: "50%",
+              opacity: 0,
+              transition: {
+                opacity: {
+                  duration: 0.1,
+                },
+              },
+            },
+          },
+        }}
       >
         <ModalContent>
           {(onClose) => (
@@ -108,7 +129,7 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
                   className="flex flex-row items-center justify-center gap-4 absolute right-10 top-6"
                 >
                   
-                  <Button isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>{t("Preview.exportbtn")}</Button>
+                  <Button className="bg-neutral-100" isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>{t("Preview.exportbtn")}</Button>
                   {/* <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat">导出并发布</NuwaButton> */}
                 </div>
               </ModalHeader>

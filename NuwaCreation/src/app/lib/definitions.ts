@@ -30,7 +30,6 @@ export type TypeChara = {
     alternate_greetings: string[];
     extensions: {
       avatar?: string | undefined;
-      avatars: TypeAvatar[];
       talkativeness: string;
       fav: Boolean;
       world: string;
@@ -38,14 +37,20 @@ export type TypeChara = {
         prompt: string;
         depth: number;
       };
-      voice?: {
-        type: string,
-        sex: string,
-        name: string,
-      } | undefined | null,
       languages: string[],
       level: string,
       cclicense: string,
+      nuwa_avatars: {
+        version: string;
+        list: TypeAvatar[]
+      };
+      nuwa_voice?: {
+        type: string,
+        sex: string,
+        name: string,
+        version: string,
+        language: string,
+      } | undefined | null,
     };
     character_book?: TypeWorldBook;
   };
